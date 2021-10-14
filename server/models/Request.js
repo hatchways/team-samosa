@@ -24,6 +24,10 @@ const requestSchema = new mongoose.Schema({
     default: "pending",
     required: true,
   },
+  paid: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("Request", requestSchema);
