@@ -69,19 +69,6 @@ exports.updateRequest = asyncHandler(async (req, res, next) => {
     throw new Error("Unauthorized user");
   }
 
-  let requestUpdate;
-
-  switch (requestStatus) {
-    case "declined":
-      requestUpdate = { status: "declined" };
-      break;
-    case "accepted":
-      requestUpdate = { status: "accepted" };
-      break;
-    default:
-      throw new Error("Invalid request status value");
-  }
-
   request.status = requestStatus;
 
   await request.save();
