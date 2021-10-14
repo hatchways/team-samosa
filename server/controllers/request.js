@@ -23,16 +23,16 @@ exports.createRequest = asyncHandler(async (req, res, next) => {
 
   const { sitterId, startDate, endDate } = req.body;
 
+  if (!startDate || !endDate) {
+    res.status(400);
+    throw new Error("Incomplete date field");
+  }
+
   const sitterExists = await User.findById(sitterId);
 
   if (!sitterExists) {
     res.status(400);
     throw new Error("Invalid sitter id");
-  }
-
-  if (!startDate || !endDate) {
-    res.status(400);
-    throw new Error("Incomplete date field");
   }
 
   const request = {
