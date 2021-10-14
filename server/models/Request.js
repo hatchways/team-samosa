@@ -1,38 +1,27 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 
 const requestSchema = new mongoose.Schema({
-  user_id: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
-  sitter_id: {
+  sitterId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
-  start_date: {
+  startDate: {
     type: Date,
     required: true,
   },
-  end_date: {
+  endDate: {
     type: Date,
     required: true,
   },
-  accepted: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
-  declined: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
-  paid: {
-    type: Boolean,
-    default: false,
+  status: {
+    type: String,
+    default: "pending",
     required: true,
   },
 });
