@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Request = require("../Models/Request");
 const User = require("../models/User");
 const asyncHandler = require("express-async-handler");
@@ -31,7 +32,7 @@ exports.createRequest = asyncHandler(async (req, res, next) => {
   const sitterExists = await User.findById(sitterId);
 
   if (!sitterExists) {
-    res.status(400);
+    res.status(404);
     throw new Error("Invalid sitter id");
   }
 
@@ -52,6 +53,9 @@ exports.createRequest = asyncHandler(async (req, res, next) => {
 // @access Private
 exports.updateRequest = asyncHandler(async (req, res, next) => {
   const requestId = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    throw new Error("Bad Request");
+  }
 
   const userId = req.user.id;
 
@@ -60,7 +64,7 @@ exports.updateRequest = asyncHandler(async (req, res, next) => {
   const request = await Request.findById(requestId);
 
   if (!request) {
-    res.status(400);
+    res.status(404);
     throw new Error("Invalid request id");
   }
 
