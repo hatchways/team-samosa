@@ -7,15 +7,15 @@ const profileSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    first_name: {
+    firstName: {
         type: String,
         required: true,
     },
-    last_name: {
+    lastName: {
         type: String,
         required: true,
     },
-    birth_date: {
+    birthDate: {
         type: Date,
         default: Date.now
     },
@@ -24,7 +24,7 @@ const profileSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    phone_num: {
+    phoneNum: {
         type: String,
         required: true,
     },
@@ -33,7 +33,10 @@ const profileSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-    }
+    },
+    photoUrl: {
+        type: String,
+    },
 });
 
 

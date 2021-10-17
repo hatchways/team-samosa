@@ -6,11 +6,11 @@ const availabilitySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    start_date: {
+    startDate: {
         type: Date,
         default: Date.now
     },
-    end_date: {
+    endDate: {
         type: Date,
         default: Date.now
     }
