@@ -17,6 +17,7 @@ const profileSchema = new mongoose.Schema({
     },
     birthDate: {
         type: Date,
+        default: '1998-06-15'
     },
     email: {
         type: String,
