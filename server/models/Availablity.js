@@ -1,17 +1,18 @@
 const mongoose = require("mongoose");
 
 const availabilitySchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
+    userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
     },
     startDate: {
         type: Date,
-        default: Date.now
+        required: true
     },
     endDate: {
         type: Date,
-        default: Date.now
+        required: true
     }
 });
 
