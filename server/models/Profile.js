@@ -29,12 +29,15 @@ const profileSchema = new mongoose.Schema({
     },
     address: {
         type: String,
+        default: ''
     },
     description: {
         type: String,
+        default: ''
     },
     photoUrl: {
         type: String,
+        default: ''
     },
 });
 
