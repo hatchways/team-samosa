@@ -5,7 +5,7 @@ const asyncHandler = require("express-async-handler");
 // @route GET /profile
 // @desc the profile of the relevant user
 // @access Private
-exports.getProfile = asyncHandler(async (req, res, next) => {
+exports.getProfile = asyncHandler(async (req, res) => {
     const userId = req.user.id;
 
     const profile = await Profile.findOne({ userId });
@@ -16,10 +16,15 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
 // @route POST /profile
 // @desc Create a new profile
 // @access Private
-exports.createProfile = asyncHandler(async (req, res, next) => {
+exports.createProfile = asyncHandler(async (req, res) => {
     const userId = req.user.id;
 
     const { firstName, lastName, email, phoneNum } = req.body;
+
+    if (!firstName || !lastName || !email || !phoneNum) {
+        res.status(400);
+        throw new Error("Incomplete profile field");
+    }
 
     const emailExists = await Profile.findOne({ email });
 
@@ -33,11 +38,6 @@ exports.createProfile = asyncHandler(async (req, res, next) => {
     if (phoneNumExists) {
         res.status(400);
         throw new Error("The phone number is already in use");
-    }
-
-    if (!firstName || !lastName || !email || !phoneNum) {
-        res.status(400);
-        throw new Error("Incomplete profile field");
     }
 
     const profile = {
@@ -56,7 +56,7 @@ exports.createProfile = asyncHandler(async (req, res, next) => {
 // @route PATCH /Profile
 // @desc Update profile with approved or decline
 // @access Private
-exports.updateProfile = asyncHandler(async (req, res, next) => {
+exports.updateProfile = asyncHandler(async (req, res) => {
     const userId = req.user.id;
 
     const { profileupdates } = req.body;

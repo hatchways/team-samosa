@@ -5,7 +5,7 @@ const asyncHandler = require("express-async-handler");
 // @route GET /Availability
 // @desc the Availability list  of the relevant user
 // @access Private
-exports.getAvailability = asyncHandler(async (req, res, next) => {
+exports.getAvailability = asyncHandler(async (req, res) => {
     const userId = req.user.id;
 
     const availability = await Availability.find({
@@ -18,7 +18,7 @@ exports.getAvailability = asyncHandler(async (req, res, next) => {
 // @route POST /Availability
 // @desc Create a new Availability time solts
 // @access Private
-exports.createAvailability = asyncHandler(async (req, res, next) => {
+exports.createAvailability = asyncHandler(async (req, res) => {
     const userId = req.user.id;
 
     const { startDate, endDate } = req.body;
@@ -54,7 +54,7 @@ exports.createAvailability = asyncHandler(async (req, res, next) => {
 // @route PATCH /Availability
 // @desc Update Availability period with approved or decline
 // @access Private
-exports.updateAvailability = asyncHandler(async (req, res, next) => {
+exports.updateAvailability = asyncHandler(async (req, res) => {
     const availabilityId = req.params.id;
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
         throw new Error("Cannot find such available period");
