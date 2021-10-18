@@ -8,11 +8,13 @@ const availabilitySchema = new mongoose.Schema({
     },
     startDate: {
         type: Date,
-        required: true
+        required: true,
+        unique: true
     },
     endDate: {
         type: Date,
-        required: true
+        required: true,
+        unique: true
     }
 });
 
