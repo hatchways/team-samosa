@@ -14,6 +14,10 @@ const profileSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    gender: {
+        type: String,
+        default: 'male'
+    },
     birthDate: {
         type: Date,
         default: '1998-06-15'
