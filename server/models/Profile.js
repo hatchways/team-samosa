@@ -18,11 +18,6 @@ const profileSchema = new mongoose.Schema({
         type: Date,
         default: '1998-06-15'
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
     phoneNum: {
         type: String,
         required: true,
