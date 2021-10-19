@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const profileSchema = new mongoose.Schema({
     userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
     },
     firstName: {
         type: String,
@@ -17,11 +17,6 @@ const profileSchema = new mongoose.Schema({
     birthDate: {
         type: Date,
         default: '1998-06-15'
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true
     },
     phoneNum: {
         type: String,

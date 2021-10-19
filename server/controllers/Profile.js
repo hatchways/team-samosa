@@ -19,18 +19,11 @@ exports.getProfile = asyncHandler(async (req, res) => {
 exports.createProfile = asyncHandler(async (req, res) => {
     const userId = req.user.id;
 
-    const { firstName, lastName, email, phoneNum } = req.body;
+    const { firstName, lastName, phoneNum } = req.body;
 
-    if (!firstName || !lastName || !email || !phoneNum) {
+    if (!firstName || !lastName || !phoneNum) {
         res.status(400);
         throw new Error("Incomplete profile field");
-    }
-
-    const emailExists = await Profile.findOne({ email });
-
-    if (emailExists) {
-        res.status(400);
-        throw new Error("The email is already in use");
     }
 
     const phoneNumExists = await Profile.findOne({ phoneNum });
@@ -44,7 +37,6 @@ exports.createProfile = asyncHandler(async (req, res) => {
         userId: userId,
         firstName: firstName,
         lastName: lastName,
-        email: email,
         phoneNum: phoneNum,
     };
 
