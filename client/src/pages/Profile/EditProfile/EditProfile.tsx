@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './useStyles';
 import { CircularProgress } from '@material-ui/core';
-
+import { Grid } from '@material-ui/core';
 interface Props {
   handleSubmit: (
     {
@@ -76,42 +76,58 @@ export default function Login({ handleSubmit }: Props): JSX.Element {
     >
       {({ handleSubmit, handleChange, values, touched, errors, isSubmitting }) => (
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
-          <label className={classes.label}>FIRST NAME </label>
-          <TextField
-            id="firstName"
-            //fullWidth
-            margin="normal"
-            InputProps={{
-              classes: { input: classes.inputs },
-            }}
-            style={{ width: '80%' }}
-            variant="outlined"
-            name="firstName"
-            autoComplete="firstName"
-            autoFocus
-            helperText={touched.firstName ? errors.firstName : ''}
-            error={touched.firstName && Boolean(errors.firstName)}
-            value={values.firstName}
-            onChange={handleChange}
-          />
-          <label className={classes.label}>EMAIL ADDRESS </label>
-          <TextField
-            id="email"
-            //fullWidth
-            margin="normal"
-            InputProps={{
-              classes: { input: classes.inputs },
-            }}
-            style={{ width: '80%' }}
-            variant="outlined"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            helperText={touched.email ? errors.email : ''}
-            error={touched.email && Boolean(errors.email)}
-            value={values.email}
-            onChange={handleChange}
-          />
+          <Grid container alignItems="center" spacing={2}>
+            <Grid item xs={12} sm={3}>
+              <Typography variant="body1" align="right">
+                <label className={classes.label}>FIRST NAME</label>
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <TextField
+                id="firstName"
+                //fullWidth
+                margin="normal"
+                InputProps={{
+                  classes: { input: classes.inputs },
+                }}
+                style={{ width: '80%' }}
+                variant="outlined"
+                name="firstName"
+                autoComplete="firstName"
+                autoFocus
+                helperText={touched.firstName ? errors.firstName : ''}
+                error={touched.firstName && Boolean(errors.firstName)}
+                value={values.firstName}
+                onChange={handleChange}
+              />
+            </Grid>
+          </Grid>
+          <Grid container alignItems="center" spacing={2}>
+            <Grid item xs={12} sm={3}>
+              <Typography variant="body1" align="right">
+                <label className={classes.label}>EMAIL ADDRESS </label>
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <TextField
+                id="email"
+                //fullWidth
+                margin="normal"
+                InputProps={{
+                  classes: { input: classes.inputs },
+                }}
+                style={{ width: '80%' }}
+                variant="outlined"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                helperText={touched.email ? errors.email : ''}
+                error={touched.email && Boolean(errors.email)}
+                value={values.email}
+                onChange={handleChange}
+              />
+            </Grid>
+          </Grid>
           <Box textAlign="center">
             <Button type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
               {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'Save'}
