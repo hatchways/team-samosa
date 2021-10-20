@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './useStyles';
 import { CircularProgress } from '@material-ui/core';
+
 interface Props {
   handleSubmit: (
     {
@@ -36,7 +37,6 @@ interface Props {
       gender: string;
       birthDate: Date;
       email: string;
-
       phoneNum: string;
       address: string;
       description: string;
@@ -44,7 +44,7 @@ interface Props {
   ) => void;
 }
 
-export default function EditProfile({ handleSubmit }: Props): JSX.Element {
+export default function Login({ handleSubmit }: Props): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -76,36 +76,34 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
     >
       {({ handleSubmit, handleChange, values, touched, errors, isSubmitting }) => (
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
+          <label className={classes.label}>FIRST NAME </label>
           <TextField
             id="firstName"
-            label={<Typography className={classes.label}>E-mail address</Typography>}
-            fullWidth
+            //fullWidth
             margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
             InputProps={{
               classes: { input: classes.inputs },
             }}
+            style={{ width: '80%' }}
+            variant="outlined"
             name="firstName"
             autoComplete="firstName"
             autoFocus
-            helperText={touched.email ? errors.email : ''}
-            error={touched.email && Boolean(errors.email)}
-            value={values.email}
+            helperText={touched.firstName ? errors.firstName : ''}
+            error={touched.firstName && Boolean(errors.firstName)}
+            value={values.firstName}
             onChange={handleChange}
           />
+          <label className={classes.label}>EMAIL ADDRESS </label>
           <TextField
             id="email"
-            label={<Typography className={classes.label}>E-mail address</Typography>}
-            fullWidth
+            //fullWidth
             margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
             InputProps={{
               classes: { input: classes.inputs },
             }}
+            style={{ width: '80%' }}
+            variant="outlined"
             name="email"
             autoComplete="email"
             autoFocus
@@ -116,7 +114,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
           />
           <Box textAlign="center">
             <Button type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
-              {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'Login'}
+              {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'Save'}
             </Button>
           </Box>
           <div style={{ height: 95 }} />

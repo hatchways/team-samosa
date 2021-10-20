@@ -3,7 +3,7 @@ import { grey } from '@material-ui/core/colors';
 
 export const theme = createMuiTheme({
   typography: {
-    fontFamily: '"Open Sans", "sans-serif", "Roboto"',
+    fontFamily: '"Open Sans", "sans-serif", "Roboto", "Poppins"',
     fontSize: 12,
     button: {
       textTransform: 'none',
