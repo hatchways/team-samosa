@@ -1,24 +1,11 @@
 import Typography from '@material-ui/core/Typography';
 import { BookingRequest } from '../../../interface/Request';
+import { MONTHS } from '../../../constants/date';
 
 interface Props {
   classes: string;
   request: BookingRequest;
 }
-const MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
 
 export default function BookingsDate({ classes, request }: Props): JSX.Element {
   return (

@@ -5,29 +5,16 @@ import Avatar from '@material-ui/core/Avatar';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { startOfWeek, startOfMonth, addDays, addMonths } from 'date-fns';
+import uniqid from 'uniqid';
 import useStyles from './useStyles';
 import React, { useState } from 'react';
 import { BookingRequest } from '../../../interface/Request';
 import { MOCK_TODAY } from '../mockRequests';
+import { MONTHS } from '../../../constants/date';
 
 interface Props {
   requests: Array<BookingRequest>;
 }
-
-const MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
 
 export default function BookingsCalendar({ requests }: Props): JSX.Element {
   const classes = useStyles();
@@ -55,7 +42,7 @@ export default function BookingsCalendar({ requests }: Props): JSX.Element {
 
     return (
       <React.Fragment>
-        <Grid item>
+        <Grid key={uniqid()} item>
           <Avatar className={`${dayBookedColor} ${otherMonthColor}`}>{dayDate.getDate()}</Avatar>
         </Grid>
       </React.Fragment>
@@ -91,21 +78,11 @@ export default function BookingsCalendar({ requests }: Props): JSX.Element {
             </IconButton>
           </Grid>
         </Grid>
-        <Grid item className={classes.week} container xs={12} justify="space-between">
-          {WeekRow(0)}
-        </Grid>
-        <Grid item className={classes.week} container xs={12} justify="space-between">
-          {WeekRow(1)}
-        </Grid>
-        <Grid item className={classes.week} container xs={12} justify="space-between">
-          {WeekRow(2)}
-        </Grid>
-        <Grid item className={classes.week} container xs={12} justify="space-between">
-          {WeekRow(3)}
-        </Grid>
-        <Grid item className={classes.week} container xs={12} justify="space-between">
-          {WeekRow(4)}
-        </Grid>
+        {[0, 1, 2, 3, 4].map((element) => (
+          <Grid item className={classes.week} key={uniqid()} container xs={12} justify="space-between">
+            {WeekRow(element)}
+          </Grid>
+        ))}
       </Grid>
     </Paper>
   );
