@@ -9,7 +9,7 @@ exports.getAvailability = asyncHandler(async (req, res) => {
     const userId = req.user.id;
 
     const availability = await Availability.find({
-        $or: [{ userId: userId }]
+       userId
     });
 
     res.send({ availability });
@@ -66,6 +66,10 @@ exports.updateAvailability = asyncHandler(async (req, res) => {
     const availability = await Availability.findById(availabilityId);
 
     if (!availability) {
+        res.status(404);
+        throw new Error("Invalid availability id");
+    }
+    if (availability.userId!=userId) {
         res.status(404);
         throw new Error("Invalid availability id");
     }
