@@ -1,6 +1,6 @@
 import Typography from '@material-ui/core/Typography';
 import { BookingRequest } from '../../../interface/Request';
-import { MONTHS } from '../../../constants/date';
+import { format } from 'date-fns';
 
 interface Props {
   classes: string;
@@ -9,9 +9,8 @@ interface Props {
 
 export default function BookingsDate({ classes, request }: Props): JSX.Element {
   return (
-    <Typography className={classes}>{`${request.startDate.getDate()} ${
-      MONTHS[request.startDate.getMonth()]
-    } ${request.startDate.getFullYear()}, ${request.startDate.getHours()}-${request.endDate.getHours()}
-                `}</Typography>
+    <Typography className={classes}>
+      {format(request.startDate, 'd MMMM h') + ' - ' + format(request.endDate, 'h a')}
+    </Typography>
   );
 }
