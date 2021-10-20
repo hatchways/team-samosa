@@ -19,7 +19,7 @@ exports.getProfile = asyncHandler(async (req, res) => {
 exports.createProfile = asyncHandler(async (req, res) => {
     const userId = req.user.id;
 
-    const { firstName, lastName, phoneNum } = req.body;
+    const { firstName, lastName, gender, birthDate, phoneNum, address, description } = req.body;
 
     if (!firstName || !lastName || !phoneNum) {
         res.status(400);
@@ -37,7 +37,11 @@ exports.createProfile = asyncHandler(async (req, res) => {
         userId: userId,
         firstName: firstName,
         lastName: lastName,
+        gender:gender,
+        birthDate:birthDate,
         phoneNum: phoneNum,
+        address:address,
+        description:description
     };
 
     const resp = await Profile.create(profile);
@@ -51,7 +55,7 @@ exports.createProfile = asyncHandler(async (req, res) => {
 exports.updateProfile = asyncHandler(async (req, res) => {
     const userId = req.user.id;
 
-    const { profileupdates } = req.body;
+    const { profileUpdates } = req.body;
 
     const profile = await Profile.findById(userId);
 
@@ -60,7 +64,7 @@ exports.updateProfile = asyncHandler(async (req, res) => {
         throw new Error("User id do not exist! Error happened!");
     }
 
-    profile.status = profileupdates;
+    profile.status = profileUpdates;
 
     await profile.save();
 
