@@ -11,6 +11,6 @@ router.route("/").get(protect, getProfile);
 
 router.route("/").post(protect, createProfile);
 
-router.route("/:id").patch(protect, updateProfile);
+router.route("/").patch(protect, updateProfile);
 
 module.exports = router;
