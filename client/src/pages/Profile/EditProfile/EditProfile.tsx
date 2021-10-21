@@ -1,12 +1,17 @@
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { TextField as Text } from '@mui/material';
 import Box from '@material-ui/core/Box';
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './useStyles';
-import { CircularProgress } from '@material-ui/core';
-import { Grid } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
+import DatePicker from '@mui/lab/DatePicker';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+//import DatePicker from '@material-ui/lab/DatePicker';
 interface Props {
   handleSubmit: (
     {
@@ -100,6 +105,74 @@ export default function Login({ handleSubmit }: Props): JSX.Element {
                 value={values.firstName}
                 onChange={handleChange}
               />
+            </Grid>
+          </Grid>
+          <Grid container alignItems="center" spacing={2}>
+            <Grid item xs={12} sm={3}>
+              <Typography variant="body1" align="right">
+                <label className={classes.label}>LAST NAME</label>
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <TextField
+                id="lastName"
+                //fullWidth
+                margin="normal"
+                InputProps={{
+                  classes: { input: classes.inputs },
+                }}
+                style={{ width: '80%' }}
+                variant="outlined"
+                name="lastName"
+                autoComplete="lastName"
+                autoFocus
+                helperText={touched.lastName ? errors.lastName : ''}
+                error={touched.lastName && Boolean(errors.lastName)}
+                value={values.lastName}
+                onChange={handleChange}
+              />
+            </Grid>
+          </Grid>
+          <Grid container alignItems="center" spacing={2}>
+            <Grid item xs={12} sm={3}>
+              <Typography variant="body1" align="right">
+                <label className={classes.label}>GENDER </label>
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <TextField
+                id="gender"
+                //fullWidth
+                margin="normal"
+                InputProps={{
+                  classes: { input: classes.inputs },
+                }}
+                style={{ width: '40%' }}
+                variant="outlined"
+                name="gender"
+                autoComplete="gender"
+                autoFocus
+                helperText={touched.gender ? errors.gender : ''}
+                error={touched.gender && Boolean(errors.gender)}
+                value={values.gender}
+                onChange={handleChange}
+              />
+            </Grid>
+          </Grid>
+          <Grid container alignItems="center" spacing={2}>
+            <Grid item xs={12} sm={3}>
+              <Typography variant="body1" align="right">
+                <label className={classes.label}>BIRTH DATE </label>
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  value={values.birthDate}
+                  onChange={handleChange}
+                  renderInput={(params) => <Text {...params} />}
+                />
+              </LocalizationProvider>
             </Grid>
           </Grid>
           <Grid container alignItems="center" spacing={2}>
