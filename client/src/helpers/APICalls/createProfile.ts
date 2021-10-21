@@ -1,25 +1,20 @@
 import { Profile } from '../../interface/Profile';
 import { FetchOptions } from '../../interface/FetchOptions';
 
-const createProfile = async (firstName: string,
+const createProfile = async (
+  firstName: string,
   lastName: string,
   gender: string,
   birthDate: Date,
   email: string,
   phoneNum: string,
   address: string,
-  description: string): Promise<Profile> => {
+  description: string,
+): Promise<Profile> => {
   const fetchOptions: FetchOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ firstName,
-      lastName,
-      gender,
-      birthDate,
-      email,
-      phoneNum,
-      address,
-      description, }),
+    body: JSON.stringify({ firstName, lastName, gender, birthDate, email, phoneNum, address, description }),
     credentials: 'include',
   };
   return await fetch(`/profile`, fetchOptions)
