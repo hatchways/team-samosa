@@ -5,11 +5,6 @@ const useStyles = makeStyles(() => ({
     padding: 32,
     minHeight: '100px',
   },
-  title: {
-    fontSize: 12,
-    fontWeight: 700,
-    textTransform: 'uppercase',
-  },
   empty: { fontSize: 16 },
 }));
 
