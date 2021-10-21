@@ -13,7 +13,7 @@ const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 
 const profileRouter = require("./routes/profile");
-const availabilityRouter = require("./routes/Availability");
+const availabilityRouter = require("./routes/availability");
 const { json, urlencoded } = express;
 
 connectDB();
