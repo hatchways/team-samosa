@@ -19,19 +19,19 @@ export default function BookingContent({ request }: Props): JSX.Element {
       <Grid container alignItems="center" spacing={2}>
         <Grid item xs={12} sm container spacing={2}>
           <Grid item>
-            <BookingsDate classes={classes.date} request={request} />
+            <BookingsDate request={request} />
           </Grid>
           <Grid item container spacing={2} alignItems="center">
             <Grid item>
               <Avatar alt="avatar" src="" />
             </Grid>
             <Grid item>
-              <Typography className={classes.user}>{request.sitter.username}</Typography>
+              <Typography variant="h6">{request.sitter.username}</Typography>
             </Grid>
           </Grid>
         </Grid>
         <Grid item>
-          <Typography color="textSecondary" className={classes.status}>
+          <Typography variant="button" color="textSecondary">
             {request.status}
           </Typography>
         </Grid>

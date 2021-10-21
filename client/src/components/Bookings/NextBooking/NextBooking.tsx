@@ -30,14 +30,14 @@ export default function NextBooking({ request }: Props): JSX.Element {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm container spacing={2}>
                   <Grid item>
-                    <BookingsDate request={request} classes={classes.date} />
+                    <BookingsDate request={request} />
                   </Grid>
                   <Grid item container spacing={2} alignItems="center">
                     <Grid item>
                       <Avatar className={classes.avatar} alt="avatar" src="" />
                     </Grid>
                     <Grid item>
-                      <Typography className={classes.user}>{request.sitter.username}</Typography>
+                      <Typography variant="h5">{request.sitter.username}</Typography>
                     </Grid>
                   </Grid>
                 </Grid>

@@ -6,7 +6,7 @@ export const theme = createMuiTheme({
     fontFamily: '"Poppins", "Open Sans", "sans-serif", "Roboto"',
     fontSize: 12,
     button: {
-      textTransform: 'none',
+      textTransform: 'uppercase',
       fontWeight: 700,
     },
     overline: { fontWeight: 700, fontSize: '0.75rem' },

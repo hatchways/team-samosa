@@ -4,8 +4,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import Typography from '@material-ui/core/Typography';
 import { startOfWeek, startOfMonth, addDays, addMonths } from 'date-fns';
-import uniqid from 'uniqid';
 import useStyles from './useStyles';
 import React, { useState } from 'react';
 import { BookingRequest } from '../../../interface/Request';
@@ -42,7 +42,7 @@ export default function BookingsCalendar({ requests }: Props): JSX.Element {
 
     return (
       <React.Fragment>
-        <Grid key={uniqid()} item>
+        <Grid item>
           <Avatar className={`${dayBookedColor} ${otherMonthColor}`}>{dayDate.getDate()}</Avatar>
         </Grid>
       </React.Fragment>
@@ -70,7 +70,9 @@ export default function BookingsCalendar({ requests }: Props): JSX.Element {
             </IconButton>
           </Grid>
           <Grid item className={classes.month}>
-            {MONTHS[month.getMonth()]} {month.getFullYear()}
+            <Typography variant="h5">
+              {MONTHS[month.getMonth()]} {month.getFullYear()}
+            </Typography>
           </Grid>
           <Grid item className={classes.incdec}>
             <IconButton onClick={handleIncButton} edge="end">
@@ -78,8 +80,8 @@ export default function BookingsCalendar({ requests }: Props): JSX.Element {
             </IconButton>
           </Grid>
         </Grid>
-        {[0, 1, 2, 3, 4].map((element) => (
-          <Grid item className={classes.week} key={uniqid()} container xs={12} justify="space-between">
+        {[0, 1, 2, 3, 4].map((element, index) => (
+          <Grid item key={index} container xs={12} justify="space-between">
             {WeekRow(element)}
           </Grid>
         ))}

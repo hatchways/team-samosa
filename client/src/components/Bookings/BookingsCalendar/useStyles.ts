@@ -5,12 +5,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 64,
   },
   month: {
-    fontSize: 20,
-    fontWeight: 700,
     color: theme.palette.primary.main,
-  },
-  week: {
-    fontSize: 16,
   },
   incdec: {
     fontSize: 20,
