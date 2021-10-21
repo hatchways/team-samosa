@@ -10,7 +10,10 @@ interface Props {
 export default function BookingsDate({ classes, request }: Props): JSX.Element {
   return (
     <Typography className={classes}>
-      {format(request.startDate, 'd MMMM h') + ' - ' + format(request.endDate, 'h a')}
+      {format(request.startDate, 'd MMMM y ha') +
+        ' - ' +
+        (request.startDate.getDay() !== request.endDate.getDay() ? format(request.endDate, 'd MMMM y ') : '') +
+        format(request.endDate, 'ha')}
     </Typography>
   );
 }

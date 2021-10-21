@@ -60,7 +60,7 @@ exports.updateRequest = asyncHandler(async (req, res, next) => {
 
   const userId = req.user.id;
 
-  const { requestStatus } = req.body;
+  const { status } = req.body;
 
   const request = await Request.findById(requestId);
 
@@ -74,7 +74,7 @@ exports.updateRequest = asyncHandler(async (req, res, next) => {
     throw new Error("Unauthorized user");
   }
 
-  request.status = requestStatus;
+  request.status = status;
 
   await request.save();
 

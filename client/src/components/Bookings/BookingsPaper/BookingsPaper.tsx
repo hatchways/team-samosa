@@ -25,12 +25,10 @@ export default function BookingsPaper({ requests }: Props): JSX.Element {
             <BookingsList title="Current Bookings:" requests={currentBookings} />
           </Grid>
         ) : (
-          <Grid item xs={12}>
-            <Typography className={classes.empty}>{"You don't have any upcoming bookings"}</Typography>
-          </Grid>
+          ''
         )}
         {pastBookings.length ? (
-          <Grid item>
+          <Grid item xs={12}>
             <BookingsList title="Past Bookings:" requests={pastBookings} />
           </Grid>
         ) : (
