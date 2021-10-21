@@ -11,7 +11,6 @@ import Grid from '@material-ui/core/Grid';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-//import DatePicker from '@material-ui/lab/DatePicker';
 interface Props {
   handleSubmit: (
     {
@@ -69,9 +68,7 @@ export default function Login({ handleSubmit }: Props): JSX.Element {
         firstName: Yup.string().required('FirstName is required'),
         lastName: Yup.string().required('LastName is required'),
         gender: Yup.string(),
-        birthDate: Yup.date().default(function () {
-          return new Date();
-        }),
+        birthDate: Yup.date().nullable(),
         email: Yup.string().required('email is required').email('email is not valid'),
         phoneNum: Yup.string().required('phone number is required'),
         address: Yup.string(),
@@ -79,7 +76,7 @@ export default function Login({ handleSubmit }: Props): JSX.Element {
       })}
       onSubmit={handleSubmit}
     >
-      {({ handleSubmit, handleChange, values, touched, errors, isSubmitting }) => (
+      {({ handleSubmit, handleChange, values, touched, errors, isSubmitting, setFieldValue }) => (
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <Grid container alignItems="center" spacing={2}>
             <Grid item xs={12} sm={3}>
@@ -169,7 +166,7 @@ export default function Login({ handleSubmit }: Props): JSX.Element {
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
                   value={values.birthDate}
-                  onChange={handleChange}
+                  onChange={(val) => setFieldValue('birthDate', val)}
                   renderInput={(params) => <Text {...params} />}
                 />
               </LocalizationProvider>
@@ -197,6 +194,84 @@ export default function Login({ handleSubmit }: Props): JSX.Element {
                 helperText={touched.email ? errors.email : ''}
                 error={touched.email && Boolean(errors.email)}
                 value={values.email}
+                onChange={handleChange}
+              />
+            </Grid>
+          </Grid>
+          <Grid container alignItems="center" spacing={2}>
+            <Grid item xs={12} sm={3}>
+              <Typography variant="body1" align="right">
+                <label className={classes.label}>PHONE NUMBER </label>
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <TextField
+                id="phoneNum"
+                //fullWidth
+                margin="normal"
+                InputProps={{
+                  classes: { input: classes.inputs },
+                }}
+                style={{ width: '80%' }}
+                variant="outlined"
+                name="phoneNum"
+                autoComplete="phoneNum"
+                autoFocus
+                helperText={touched.phoneNum ? errors.phoneNum : ''}
+                error={touched.phoneNum && Boolean(errors.phoneNum)}
+                value={values.phoneNum}
+                onChange={handleChange}
+              />
+            </Grid>
+          </Grid>
+          <Grid container alignItems="center" spacing={2}>
+            <Grid item xs={12} sm={3}>
+              <Typography variant="body1" align="right">
+                <label className={classes.label}>WHERE YOUR LIVE </label>
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <TextField
+                id="address"
+                multiline
+                margin="normal"
+                InputProps={{
+                  classes: { input: classes.inputs },
+                }}
+                style={{ width: '80%' }}
+                variant="outlined"
+                name="address"
+                autoComplete="address"
+                autoFocus
+                helperText={touched.address ? errors.address : ''}
+                error={touched.email && Boolean(errors.address)}
+                value={values.address}
+                onChange={handleChange}
+              />
+            </Grid>
+          </Grid>
+          <Grid container alignItems="center" spacing={2}>
+            <Grid item xs={12} sm={3}>
+              <Typography variant="body1" align="right">
+                <label className={classes.label}>DESCRIBE YOURSELF </label>
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <TextField
+                id="description"
+                multiline
+                margin="normal"
+                InputProps={{
+                  classes: { input: classes.inputs },
+                }}
+                style={{ width: '80%' }}
+                variant="outlined"
+                name="description"
+                autoComplete="description"
+                autoFocus
+                helperText={touched.description ? errors.description : ''}
+                error={touched.email && Boolean(errors.description)}
+                value={values.description}
                 onChange={handleChange}
               />
             </Grid>
