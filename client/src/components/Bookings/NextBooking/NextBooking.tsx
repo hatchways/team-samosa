@@ -35,7 +35,7 @@ export default function NextBooking({ request }: Props): JSX.Element {
                   <Avatar className={classes.avatar} alt="avatar" src="" />
                 </Grid>
                 <Grid item>
-                  <Typography className={classes.user}>{request.name}</Typography>
+                  <Typography className={classes.user}>{request.sitter.username}</Typography>
                 </Grid>
               </Grid>
             </Grid>

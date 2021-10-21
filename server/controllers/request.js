@@ -1,5 +1,5 @@
-const Request = require("../Models/Request");
 const User = require("../models/User");
+const Request = require("../Models/Request");
 const asyncHandler = require("express-async-handler");
 
 // @route GET /request
@@ -10,7 +10,12 @@ exports.getRequests = asyncHandler(async (req, res, next) => {
 
   const requests = await Request.find({
     $or: [{ userId: userId }, { sitterId: userId }],
-  });
+  })
+    .populate([
+      { path: "sitterId", select: "username" },
+      { path: "userId", select: "username" },
+    ])
+    .exec();
 
   res.send({ requests });
 });
