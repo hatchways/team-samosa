@@ -8,7 +8,6 @@ export async function updateRequest(id: string, status: string): Promise<{ reque
     body: JSON.stringify({ status }),
     credentials: 'include',
   };
-  console.log('fetchOptions: ', fetchOptions);
   return await fetch(`/request/${id}`, fetchOptions)
     .then((res) => res.json())
     .catch(() => ({
