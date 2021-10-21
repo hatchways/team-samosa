@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const protect = require("../middleware/auth");
 const {
-    getProfile,
-    createProfile,
-    updateProfile,
+  getProfile,
+  createProfile,
+  updateProfile,
 } = require("../controllers/Profile");
 
 router.route("/").get(protect, getProfile);
