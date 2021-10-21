@@ -5,12 +5,11 @@ import Avatar from '@material-ui/core/Avatar';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Typography from '@material-ui/core/Typography';
-import { startOfWeek, startOfMonth, addDays, addMonths } from 'date-fns';
+import { startOfWeek, startOfMonth, addDays, addMonths, format } from 'date-fns';
 import useStyles from './useStyles';
 import React, { useState } from 'react';
 import { BookingRequest } from '../../../interface/Request';
 import { MOCK_TODAY } from '../mockRequests';
-import { MONTHS } from '../../../constants/date';
 
 interface Props {
   requests: Array<BookingRequest>;
@@ -70,9 +69,7 @@ export default function BookingsCalendar({ requests }: Props): JSX.Element {
             </IconButton>
           </Grid>
           <Grid item className={classes.month}>
-            <Typography variant="h5">
-              {MONTHS[month.getMonth()]} {month.getFullYear()}
-            </Typography>
+            <Typography variant="h5">{format(month, 'MMMM y')}</Typography>
           </Grid>
           <Grid item className={classes.incdec}>
             <IconButton onClick={handleIncButton} edge="end">
