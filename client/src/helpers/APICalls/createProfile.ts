@@ -2,7 +2,6 @@ import { ProfileData } from '../../interface/Profile';
 import { FetchOptions } from '../../interface/FetchOptions';
 
 const createProfile = async (
-  userId: string,
   firstName: string,
   lastName: string,
   gender: string,
@@ -15,7 +14,7 @@ const createProfile = async (
   const fetchOptions: FetchOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ userId, firstName, lastName, gender, birthDate, email, phoneNum, address, description }),
+    body: JSON.stringify({ firstName, lastName, gender, birthDate, email, phoneNum, address, description }),
     credentials: 'include',
   };
   console.log(fetchOptions);

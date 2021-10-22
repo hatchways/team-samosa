@@ -1,5 +1,4 @@
 export interface ProfileSuccess {
-  userId: string;
   firstName: string;
   lastName: string;
   gender: string;
@@ -11,6 +10,6 @@ export interface ProfileSuccess {
 }
 
 export interface ProfileData {
-  error?: { message: string };
+  error?: string;
   success?: ProfileSuccess;
 }

@@ -48,7 +48,15 @@ export default function Profile(): JSX.Element {
       description: string;
     }>,
   ) => {
-    createProfile(userId, firstName, lastName, gender, birthDate, email, phoneNum, address, description);
+    createProfile(firstName, lastName, gender, birthDate, email, phoneNum, address, description).then((data) => {
+      if (data.error) {
+        console.error({ error: data.error });
+        updateSnackBarMessage(data.error);
+      } else {
+        console.log(data);
+      }
+      setSubmitting(false);
+    });
   };
   return (
     <Grid container component="main" className={classes.root}>
