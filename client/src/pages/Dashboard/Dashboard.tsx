@@ -6,6 +6,8 @@ import { useAuth } from '../../context/useAuthContext';
 import { useSocket } from '../../context/useSocketContext';
 import { useHistory } from 'react-router-dom';
 import ChatSideBanner from '../../components/ChatSideBanner/ChatSideBanner';
+import NavbarContainer from '../../components/Navbar/NavbarContainer/NavbarContainer';
+import MySitters from '../MySitters/MySitters';
 import { useEffect } from 'react';
 
 export default function Dashboard(): JSX.Element {
@@ -28,10 +30,15 @@ export default function Dashboard(): JSX.Element {
   }
 
   return (
-    <Grid container component="main" className={`${classes.root} ${classes.dashboard}`}>
+    <Grid container component="main">
       <CssBaseline />
-      <Grid item className={classes.drawerWrapper}>
-        <ChatSideBanner loggedInUser={loggedInUser} />
+      <Grid container>
+        <Grid item xs={12}>
+          <NavbarContainer />
+        </Grid>
+        <Grid item xs={12}>
+          <MySitters />
+        </Grid>
       </Grid>
     </Grid>
   );

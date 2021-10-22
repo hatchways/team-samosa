@@ -8,6 +8,7 @@ import useStyles from './useStyles';
 import register from '../../helpers/APICalls/register';
 import SignUpForm from './SignUpForm/SignUpForm';
 import AuthHeader from '../../components/AuthHeader/AuthHeader';
+import NavbarContainer from '../../components/Navbar/NavbarContainer/NavbarContainer';
 import { useAuth } from '../../context/useAuthContext';
 import { useSnackBar } from '../../context/useSnackbarContext';
 
@@ -40,6 +41,9 @@ export default function Register(): JSX.Element {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
+      <Grid item xs={12}>
+        <NavbarContainer />
+      </Grid>
       <Grid item xs={12} sm={8} md={7} elevation={6} component={Paper} square>
         <Box className={classes.authWrapper}>
           <AuthHeader linkTo="/login" asideText="Already have an account?" btnText="Login" />
