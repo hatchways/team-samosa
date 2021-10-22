@@ -1,18 +1,18 @@
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import useStyles from './useStyles';
 import { useAuth } from '../../context/useAuthContext';
 import { useSocket } from '../../context/useSocketContext';
 import { useHistory } from 'react-router-dom';
-import ChatSideBanner from '../../components/ChatSideBanner/ChatSideBanner';
-import NavbarContainer from '../../components/Navbar/NavbarContainer/NavbarContainer';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+
+import PageWrapper from '../../components/PageWrapper/PageWrapper';
+
 import MySitters from '../MySitters/MySitters';
+
 import { useEffect } from 'react';
 
 export default function Dashboard(): JSX.Element {
-  const classes = useStyles();
-
   const { loggedInUser } = useAuth();
   const { initSocket } = useSocket();
 
@@ -32,14 +32,20 @@ export default function Dashboard(): JSX.Element {
   return (
     <Grid container component="main">
       <CssBaseline />
-      <Grid container>
-        <Grid item xs={12}>
-          <NavbarContainer />
-        </Grid>
-        <Grid item xs={12}>
-          <MySitters />
-        </Grid>
-      </Grid>
+      <PageWrapper>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/dashboard/mysitters">
+              <MySitters />
+            </Route>
+            <Route path="/dashboard/myjobs">{/* <MyJobs /> */}</Route>
+            <Route path="/dashboard/myprofile">{/* <MyProfile /> */}</Route>
+            <Route path="*">
+              <Redirect to="/dashboard/mysitters" />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </PageWrapper>
     </Grid>
   );
 }

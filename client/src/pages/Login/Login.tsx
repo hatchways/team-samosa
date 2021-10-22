@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -8,12 +9,14 @@ import useStyles from './useStyles';
 import login from '../../helpers/APICalls/login';
 import LoginForm from './LoginForm/LoginForm';
 import AuthHeader from '../../components/AuthHeader/AuthHeader';
-import NavbarContainer from '../../components/Navbar/NavbarContainer/NavbarContainer';
 import { useAuth } from '../../context/useAuthContext';
 import { useSnackBar } from '../../context/useSnackbarContext';
 
 export default function Login(): JSX.Element {
   const classes = useStyles();
+
+  const history = useHistory();
+
   const { updateLoginContext } = useAuth();
   const { updateSnackBarMessage } = useSnackBar();
 
@@ -27,6 +30,7 @@ export default function Login(): JSX.Element {
         updateSnackBarMessage(data.error.message);
       } else if (data.success) {
         updateLoginContext(data.success);
+        history.push('/dashboard');
       } else {
         // should not get here from backend but this catch is for an unknown issue
         console.error({ data });
@@ -38,12 +42,8 @@ export default function Login(): JSX.Element {
   };
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid container component="main" className={classes.root} justify="center" alignItems="center">
       <CssBaseline />
-      <Grid item xs={12}>
-        <NavbarContainer />
-      </Grid>
-
       <Grid item xs={12} sm={8} md={7} elevation={6} component={Paper} square>
         <Box className={classes.authWrapper}>
           <AuthHeader linkTo="/signup" asideText="Don't have an account?" btnText="Create account" />

@@ -22,7 +22,7 @@ export default function MySitters(): JSX.Element {
 
   return (
     <Grid container justify="center">
-      <Grid className={classes.root} item container spacing={10} direction="row-reverse">
+      <Grid className={classes.root} item container direction="row-reverse" spacing={10}>
         <Grid lg={7} item>
           <BookingsCalendar requests={requests} />
         </Grid>
