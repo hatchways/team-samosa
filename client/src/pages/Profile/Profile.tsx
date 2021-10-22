@@ -6,6 +6,7 @@ import { FormikHelpers } from 'formik';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './useStyles';
 import createProfile from '../../helpers/APICalls/createProfile';
+import updateProfile from '../../helpers/APICalls/updateProfile';
 import EditProfile from './EditProfile/EditProfile';
 import { useSnackBar } from '../../context/useSnackbarContext';
 
@@ -14,6 +15,7 @@ export default function Profile(): JSX.Element {
   const { updateSnackBarMessage } = useSnackBar();
   const handleSubmit = (
     {
+      exist,
       firstName,
       lastName,
       gender,
@@ -23,6 +25,7 @@ export default function Profile(): JSX.Element {
       address,
       description,
     }: {
+      exist: boolean;
       firstName: string;
       lastName: string;
       gender: string;
@@ -35,6 +38,7 @@ export default function Profile(): JSX.Element {
     {
       setSubmitting,
     }: FormikHelpers<{
+      exist: boolean;
       firstName: string;
       lastName: string;
       gender: string;
@@ -45,15 +49,25 @@ export default function Profile(): JSX.Element {
       description: string;
     }>,
   ) => {
-    createProfile(firstName, lastName, gender, birthDate, email, phoneNum, address, description).then((data) => {
-      if (data.error) {
-        console.error({ error: data.error });
-        updateSnackBarMessage(data.error);
-      } else {
-        console.log(data);
-      }
-      setSubmitting(false);
-    });
+    exist
+      ? updateProfile(firstName, lastName, gender, birthDate, email, phoneNum, address, description).then((data) => {
+          if (data.error) {
+            console.error({ error: data.error });
+            updateSnackBarMessage(data.error);
+          } else {
+            console.log(data);
+          }
+          setSubmitting(false);
+        })
+      : createProfile(firstName, lastName, gender, birthDate, email, phoneNum, address, description).then((data) => {
+          if (data.error) {
+            console.error({ error: data.error });
+            updateSnackBarMessage(data.error);
+          } else {
+            console.log(data);
+          }
+          setSubmitting(false);
+        });
   };
   return (
     <Grid container component="main" className={classes.root}>

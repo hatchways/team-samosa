@@ -12,7 +12,7 @@ const createProfile = async (
   description: string,
 ): Promise<ProfileData> => {
   const fetchOptions: FetchOptions = {
-    method: 'POST',
+    method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ firstName, lastName, gender, birthDate, email, phoneNum, address, description }),
     credentials: 'include',

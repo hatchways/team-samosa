@@ -13,10 +13,11 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { ProfileData } from '../../../interface/Profile';
 import { useEffect, useState } from 'react';
-import { getProfile } from '../../../helpers/APICalls/getProfiles';
+import { getProfile } from '../../../helpers/APICalls/getProfile';
 interface Props {
   handleSubmit: (
     {
+      exist,
       firstName,
       lastName,
       gender,
@@ -26,6 +27,7 @@ interface Props {
       address,
       description,
     }: {
+      exist: boolean;
       firstName: string;
       lastName: string;
       gender: string;
@@ -39,6 +41,7 @@ interface Props {
       setStatus,
       setSubmitting,
     }: FormikHelpers<{
+      exist: boolean;
       firstName: string;
       lastName: string;
       gender: string;
@@ -65,6 +68,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
     <Formik
       enableReinitialize={true}
       initialValues={{
+        exist: profile.success ? true : false,
         firstName: profile.success ? profile.success.firstName : '',
         lastName: profile.success ? profile.success.lastName : '',
         gender: profile.success ? profile.success.gender : '',
