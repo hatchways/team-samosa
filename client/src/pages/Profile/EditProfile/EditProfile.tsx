@@ -11,6 +11,9 @@ import Grid from '@material-ui/core/Grid';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { ProfileData } from '../../../interface/Profile';
+import { useEffect, useState } from 'react';
+import { getProfile } from '../../../helpers/APICalls/getProfiles';
 interface Props {
   handleSubmit: (
     {
@@ -47,22 +50,28 @@ interface Props {
     }>,
   ) => void;
 }
-
-export default function Login({ handleSubmit }: Props): JSX.Element {
+const profileclear: ProfileData = {};
+export default function EditProfile({ handleSubmit }: Props): JSX.Element {
   const classes = useStyles();
+  const [profile, setProfile] = useState(profileclear);
 
+  useEffect(() => {
+    getProfile().then((res) => {
+      setProfile(res);
+    });
+  }, []);
+  console.log(profile.success);
   return (
     <Formik
       initialValues={{
-        //SHould fetch data for future
-        firstName: '',
-        lastName: '',
-        gender: '',
-        birthDate: new Date('1998-06-15'),
-        email: '',
-        phoneNum: '',
-        address: '',
-        description: '',
+        firstName: profile.success ? profile.success.firstName : '',
+        lastName: profile.success ? profile.success.lastName : '',
+        gender: profile.success ? profile.success.gender : '',
+        birthDate: profile.success ? profile.success.birthDate : new Date('1998-06-15'),
+        email: profile.success ? profile.success.email : '',
+        phoneNum: profile.success ? profile.success.phoneNum : '',
+        address: profile.success ? profile.success.address : '',
+        description: profile.success ? profile.success.description : '',
       }}
       validationSchema={Yup.object().shape({
         firstName: Yup.string().required('FirstName is required'),

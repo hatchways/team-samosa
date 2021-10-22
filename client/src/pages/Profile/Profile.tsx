@@ -8,13 +8,10 @@ import useStyles from './useStyles';
 import createProfile from '../../helpers/APICalls/createProfile';
 import EditProfile from './EditProfile/EditProfile';
 import { useSnackBar } from '../../context/useSnackbarContext';
-import { useAuth } from '../../context/useAuthContext';
 
 export default function Profile(): JSX.Element {
   const classes = useStyles();
   const { updateSnackBarMessage } = useSnackBar();
-  const { loggedInUser } = useAuth();
-  const userId = (loggedInUser as any).id;
   const handleSubmit = (
     {
       firstName,

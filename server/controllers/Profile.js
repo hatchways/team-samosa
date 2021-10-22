@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("../models/User");
 const Profile = require("../Models/Profile");
 const asyncHandler = require("express-async-handler");
 
@@ -8,9 +9,22 @@ const asyncHandler = require("express-async-handler");
 exports.getProfile = asyncHandler(async (req, res) => {
   const userId = req.user.id;
 
-  const profile = await Profile.findOne({ userId });
 
-  res.send({ profile });
+  const user = await User.findOne({ _id: userId });
+  const profile = await Profile.findOne({ userId });
+  const email = await user.email;
+  res.send({
+    success: {
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      gender: profile.gender,
+      birthDate: profile.birthDate,
+      email: user.email,
+      phoneNum: profile.phoneNum,
+      address: profile.address,
+      description: profile.description,
+    }
+  });
 });
 
 // @route POST /profile
