@@ -26,11 +26,10 @@ export default function Dashboard(): JSX.Element {
     // loading for a split seconds until history.push works
     return <CircularProgress />;
   }
-
   return (
     <Grid container component="main" className={`${classes.root} ${classes.dashboard}`}>
       <CssBaseline />
-      <Profile />
+      <Profile loggedInUser={loggedInUser} />
     </Grid>
   );
 }

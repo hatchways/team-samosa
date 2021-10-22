@@ -9,10 +9,13 @@ import createProfile from '../../helpers/APICalls/createProfile';
 import EditProfile from './EditProfile/EditProfile';
 import { useSnackBar } from '../../context/useSnackbarContext';
 
-export default function Profile(): JSX.Element {
+interface Props {
+  loggedInUser: any;
+}
+export default function Profile(loggedInUser: any): JSX.Element {
   const classes = useStyles();
   const { updateSnackBarMessage } = useSnackBar();
-
+  const id = loggedInUser.id;
   const handleSubmit = (
     {
       firstName,
@@ -46,9 +49,9 @@ export default function Profile(): JSX.Element {
       description: string;
     }>,
   ) => {
-    createProfile(firstName, lastName, gender, birthDate, email, phoneNum, address, description);
+    createProfile(id, firstName, lastName, gender, birthDate, email, phoneNum, address, description);
   };
-
+  console.log(loggedInUser.loggedInUser);
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
