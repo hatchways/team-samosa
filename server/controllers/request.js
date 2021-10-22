@@ -62,6 +62,11 @@ exports.updateRequest = asyncHandler(async (req, res, next) => {
 
   const { status } = req.body;
 
+  if (status !== "declined" && status !== "accepted" && status !== "pending") {
+    res.status(400);
+    throw new Error("Invalid status field");
+  }
+
   const request = await Request.findById(requestId);
 
   if (!request) {
