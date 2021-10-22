@@ -14,7 +14,7 @@ export default function Profile(): JSX.Element {
   const classes = useStyles();
   const { updateSnackBarMessage } = useSnackBar();
   const { loggedInUser } = useAuth();
-  const id = (loggedInUser as any).id;
+  const userId = (loggedInUser as any).id;
   const handleSubmit = (
     {
       firstName,
@@ -48,7 +48,7 @@ export default function Profile(): JSX.Element {
       description: string;
     }>,
   ) => {
-    createProfile(id, firstName, lastName, gender, birthDate, email, phoneNum, address, description);
+    createProfile(userId, firstName, lastName, gender, birthDate, email, phoneNum, address, description);
   };
   return (
     <Grid container component="main" className={classes.root}>

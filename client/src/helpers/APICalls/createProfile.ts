@@ -2,7 +2,7 @@ import { Profile } from '../../interface/Profile';
 import { FetchOptions } from '../../interface/FetchOptions';
 
 const createProfile = async (
-  userId: string,
+  userId: any,
   firstName: string,
   lastName: string,
   gender: string,
@@ -18,6 +18,7 @@ const createProfile = async (
     body: JSON.stringify({ userId, firstName, lastName, gender, birthDate, email, phoneNum, address, description }),
     credentials: 'include',
   };
+  console.log(fetchOptions);
   return await fetch(`/profile`, fetchOptions)
     .then((res) => res.json())
     .catch(() => ({

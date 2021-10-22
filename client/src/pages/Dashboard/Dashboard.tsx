@@ -13,8 +13,6 @@ export default function Dashboard(): JSX.Element {
 
   const { loggedInUser } = useAuth();
   const { initSocket } = useSocket();
-  const id = (loggedInUser as any).id;
-  console.log(id);
   const history = useHistory();
 
   useEffect(() => {
@@ -30,7 +28,7 @@ export default function Dashboard(): JSX.Element {
   return (
     <Grid container component="main" className={`${classes.root} ${classes.dashboard}`}>
       <CssBaseline />
-      <Profile loggedInUser={loggedInUser} />
+      <Profile />
     </Grid>
   );
 }
