@@ -50,6 +50,7 @@ interface Props {
     }>,
   ) => void;
 }
+
 const profileclear: ProfileData = {};
 export default function EditProfile({ handleSubmit }: Props): JSX.Element {
   const classes = useStyles();
@@ -60,9 +61,9 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
       setProfile(res);
     });
   }, []);
-  console.log(profile.success);
   return (
     <Formik
+      enableReinitialize={true}
       initialValues={{
         firstName: profile.success ? profile.success.firstName : '',
         lastName: profile.success ? profile.success.lastName : '',
