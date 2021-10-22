@@ -125,7 +125,7 @@ exports.updateProfile = asyncHandler(async (req, res) => {
   const user = await User.findOne({ _id: userId });
   if (user.email !== email) {
     user.email = email;
-    await profile.save();
+    await user.save();
   }
-  res.status(200).json(profile);
+  res.status(200).json(user);
 });
