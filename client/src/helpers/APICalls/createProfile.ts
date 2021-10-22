@@ -1,8 +1,8 @@
-import { Profile } from '../../interface/Profile';
+import { ProfileData } from '../../interface/Profile';
 import { FetchOptions } from '../../interface/FetchOptions';
 
 const createProfile = async (
-  userId: any,
+  userId: string,
   firstName: string,
   lastName: string,
   gender: string,
@@ -11,7 +11,7 @@ const createProfile = async (
   phoneNum: string,
   address: string,
   description: string,
-): Promise<Profile> => {
+): Promise<ProfileData> => {
   const fetchOptions: FetchOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -19,7 +19,7 @@ const createProfile = async (
     credentials: 'include',
   };
   console.log(fetchOptions);
-  return await fetch(`/profile`, fetchOptions)
+  return await fetch(`/Profile`, fetchOptions)
     .then((res) => res.json())
     .catch(() => ({
       error: { message: 'Unable to connect to server. Please try again' },
