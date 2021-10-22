@@ -33,6 +33,11 @@ exports.createProfile = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Incomplete profile field");
   }
+  const userIdExists = await Profile.findOne({ userId });
+  if (userIdExists) {
+    res.status(400);
+    throw new Error("There already a profile");
+  }
 
   const phoneNumExists = await Profile.findOne({ phoneNum });
 
