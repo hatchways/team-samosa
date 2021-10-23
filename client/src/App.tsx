@@ -5,14 +5,13 @@ import Welcome from './pages/Welcome/Welcome';
 import Login from './pages/Login/Login';
 import Signup from './pages/SignUp/SignUp';
 import Dashboard from './pages/Dashboard/Dashboard';
-import NavWrapper from './components/NavWrapper/NavWrapper';
+import NavBar from './components/Navbar/NavBar';
 import { AuthProvider } from './context/useAuthContext';
 import { SocketProvider } from './context/useSocketContext';
 import { SnackBarProvider } from './context/useSnackbarContext';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import './App.css';
-import NavBar from './components/Navbar/NavBar';
 
 function App(): JSX.Element {
   return (
@@ -27,17 +26,16 @@ function App(): JSX.Element {
                   <Welcome />
                 </Route>
                 <Route exact path="/login">
-                  <NavWrapper>
-                    <Login />
-                  </NavWrapper>
+                  <NavBar elevation={16} color="inherit" />
+                  <Login />
                 </Route>
                 <Route exact path="/signup">
-                  <NavWrapper>
-                    <Signup />
-                  </NavWrapper>
+                  <NavBar elevation={16} color="inherit" />
+                  <Signup />
                 </Route>
                 <Route exact path="/profiles">
-                  <NavWrapper>{/* <Profiles /> */}</NavWrapper>
+                  <NavBar elevation={16} color="inherit" />
+                  {/* <Profiles /> */}
                 </Route>
                 <Route path="/dashboard">
                   <NavBar elevation={16} color="inherit" />

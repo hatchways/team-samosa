@@ -1,12 +1,11 @@
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useAuth } from '../../context/useAuthContext';
 import { useSocket } from '../../context/useSocketContext';
 import { useHistory } from 'react-router-dom';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-
-import PageWrapper from '../../components/PageWrapper/PageWrapper';
 
 import MySitters from '../MySitters/MySitters';
 
@@ -32,7 +31,7 @@ export default function Dashboard(): JSX.Element {
   return (
     <Grid container component="main">
       <CssBaseline />
-      <PageWrapper>
+      <Container>
         <BrowserRouter>
           <Switch>
             <Route path="/dashboard/mysitters">
@@ -45,7 +44,7 @@ export default function Dashboard(): JSX.Element {
             </Route>
           </Switch>
         </BrowserRouter>
-      </PageWrapper>
+      </Container>
     </Grid>
   );
 }

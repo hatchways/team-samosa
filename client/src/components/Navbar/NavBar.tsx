@@ -86,6 +86,7 @@ export default function NavBar({ elevation, color }: Props): JSX.Element {
   return (
     <AppBar elevation={elevation} color={color} position="fixed">
       <Toolbar className={classes.toolbar}>
+        <img src="/Paw-print.svg" className={classes.logoImg} />
         <Box className={classes.logo}>
           <Typography variant="h5" className={classes.logoText}>
             LovingSitter.
