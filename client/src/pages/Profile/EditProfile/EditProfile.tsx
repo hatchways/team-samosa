@@ -15,7 +15,7 @@ import { ProfileData, ProfileSuccess } from '../../../interface/Profile';
 import { useEffect, useState } from 'react';
 import { getProfile } from '../../../helpers/APICalls/getProfile';
 import { useSnackBar } from '../../../context/useSnackbarContext';
-
+import EditProfileInput from '../../../components/Profile/EditProfileInput';
 interface Props {
   handleSubmit: (
     { exist, firstName, lastName, gender, birthDate, email, phoneNum, address, description }: ProfileSuccess,
@@ -65,78 +65,33 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
     >
       {({ handleSubmit, handleChange, values, touched, errors, isSubmitting, setFieldValue }) => (
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
-          <Grid container alignItems="center" spacing={2}>
-            <Grid item xs={12} sm={3}>
-              <Typography variant="body1" align="right">
-                <label className={classes.label}>FIRST NAME</label>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={8}>
-              <TextField
-                id="firstName"
-                margin="normal"
-                InputProps={{
-                  classes: { input: classes.inputs },
-                }}
-                variant="outlined"
-                name="firstName"
-                autoComplete="firstName"
-                autoFocus
-                helperText={touched.firstName ? errors.firstName : ''}
-                error={touched.firstName && Boolean(errors.firstName)}
-                value={values.firstName}
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
-          <Grid container alignItems="center" spacing={2}>
-            <Grid item xs={12} sm={3}>
-              <Typography variant="body1" align="right">
-                <label className={classes.label}>LAST NAME</label>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={8}>
-              <TextField
-                id="lastName"
-                margin="normal"
-                InputProps={{
-                  classes: { input: classes.inputs },
-                }}
-                variant="outlined"
-                name="lastName"
-                autoComplete="lastName"
-                autoFocus
-                helperText={touched.lastName ? errors.lastName : ''}
-                error={touched.lastName && Boolean(errors.lastName)}
-                value={values.lastName}
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
-          <Grid container alignItems="center" spacing={2}>
-            <Grid item xs={12} sm={3}>
-              <Typography variant="body1" align="right">
-                <label className={classes.label}>GENDER </label>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={8}>
-              <TextField
-                id="gender"
-                margin="normal"
-                InputProps={{
-                  classes: { input: classes.inputs },
-                }}
-                variant="outlined"
-                name="gender"
-                autoComplete="gender"
-                autoFocus
-                helperText={touched.gender ? errors.gender : ''}
-                error={touched.gender && Boolean(errors.gender)}
-                value={values.gender}
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
+          <EditProfileInput
+            handleChange={handleChange}
+            id={'firstName'}
+            label={'FIRST NAME'}
+            helperText={touched.firstName ? errors.firstName : ''}
+            error={touched.firstName && Boolean(errors.firstName)}
+            value={values.firstName}
+            multiline={false}
+          />
+          <EditProfileInput
+            handleChange={handleChange}
+            id={'lastName'}
+            label={'LAST NAME'}
+            helperText={touched.lastName ? errors.lastName : ''}
+            error={touched.lastName && Boolean(errors.lastName)}
+            value={values.lastName}
+            multiline={false}
+          />
+          <EditProfileInput
+            handleChange={handleChange}
+            id={'gender'}
+            label={'GENDER'}
+            helperText={touched.gender ? errors.gender : ''}
+            error={touched.gender && Boolean(errors.gender)}
+            value={values.gender}
+            multiline={false}
+          />
           <Grid container alignItems="center" spacing={2}>
             <Grid item xs={12} sm={3}>
               <Typography variant="body1" align="right">
@@ -153,104 +108,42 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
               </LocalizationProvider>
             </Grid>
           </Grid>
-          <Grid container alignItems="center" spacing={2}>
-            <Grid item xs={12} sm={3}>
-              <Typography variant="body1" align="right">
-                <label className={classes.label}>EMAIL ADDRESS </label>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={8}>
-              <TextField
-                id="email"
-                margin="normal"
-                InputProps={{
-                  classes: { input: classes.inputs },
-                }}
-                variant="outlined"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                helperText={touched.email ? errors.email : ''}
-                error={touched.email && Boolean(errors.email)}
-                value={values.email}
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
-          <Grid container alignItems="center" spacing={2}>
-            <Grid item xs={12} sm={3}>
-              <Typography variant="body1" align="right">
-                <label className={classes.label}>PHONE NUMBER </label>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={8}>
-              <TextField
-                id="phoneNum"
-                margin="normal"
-                InputProps={{
-                  classes: { input: classes.inputs },
-                }}
-                variant="outlined"
-                name="phoneNum"
-                autoComplete="phoneNum"
-                autoFocus
-                helperText={touched.phoneNum ? errors.phoneNum : ''}
-                error={touched.phoneNum && Boolean(errors.phoneNum)}
-                value={values.phoneNum}
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
-          <Grid container alignItems="center" spacing={2}>
-            <Grid item xs={12} sm={3}>
-              <Typography variant="body1" align="right">
-                <label className={classes.label}>WHERE YOUR LIVE </label>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={8}>
-              <TextField
-                id="address"
-                multiline
-                margin="normal"
-                InputProps={{
-                  classes: { input: classes.inputs },
-                }}
-                variant="outlined"
-                name="address"
-                autoComplete="address"
-                autoFocus
-                helperText={touched.address ? errors.address : ''}
-                error={touched.email && Boolean(errors.address)}
-                value={values.address}
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
-          <Grid container alignItems="center" spacing={2}>
-            <Grid item xs={12} sm={3}>
-              <Typography variant="body1" align="right">
-                <label className={classes.label}>DESCRIBE YOURSELF </label>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={8}>
-              <TextField
-                id="description"
-                multiline
-                margin="normal"
-                InputProps={{
-                  classes: { input: classes.inputs },
-                }}
-                variant="outlined"
-                name="description"
-                autoComplete="description"
-                autoFocus
-                helperText={touched.description ? errors.description : ''}
-                error={touched.email && Boolean(errors.description)}
-                value={values.description}
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
+          <EditProfileInput
+            handleChange={handleChange}
+            id={'email'}
+            label={'EMAIL ADDESS'}
+            helperText={touched.email ? errors.email : ''}
+            error={touched.email && Boolean(errors.email)}
+            value={values.email}
+            multiline={false}
+          />
+          <EditProfileInput
+            handleChange={handleChange}
+            id={'phoneNum'}
+            label={'PHONE NUMBER'}
+            helperText={touched.phoneNum ? errors.phoneNum : ''}
+            error={touched.phoneNum && Boolean(errors.phoneNum)}
+            value={values.phoneNum}
+            multiline={false}
+          />
+          <EditProfileInput
+            handleChange={handleChange}
+            id={'address'}
+            label={'WHERE YOUR LIVE'}
+            helperText={touched.address ? errors.address : ''}
+            error={touched.address && Boolean(errors.address)}
+            value={values.address}
+            multiline={true}
+          />
+          <EditProfileInput
+            handleChange={handleChange}
+            id={'description'}
+            label={'DESCRIBE YOURSELF'}
+            helperText={touched.description ? errors.description : ''}
+            error={touched.description && Boolean(errors.description)}
+            value={values.description}
+            multiline={true}
+          />
           <Box textAlign="center">
             <Button type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
               {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'Save'}

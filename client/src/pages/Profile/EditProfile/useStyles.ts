@@ -14,14 +14,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '10px',
     fontWeight: 'bold',
   },
-  inputs: {
-    height: '2rem',
-    padding: '5px',
-  },
-  forgot: {
-    paddingRight: 10,
-    color: '#3a8dff',
-  },
   submit: {
     margin: theme.spacing(3, 2, 2),
     padding: 10,
@@ -32,9 +24,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
     backgroundColor: '#f04040',
     fontWeight: 'bold',
-  },
-  dic: {
-    justifyContent: 'space-between',
   },
 }));
 
