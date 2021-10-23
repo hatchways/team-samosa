@@ -14,6 +14,8 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { ProfileData, ProfileSuccess } from '../../../interface/Profile';
 import { useEffect, useState } from 'react';
 import { getProfile } from '../../../helpers/APICalls/getProfile';
+import { useSnackBar } from '../../../context/useSnackbarContext';
+
 interface Props {
   handleSubmit: (
     { exist, firstName, lastName, gender, birthDate, email, phoneNum, address, description }: ProfileSuccess,
@@ -24,12 +26,17 @@ interface Props {
 const profileclear: ProfileData = {};
 export default function EditProfile({ handleSubmit }: Props): JSX.Element {
   const classes = useStyles();
+  const { updateSnackBarMessage } = useSnackBar();
   const [profile, setProfile] = useState(profileclear);
   useEffect(() => {
     getProfile().then((res) => {
-      setProfile(res);
+      if (res.error) {
+        updateSnackBarMessage(res.error);
+      } else {
+        setProfile(res);
+      }
     });
-  }, []);
+  }, [updateSnackBarMessage]);
   return (
     <Formik
       enableReinitialize={true}

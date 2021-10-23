@@ -12,7 +12,6 @@ exports.getProfile = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ _id: userId });
   const profile = await Profile.findOne({ userId });
-  const email = await user.email;
   res.send({
     success: {
       firstName: profile.firstName,
