@@ -42,7 +42,6 @@ export default function NavBar({ elevation, color }: Props): JSX.Element {
   function loggedout() {
     return (
       <React.Fragment>
-        <Grid item></Grid>
         <Grid item>
           <Button className={classes.button} size="large">
             <Box px={4}>Become a sitter</Box>
@@ -87,11 +86,11 @@ export default function NavBar({ elevation, color }: Props): JSX.Element {
   return (
     <AppBar elevation={elevation} color={color} position="fixed">
       <Toolbar className={classes.toolbar}>
-        <Grid item className={classes.logo}>
+        <Box className={classes.logo}>
           <Typography variant="h5" className={classes.logoText}>
             LovingSitter.
           </Typography>
-        </Grid>
+        </Box>
         {loggedInUser ? loggedin() : loggedout()}
       </Toolbar>
     </AppBar>
