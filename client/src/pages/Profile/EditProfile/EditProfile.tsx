@@ -101,7 +101,6 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
             <Grid item xs={12} sm={8}>
               <TextField
                 id="firstName"
-                //fullWidth
                 margin="normal"
                 InputProps={{
                   classes: { input: classes.inputs },
@@ -127,7 +126,6 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
             <Grid item xs={12} sm={8}>
               <TextField
                 id="lastName"
-                //fullWidth
                 margin="normal"
                 InputProps={{
                   classes: { input: classes.inputs },
@@ -153,7 +151,6 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
             <Grid item xs={12} sm={8}>
               <TextField
                 id="gender"
-                //fullWidth
                 margin="normal"
                 InputProps={{
                   classes: { input: classes.inputs },
@@ -195,7 +192,6 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
             <Grid item xs={12} sm={8}>
               <TextField
                 id="email"
-                //fullWidth
                 margin="normal"
                 InputProps={{
                   classes: { input: classes.inputs },
@@ -221,7 +217,6 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
             <Grid item xs={12} sm={8}>
               <TextField
                 id="phoneNum"
-                //fullWidth
                 margin="normal"
                 InputProps={{
                   classes: { input: classes.inputs },
@@ -295,7 +290,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
               {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'Save'}
             </Button>
           </Box>
-          <div style={{ height: 95 }} />
+          <Box style={{ height: 95 }} />
         </form>
       )}
     </Formik>

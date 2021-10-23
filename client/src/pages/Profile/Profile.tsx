@@ -52,26 +52,21 @@ export default function Profile(): JSX.Element {
     exist
       ? updateProfile(firstName, lastName, gender, birthDate, email, phoneNum, address, description).then((data) => {
           if (data.error) {
-            console.error({ error: data.error });
             updateSnackBarMessage(data.error);
           } else {
-            console.log(data);
           }
           setSubmitting(false);
         })
       : createProfile(firstName, lastName, gender, birthDate, email, phoneNum, address, description).then((data) => {
           if (data.error) {
-            console.error({ error: data.error });
             updateSnackBarMessage(data.error);
           } else {
-            console.log(data);
           }
           setSubmitting(false);
         });
   };
   return (
     <Grid container component="main" className={classes.root}>
-      <CssBaseline />
       <Grid item xs={12} sm={8} md={7} elevation={6} component={Paper} square>
         <Box className={classes.authWrapper}>
           <Box width="100%" maxWidth={450} p={3} alignSelf="center">

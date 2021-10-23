@@ -1,7 +1,7 @@
 import { ProfileData } from '../../interface/Profile';
 import { FetchOptions } from '../../interface/FetchOptions';
 
-const createProfile = async (
+const updateProfile = async (
   firstName: string,
   lastName: string,
   gender: string,
@@ -24,4 +24,4 @@ const createProfile = async (
     }));
 };
 
-export default createProfile;
+export default updateProfile;
