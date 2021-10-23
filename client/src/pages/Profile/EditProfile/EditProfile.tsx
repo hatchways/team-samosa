@@ -105,7 +105,6 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
                 InputProps={{
                   classes: { input: classes.inputs },
                 }}
-                style={{ width: '80%' }}
                 variant="outlined"
                 name="firstName"
                 autoComplete="firstName"
@@ -130,7 +129,6 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
                 InputProps={{
                   classes: { input: classes.inputs },
                 }}
-                style={{ width: '80%' }}
                 variant="outlined"
                 name="lastName"
                 autoComplete="lastName"
@@ -155,7 +153,6 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
                 InputProps={{
                   classes: { input: classes.inputs },
                 }}
-                style={{ width: '40%' }}
                 variant="outlined"
                 name="gender"
                 autoComplete="gender"
@@ -196,7 +193,6 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
                 InputProps={{
                   classes: { input: classes.inputs },
                 }}
-                style={{ width: '80%' }}
                 variant="outlined"
                 name="email"
                 autoComplete="email"
@@ -221,7 +217,6 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
                 InputProps={{
                   classes: { input: classes.inputs },
                 }}
-                style={{ width: '80%' }}
                 variant="outlined"
                 name="phoneNum"
                 autoComplete="phoneNum"
@@ -247,7 +242,6 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
                 InputProps={{
                   classes: { input: classes.inputs },
                 }}
-                style={{ width: '80%' }}
                 variant="outlined"
                 name="address"
                 autoComplete="address"
@@ -273,7 +267,6 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
                 InputProps={{
                   classes: { input: classes.inputs },
                 }}
-                style={{ width: '80%' }}
                 variant="outlined"
                 name="description"
                 autoComplete="description"

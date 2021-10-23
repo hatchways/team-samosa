@@ -17,7 +17,7 @@ const createProfile = async (
     body: JSON.stringify({ firstName, lastName, gender, birthDate, email, phoneNum, address, description }),
     credentials: 'include',
   };
-  return await fetch(`/Profile`, fetchOptions)
+  return await fetch(`/profile`, fetchOptions)
     .then((res) => res.json())
     .catch(() => ({
       error: { message: 'Unable to connect to server. Please try again' },
