@@ -1,4 +1,3 @@
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -9,45 +8,13 @@ import createProfile from '../../helpers/APICalls/createProfile';
 import updateProfile from '../../helpers/APICalls/updateProfile';
 import EditProfile from './EditProfile/EditProfile';
 import { useSnackBar } from '../../context/useSnackbarContext';
-
+import { ProfileSuccess } from '../../interface/Profile';
 export default function Profile(): JSX.Element {
   const classes = useStyles();
   const { updateSnackBarMessage } = useSnackBar();
   const handleSubmit = (
-    {
-      exist,
-      firstName,
-      lastName,
-      gender,
-      birthDate,
-      email,
-      phoneNum,
-      address,
-      description,
-    }: {
-      exist: boolean;
-      firstName: string;
-      lastName: string;
-      gender: string;
-      birthDate: Date;
-      email: string;
-      phoneNum: string;
-      address: string;
-      description: string;
-    },
-    {
-      setSubmitting,
-    }: FormikHelpers<{
-      exist: boolean;
-      firstName: string;
-      lastName: string;
-      gender: string;
-      birthDate: Date;
-      email: string;
-      phoneNum: string;
-      address: string;
-      description: string;
-    }>,
+    { exist, firstName, lastName, gender, birthDate, email, phoneNum, address, description }: ProfileSuccess,
+    { setSubmitting }: FormikHelpers<ProfileSuccess>,
   ) => {
     exist
       ? updateProfile(firstName, lastName, gender, birthDate, email, phoneNum, address, description).then((data) => {

@@ -11,46 +11,13 @@ import Grid from '@material-ui/core/Grid';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { ProfileData } from '../../../interface/Profile';
+import { ProfileData, ProfileSuccess } from '../../../interface/Profile';
 import { useEffect, useState } from 'react';
 import { getProfile } from '../../../helpers/APICalls/getProfile';
 interface Props {
   handleSubmit: (
-    {
-      exist,
-      firstName,
-      lastName,
-      gender,
-      birthDate,
-      email,
-      phoneNum,
-      address,
-      description,
-    }: {
-      exist: boolean;
-      firstName: string;
-      lastName: string;
-      gender: string;
-      birthDate: Date;
-      email: string;
-      phoneNum: string;
-      address: string;
-      description: string;
-    },
-    {
-      setStatus,
-      setSubmitting,
-    }: FormikHelpers<{
-      exist: boolean;
-      firstName: string;
-      lastName: string;
-      gender: string;
-      birthDate: Date;
-      email: string;
-      phoneNum: string;
-      address: string;
-      description: string;
-    }>,
+    { exist, firstName, lastName, gender, birthDate, email, phoneNum, address, description }: ProfileSuccess,
+    { setStatus, setSubmitting }: FormikHelpers<ProfileSuccess>,
   ) => void;
 }
 
@@ -58,7 +25,6 @@ const profileclear: ProfileData = {};
 export default function EditProfile({ handleSubmit }: Props): JSX.Element {
   const classes = useStyles();
   const [profile, setProfile] = useState(profileclear);
-
   useEffect(() => {
     getProfile().then((res) => {
       setProfile(res);

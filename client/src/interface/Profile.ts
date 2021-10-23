@@ -1,4 +1,7 @@
+import { FormikHelpers } from 'formik';
+
 export interface ProfileSuccess {
+  exist: boolean;
   firstName: string;
   lastName: string;
   gender: string;
