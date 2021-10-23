@@ -1,19 +1,20 @@
 import { createMuiTheme } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
+import grey from '@material-ui/core/colors/grey';
 
 export const theme = createMuiTheme({
   typography: {
-    fontFamily: '"Open Sans", "sans-serif", "Roboto", "Poppins"',
+    fontFamily: '"Poppins", "Open Sans", "sans-serif", "Roboto"',
     fontSize: 12,
     button: {
-      textTransform: 'none',
+      textTransform: 'uppercase',
       fontWeight: 700,
     },
+    overline: { fontWeight: 700, fontSize: '0.75rem' },
   },
   palette: {
-    primary: { main: '#3A8DFF' },
+    primary: { main: '#de5048' },
     secondary: { main: grey[400] },
-    text: { primary: grey[800], secondary: grey[400], disabled: grey[50] },
+    text: { primary: grey[800], secondary: grey[400], disabled: grey[100] },
     background: { default: grey[50] },
   },
   shape: {
