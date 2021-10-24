@@ -1,27 +1,27 @@
 import React from 'react';
-import { Redirect, Route, RouteProps } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import { useAuth } from '../../context/useAuthContext';
-interface Props extends RouteProps {
-  component: React.ComponentType;
-}
-const ProtectedRoute = ({ component: Component, ...rest }: Props): JSX.Element => {
+
+const ProtectedRoute = ({ component: Component, ...rest }: React.PropsWithChildren<any>) => {
   const { loggedInUser } = useAuth();
   return (
     <Route
       {...rest}
       render={(props) => {
-        return loggedInUser ? (
-          <Component {...rest} {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/login',
-              state: {
-                from: props.location,
-              },
-            }}
-          />
-        );
+        if (loggedInUser) {
+          return <Component {...rest} {...props} />;
+        } else {
+          return (
+            <Redirect
+              to={{
+                pathname: '/login',
+                state: {
+                  from: props.location,
+                },
+              }}
+            />
+          );
+        }
       }}
     />
   );
