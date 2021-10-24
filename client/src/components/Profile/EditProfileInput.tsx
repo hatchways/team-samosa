@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import { ChangeEventHandler } from 'react';
 
 type Props = {
-  handleChange: any;
+  handleChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   label: string | undefined;
   error: boolean | undefined;
   value: string;
