@@ -68,7 +68,7 @@ export default function Login({ handleSubmit }: Props): JSX.Element {
           </label>
           <TextField
             id="password"
-            placeholder="your password"
+            placeholder="Your password"
             fullWidth
             margin="normal"
             type="password"
