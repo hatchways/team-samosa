@@ -11,7 +11,7 @@ export default function BookingsDate({ request }: Props): JSX.Element {
     <Typography variant="h6">
       {format(request.startDate, 'd MMMM y ha') +
         ' - ' +
-        (request.startDate.getDay() !== request.endDate.getDay() ? format(request.endDate, 'd MMMM y ') : '') +
+        (request.startDate.getDay() !== request.endDate.getDay() && format(request.endDate, 'd MMMM y ')) +
         format(request.endDate, 'ha')}
     </Typography>
   );
