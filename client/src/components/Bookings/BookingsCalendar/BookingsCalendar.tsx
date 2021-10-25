@@ -16,7 +16,7 @@ import {
   endOfDay,
 } from 'date-fns';
 import useStyles from './useStyles';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BookingRequest } from '../../../interface/Request';
 import { MOCK_TODAY } from '../mockRequests';
 
@@ -25,10 +25,6 @@ interface Props {
 }
 
 export default function BookingsCalendar({ requests }: Props): JSX.Element {
-  useEffect(() => {
-    console.log('requests: ', requests);
-  }, [requests]);
-
   const classes = useStyles();
 
   const [month, setMonth] = useState(MOCK_TODAY);
@@ -45,8 +41,6 @@ export default function BookingsCalendar({ requests }: Props): JSX.Element {
           { start: startOfDay(dayDate), end: endOfDay(dayDate) },
         ) && dayDate > MOCK_TODAY,
     );
-    // console.log('dayDate: ', dayDate);
-    // console.log('isDayBooked', isDayBooked);
     const isDayThisMonth = month.getMonth() === dayDate.getMonth();
 
     const dayBookedColor = isDayBooked ? classes.bookedDay : classes.notBookedDay;
