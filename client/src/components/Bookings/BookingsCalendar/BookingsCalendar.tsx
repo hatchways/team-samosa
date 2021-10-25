@@ -35,7 +35,7 @@ export default function BookingsCalendar({ requests }: Props): JSX.Element {
 
     const dayBookedColor = isDayBooked ? classes.bookedDay : classes.notBookedDay;
 
-    const otherMonthColor = !isDayThisMonth && classes.otherMonth;
+    const otherMonthColor = !isDayThisMonth ? classes.otherMonth : '';
 
     return (
       <React.Fragment>

@@ -19,15 +19,19 @@ export default function BookingsPaper({ requests }: Props): JSX.Element {
   return (
     <Paper className={classes.root} elevation={8}>
       <Grid container spacing={3}>
-        {currentBookings.length && (
+        {currentBookings.length ? (
           <Grid item xs={12}>
             <BookingsList title="Current Bookings:" requests={currentBookings} />
           </Grid>
+        ) : (
+          ''
         )}
-        {pastBookings.length && (
+        {pastBookings.length ? (
           <Grid item xs={12}>
             <BookingsList title="Past Bookings:" requests={pastBookings} />
           </Grid>
+        ) : (
+          ''
         )}
       </Grid>
     </Paper>
