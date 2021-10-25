@@ -36,16 +36,8 @@ export default function NextBooking({ request, size, fontSize }: Props): JSX.Ele
         <MoreVertIcon color="secondary" fontSize={fontSize} />
       </IconButton>
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-        {request.status === 'declined' ? (
-          <MenuItem onClick={() => handleMenuItemClick('accepted')}>Accept</MenuItem>
-        ) : (
-          ''
-        )}
-        {request.status === 'accepted' ? (
-          <MenuItem onClick={() => handleMenuItemClick('declined')}>Decline</MenuItem>
-        ) : (
-          ''
-        )}
+        {request.status === 'declined' && <MenuItem onClick={() => handleMenuItemClick('accepted')}>Accept</MenuItem>}
+        {request.status === 'accepted' && <MenuItem onClick={() => handleMenuItemClick('declined')}>Decline</MenuItem>}
       </Menu>
     </>
   );
