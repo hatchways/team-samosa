@@ -26,7 +26,7 @@ export default function BookingContent({ request }: Props): JSX.Element {
               <Avatar alt="avatar" src="" />
             </Grid>
             <Grid item>
-              <Typography variant="h6">{request.name}</Typography>
+              <Typography variant="h6">{request.sitter.username}</Typography>
             </Grid>
           </Grid>
         </Grid>

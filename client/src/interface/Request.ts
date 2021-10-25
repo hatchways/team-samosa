@@ -1,6 +1,9 @@
 export interface BookingRequest {
-  name: string;
+  paid: boolean;
+  sitter: { id: string; username: string };
   startDate: Date;
   endDate: Date;
   status: string;
+  user: { id: string; username: string };
+  id: string;
 }

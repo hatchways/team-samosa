@@ -4,6 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { BookingRequest } from '../../../interface/Request';
+import { updateRequest } from '../../../helpers/APICalls/updateRequest';
 
 interface Props {
   request: BookingRequest;
@@ -21,6 +22,11 @@ export default function NextBooking({ request, size, fontSize }: Props): JSX.Ele
     setAnchorEl(event.currentTarget);
   };
 
+  const handleMenuItemClick = (status: string) => {
+    updateRequest(request.id, status);
+    setAnchorEl(null);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -30,9 +36,16 @@ export default function NextBooking({ request, size, fontSize }: Props): JSX.Ele
         <MoreVertIcon color="secondary" fontSize={fontSize} />
       </IconButton>
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem onClick={handleClose}>Accept</MenuItem>
-        <MenuItem onClick={handleClose}>Reject</MenuItem>
-        <MenuItem onClick={handleClose}>Modify</MenuItem>
+        {request.status === 'declined' ? (
+          <MenuItem onClick={() => handleMenuItemClick('accepted')}>Accept</MenuItem>
+        ) : (
+          ''
+        )}
+        {request.status === 'accepted' ? (
+          <MenuItem onClick={() => handleMenuItemClick('declined')}>Decline</MenuItem>
+        ) : (
+          ''
+        )}
       </Menu>
     </>
   );
