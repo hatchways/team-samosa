@@ -37,6 +37,15 @@ export default function ProfileEditionMock(): JSX.Element {
               <Grid item xs>
                 <Link to={'/profileEditionMock'} className={classes.link}>
                   <Button color="inherit" className={classes.accBtn} variant="contained">
+                    Profile photo
+                  </Button>
+                </Link>
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item xs>
+                <Link to={'/profileEditionMock'} className={classes.link}>
+                  <Button color="inherit" className={classes.accBtn} variant="contained">
                     Availability
                   </Button>
                 </Link>
