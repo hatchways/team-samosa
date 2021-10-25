@@ -5,9 +5,18 @@ import Avatar from '@material-ui/core/Avatar';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Typography from '@material-ui/core/Typography';
-import { startOfWeek, startOfMonth, addDays, addMonths, format, areIntervalsOverlapping } from 'date-fns';
+import {
+  startOfWeek,
+  startOfMonth,
+  addDays,
+  addMonths,
+  format,
+  areIntervalsOverlapping,
+  startOfDay,
+  endOfDay,
+} from 'date-fns';
 import useStyles from './useStyles';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BookingRequest } from '../../../interface/Request';
 import { MOCK_TODAY } from '../mockRequests';
 
@@ -16,6 +25,10 @@ interface Props {
 }
 
 export default function BookingsCalendar({ requests }: Props): JSX.Element {
+  useEffect(() => {
+    console.log('requests: ', requests);
+  }, [requests]);
+
   const classes = useStyles();
 
   const [month, setMonth] = useState(MOCK_TODAY);
@@ -27,10 +40,13 @@ export default function BookingsCalendar({ requests }: Props): JSX.Element {
 
     const isDayBooked = requests.some(
       (element) =>
-        areIntervalsOverlapping({ start: element.startDate, end: element.endDate }, { start: dayDate, end: dayDate }) &&
-        dayDate > MOCK_TODAY,
+        areIntervalsOverlapping(
+          { start: element.startDate, end: element.endDate },
+          { start: startOfDay(dayDate), end: endOfDay(dayDate) },
+        ) && dayDate > MOCK_TODAY,
     );
-
+    // console.log('dayDate: ', dayDate);
+    // console.log('isDayBooked', isDayBooked);
     const isDayThisMonth = month.getMonth() === dayDate.getMonth();
 
     const dayBookedColor = isDayBooked ? classes.bookedDay : classes.notBookedDay;
