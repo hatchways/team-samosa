@@ -35,7 +35,7 @@ function App(): JSX.Element {
                 </Route>
                 <Route exact path="/profiles">
                   <NavBar elevation={16} color="inherit" />
-                  {/* <Profiles /> */}
+                  {/* TODO: add Profiles component */}
                 </Route>
                 <Route path="/dashboard">
                   <NavBar elevation={16} color="inherit" />
