@@ -20,10 +20,6 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  isSitter: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
