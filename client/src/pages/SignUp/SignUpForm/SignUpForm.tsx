@@ -102,7 +102,7 @@ const SignUpForm = ({ handleSubmit }: Props): JSX.Element => {
           />
           <Box textAlign="center">
             <Button type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
-              {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'Sign up'}
+              {isSubmitting ? <CircularProgress className={classes.circularProgess} /> : 'Sign up'}
             </Button>
             <Button
               type="submit"
@@ -115,7 +115,7 @@ const SignUpForm = ({ handleSubmit }: Props): JSX.Element => {
               color="primary"
               className={classes.submit}
             >
-              {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'Login Demo User'}
+              {isSubmitting ? <CircularProgress className={classes.circularProgess} /> : 'Login Demo User'}
             </Button>
           </Box>
         </form>

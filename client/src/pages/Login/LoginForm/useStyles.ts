@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     width: 160,
     height: 56,
   },
+  circularProgess: { color: 'white' },
 }));
 
 export default useStyles;
