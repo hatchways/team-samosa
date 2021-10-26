@@ -32,13 +32,13 @@ export default function Dashboard(): JSX.Element {
       <Container>
         <BrowserRouter>
           <Switch>
-            <Route path="/dashboard/mysitters">
+            <Route path="/dashboard/my-sitters">
               <MySitters />
             </Route>
-            <Route path="/dashboard/myjobs">{/* <MyJobs /> */}</Route>
-            <Route path="/dashboard/myprofile">{/* <MyProfile /> */}</Route>
+            <Route path="/dashboard/my-jobs">{/* TODO: add MyJobs component */}</Route>
+            <Route path="/dashboard/my-profile">{/* TODO: add MyProfile component */}</Route>
             <Route path="*">
-              <Redirect to="/dashboard/mysitters" />
+              <Redirect to="/dashboard/my-sitters" />
             </Route>
           </Switch>
         </BrowserRouter>
