@@ -11,7 +11,6 @@ import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pi
 
 export default function ProfileRequest(): JSX.Element {
   const classes = useStyles();
-  // The first commit of Material-UI
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date('2014-08-18T21:11:54'));
 
   const handleDateChange = (date: Date | null) => {
@@ -28,11 +27,11 @@ export default function ProfileRequest(): JSX.Element {
                 <Typography variant="h5">$14/hr</Typography>
               </Grid>
               <Grid item>
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
+                <StarIcon className={classes.star} />
+                <StarIcon className={classes.star} />
+                <StarIcon className={classes.star} />
+                <StarIcon className={classes.star} />
+                <StarIcon className={classes.star} />
               </Grid>
             </Grid>
             <form>

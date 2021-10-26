@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
     width: 160,
     height: 56,
   },
+  star: { color: '#ffc527' },
 }));
 
 export default useStyles;
