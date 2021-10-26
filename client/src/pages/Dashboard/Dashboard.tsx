@@ -30,18 +30,16 @@ export default function Dashboard(): JSX.Element {
   return (
     <Grid container component="main">
       <Container>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/dashboard/my-sitters">
-              <MySitters />
-            </Route>
-            <Route path="/dashboard/my-jobs">{/* TODO: add MyJobs component */}</Route>
-            <Route path="/dashboard/my-profile">{/* TODO: add MyProfile component */}</Route>
-            <Route path="*">
-              <Redirect to="/dashboard/my-sitters" />
-            </Route>
-          </Switch>
-        </BrowserRouter>
+        <Switch>
+          <Route path="/dashboard/my-sitters">
+            <MySitters />
+          </Route>
+          <Route path="/dashboard/my-jobs">{/* TODO: add MyJobs component */}</Route>
+          <Route path="/dashboard/my-profile">{/* TODO: add MyProfile component */}</Route>
+          <Route path="*">
+            <Redirect to="/dashboard/my-sitters" />
+          </Route>
+        </Switch>
       </Container>
     </Grid>
   );
