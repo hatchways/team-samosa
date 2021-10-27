@@ -1,5 +1,4 @@
 import { useHistory } from 'react-router-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -43,7 +42,6 @@ export default function Register(): JSX.Element {
 
   return (
     <Grid container component="main" className={classes.root} justify="center" alignItems="center">
-      <CssBaseline />
       <Grid item xs={12} sm={8} md={7}>
         <Paper className={classes.authWrapper} elevation={8}>
           <Box width="100%" maxWidth={450} p={3} alignSelf="center">
