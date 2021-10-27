@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { ArrowLeft } from '@material-ui/icons';
 import { theme } from '../../../themes/theme';
 
 const useStyles = makeStyles(() => ({
@@ -19,35 +18,16 @@ const useStyles = makeStyles(() => ({
     minHeight: '100vh',
     paddingTop: 23,
   },
+  back: {
+    color: 'white',
+    backgroundColor: '#fafafa',
+  },
   welcome: {
     fontSize: 26,
     paddingBottom: 20,
     color: '#000000',
     fontWeight: 700,
     fontFamily: "'Open Sans'",
-  },
-  link: { textDecoration: 'none' },
-  accBtn: {
-    width: 180,
-    height: 54,
-    fontSize: 20,
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: '#fafafa',
-    color: 'grey',
-    boxShadow: 'none',
-    marginRight: 35,
-    justifyContent: 'start',
-  },
-  accBtnselected: {
-    width: 180,
-    height: 54,
-    fontSize: 20,
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: '#fafafa',
-    color: '#000000',
-    boxShadow: 'none',
-    marginRight: 35,
-    justifyContent: 'start',
   },
 }));
 

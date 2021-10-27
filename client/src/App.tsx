@@ -10,7 +10,6 @@ import { AuthProvider } from './context/useAuthContext';
 import { SocketProvider } from './context/useSocketContext';
 import { SnackBarProvider } from './context/useSnackbarContext';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 import './App.css';
 
@@ -25,10 +24,6 @@ function App(): JSX.Element {
               <Switch>
                 <Route exact path="/profileEditionMock" component={ProfileEditionMock} />
                 <Route exact path="/signup" component={Signup} />
-                <Route exact path="/dashboard">
-                  {/* <Dashboard /> disabled until Navbar setup */}
-                  <MySitters />
-                </Route>
                 <Route path="*">
                   <Redirect to="/profileEditionMock" />
                 </Route>
