@@ -1,29 +1,58 @@
 const mongoose = require("mongoose");
 const Profile = require("../Models/Profile");
 const asyncHandler = require("express-async-handler");
+const verifyToken = require("../utils/verifyToken");
+const protect = require("../middleware/auth");
 
 // @route GET /profiles
 // @desc List of all profiles
 // @access Public
 exports.getProfiles = asyncHandler(async (req, res) => {
-  const profiles = await Profile.find({});
+  const resp = await Profile.find({ isSitter: true });
+
+  const profiles = resp.map((element) => {
+    return {
+      _id: element._id,
+      userId: element.userId,
+      firstName: element.firstName,
+      lastName: element.lastName,
+      description: element.description,
+      photoUrl: element.photoUrl,
+    };
+  });
 
   res.send({ profiles });
 });
 
 // @route GET /profile
-// @desc the profile of the relevant user
+// @desc Returns public profile or full profile for auth user
 // @access Public
-exports.getProfile = asyncHandler(async (req, res) => {
+exports.getProfile = asyncHandler(async (req, res, next) => {
   const userId = req.params.id;
-  const profile = await Profile.findOne({ userId });
-
-  if (!profile) {
-    res.status(400);
+  const resp = await Profile.findOne({ userId });
+  if (!resp) {
+    res.status(404);
     throw new Error("Invalid profile id");
   }
 
-  res.send({ profile });
+  if (req.headers.cookie) {
+    const user = verifyToken(req.headers.cookie);
+    if (user.id === userId) {
+      const profile = resp;
+      res.send({ profile });
+    }
+  } else {
+    const profile = {
+      _id: resp._id,
+      userId: resp.userId,
+      firstName: resp.firstName,
+      lastName: resp.lastName,
+      description: resp.description,
+      photoUrl: resp.photoUrl,
+    };
+
+    res.send({ profile });
+  }
 });
 
 // @route POST /profile
