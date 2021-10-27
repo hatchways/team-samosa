@@ -3,6 +3,7 @@ import Box from '@material-ui/core/Box';
 import useStyles from './useStyles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -18,44 +19,46 @@ export default function ProfileCard({ profile }: Props): JSX.Element {
 
   return (
     <Paper elevation={8}>
-      <Box padding={6} justifySelf="center">
-        <Grid container direction="column" alignItems="center" spacing={2}>
-          <Avatar className={classes.avatar} src={`/mock/${profile.photoUrl}`} />
-          <Typography variant="h4">{`${profile.firstName} ${profile.lastName}`}</Typography>
-          <Typography variant="h5">Loving pet sitter</Typography>
-          <Grid item>
-            <Box p={1}>
-              <StarIcon className={classes.star} />
-              <StarIcon className={classes.star} />
-              <StarIcon className={classes.star} />
-              <StarIcon className={classes.star} />
-              <StarIcon className={classes.star} />
+      <Link href={`/profiles/${profile.id}`} color="inherit" underline="none">
+        <Box padding={6} justifySelf="center">
+          <Grid container direction="column" alignItems="center" spacing={2}>
+            <Avatar className={classes.avatar} src={`/mock/${profile.photoUrl}`} />
+            <Typography variant="h4">{`${profile.firstName} ${profile.lastName}`}</Typography>
+            <Typography variant="h5">Loving pet sitter</Typography>
+            <Grid item>
+              <Box p={1}>
+                <StarIcon className={classes.star} />
+                <StarIcon className={classes.star} />
+                <StarIcon className={classes.star} />
+                <StarIcon className={classes.star} />
+                <StarIcon className={classes.star} />
+              </Box>
+            </Grid>
+
+            <Box maxWidth="300px">
+              <Typography variant="body1" paragraph={true} align="center">
+                Dog sitting, cat sitting, pocket pet and bird care
+              </Typography>
             </Box>
           </Grid>
-
-          <Box maxWidth="300px">
-            <Typography variant="body1" paragraph={true} align="center">
-              Dog sitting, cat sitting, pocket pet and bird care
-            </Typography>
-          </Box>
-        </Grid>
-      </Box>
-      <Divider />
-      <Box padding={3}>
-        <Grid container justify="space-between" alignItems="center">
-          <Grid item>
-            <Grid container alignItems="center">
-              <LocationOnIcon className={classes.location} fontSize="large" />
-              <Typography variant="body1">{profile.address}</Typography>
+        </Box>
+        <Divider />
+        <Box padding={3}>
+          <Grid container justify="space-between" alignItems="center">
+            <Grid item>
+              <Grid container alignItems="center">
+                <LocationOnIcon className={classes.location} fontSize="large" />
+                <Typography variant="body1">{profile.address}</Typography>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Typography className={classes.rate} variant="body1">
+                $14/hr
+              </Typography>
             </Grid>
           </Grid>
-          <Grid item>
-            <Typography className={classes.rate} variant="body1">
-              $14/hr
-            </Typography>
-          </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      </Link>
     </Paper>
   );
 }
