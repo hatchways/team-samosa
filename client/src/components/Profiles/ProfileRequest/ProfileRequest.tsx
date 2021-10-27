@@ -9,7 +9,13 @@ import StarIcon from '@material-ui/icons/Star';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
 
-export default function ProfileRequest(): JSX.Element {
+import { Profile } from '../../../interface/Profile';
+
+interface Props {
+  profile?: Profile;
+}
+
+export default function ProfileRequest({ profile }: Props): JSX.Element {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date('2014-08-18T21:11:54'));
 

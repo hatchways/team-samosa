@@ -19,7 +19,7 @@ export default function ProfileCard({ profile }: Props): JSX.Element {
 
   return (
     <Paper elevation={8}>
-      <Link href={`/profiles/${profile.id}`} color="inherit" underline="none">
+      <Link href={`/profiles/${profile.userId}`} color="inherit" underline="none">
         <Box padding={6} justifySelf="center">
           <Grid container direction="column" alignItems="center" spacing={2}>
             <Avatar className={classes.avatar} src={`/mock/${profile.photoUrl}`} />

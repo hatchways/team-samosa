@@ -10,3 +10,8 @@ export interface Profile {
   lastName: string;
   phoneNum: string;
 }
+
+export interface ProfileApiData {
+  error?: { message: string };
+  success?: Profile;
+}
