@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { ArrowLeft } from '@material-ui/icons';
 import { theme } from '../../../themes/theme';
 
 const useStyles = makeStyles(() => ({
