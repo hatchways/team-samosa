@@ -6,7 +6,16 @@ const asyncHandler = require("express-async-handler");
 // @desc List of all profiles
 // @access Public
 exports.getProfiles = asyncHandler(async (req, res) => {
-  const profiles = await Profile.find({ isSitter: true });
+  const resp = await Profile.find({ isSitter: true });
+
+  const profiles = resp.map((element) => {
+    return {
+      firstName: element.firstName,
+      lastName: element.lastName,
+      description: element.description,
+      photoUrl: element.photoUrl,
+    };
+  });
 
   res.send({ profiles });
 });
