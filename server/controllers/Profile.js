@@ -23,13 +23,13 @@ exports.getProfiles = asyncHandler(async (req, res) => {
 });
 
 // @route GET /profile
-// @desc the profile of the relevant user
+// @desc Returns public profile or full profile for auth user
 // @access Public
 exports.getProfile = asyncHandler(async (req, res, next) => {
   const userId = req.params.id;
   const resp = await Profile.findOne({ userId });
   if (!resp) {
-    res.status(400);
+    res.status(404);
     throw new Error("Invalid profile id");
   }
 
