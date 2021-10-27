@@ -67,7 +67,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
           <EditProfileInput
             handleChange={handleChange}
             id={'firstName'}
-            label={'FIRST NAME'}
+            label={'First name'}
             helperText={touched.firstName ? errors.firstName : ''}
             error={touched.firstName && Boolean(errors.firstName)}
             value={values.firstName}
@@ -76,7 +76,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
           <EditProfileInput
             handleChange={handleChange}
             id={'lastName'}
-            label={'LAST NAME'}
+            label={'Last name'}
             helperText={touched.lastName ? errors.lastName : ''}
             error={touched.lastName && Boolean(errors.lastName)}
             value={values.lastName}
@@ -85,7 +85,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
           <EditProfileInput
             handleChange={handleChange}
             id={'gender'}
-            label={'GENDER'}
+            label={'Gender'}
             helperText={touched.gender ? errors.gender : ''}
             error={touched.gender && Boolean(errors.gender)}
             value={values.gender}
@@ -94,7 +94,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
           <Grid container alignItems="center" spacing={2}>
             <Grid item xs={12} sm={3}>
               <Typography variant="body1" align="right">
-                <label className={classes.label}>BIRTH DATE </label>
+                <label className={classes.label}>Birth date </label>
               </Typography>
             </Grid>
             <Grid item xs={12} sm={8}>
@@ -110,7 +110,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
           <EditProfileInput
             handleChange={handleChange}
             id={'email'}
-            label={'EMAIL ADDESS'}
+            label={'Email address'}
             helperText={touched.email ? errors.email : ''}
             error={touched.email && Boolean(errors.email)}
             value={values.email}
@@ -119,7 +119,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
           <EditProfileInput
             handleChange={handleChange}
             id={'phoneNum'}
-            label={'PHONE NUMBER'}
+            label={'Phone number'}
             helperText={touched.phoneNum ? errors.phoneNum : ''}
             error={touched.phoneNum && Boolean(errors.phoneNum)}
             value={values.phoneNum}
@@ -128,7 +128,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
           <EditProfileInput
             handleChange={handleChange}
             id={'address'}
-            label={'WHERE YOUR LIVE'}
+            label={'Where are you live'}
             helperText={touched.address ? errors.address : ''}
             error={touched.address && Boolean(errors.address)}
             value={values.address}
@@ -137,7 +137,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
           <EditProfileInput
             handleChange={handleChange}
             id={'description'}
-            label={'DESCRIBE YOURSELF'}
+            label={'Describe yourself'}
             helperText={touched.description ? errors.description : ''}
             error={touched.description && Boolean(errors.description)}
             value={values.description}

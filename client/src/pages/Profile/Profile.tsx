@@ -21,6 +21,7 @@ export default function Profile(): JSX.Element {
           if (data.error) {
             updateSnackBarMessage(data.error);
           } else {
+            updateSnackBarMessage('Profile was successfully Updated');
           }
           setSubmitting(false);
         })
@@ -28,6 +29,7 @@ export default function Profile(): JSX.Element {
           if (data.error) {
             updateSnackBarMessage(data.error);
           } else {
+            updateSnackBarMessage('Profile was successfully created');
           }
           setSubmitting(false);
         });
