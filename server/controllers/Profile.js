@@ -2,13 +2,26 @@ const mongoose = require("mongoose");
 const Profile = require("../Models/Profile");
 const asyncHandler = require("express-async-handler");
 
+// @route GET /profiles
+// @desc List of all profiles
+// @access Public
+exports.getProfiles = asyncHandler(async (req, res) => {
+  const profiles = await Profile.find({});
+
+  res.send({ profiles });
+});
+
 // @route GET /profile
 // @desc the profile of the relevant user
-// @access Private
+// @access Public
 exports.getProfile = asyncHandler(async (req, res) => {
-  const userId = req.user.id;
-
+  const userId = req.params.id;
   const profile = await Profile.findOne({ userId });
+
+  if (!profile) {
+    res.status(400);
+    throw new Error("Invalid profile id");
+  }
 
   res.send({ profile });
 });
