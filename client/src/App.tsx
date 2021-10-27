@@ -12,6 +12,7 @@ import { SocketProvider } from './context/useSocketContext';
 import { SnackBarProvider } from './context/useSnackbarContext';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import Profiles from './components/Profiles/Profiles';
 
 import './App.css';
 
@@ -38,6 +39,10 @@ function App(): JSX.Element {
                 <Route exact path="/profiles">
                   <NavBar elevation={16} color="inherit" />
                   <ProfileListings />
+                </Route>
+                <Route path="/profiles/:profileId">
+                  <NavBar elevation={16} color="inherit" />
+                  <Profiles />
                 </Route>
                 <Route path="/dashboard">
                   <NavBar elevation={16} color="inherit" />

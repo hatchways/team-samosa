@@ -1,11 +1,16 @@
+import { useParams } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import useStyles from './useStyles';
 import ProfileRequest from './ProfileRequest/ProfileRequest';
 import ProfileMain from './ProfileMain/ProfileMain';
 
+type ProfileParam = { profileId: string };
+
 export default function Profiles(): JSX.Element {
   const classes = useStyles();
+
+  const { profileId } = useParams<ProfileParam>();
 
   return (
     <Container>
