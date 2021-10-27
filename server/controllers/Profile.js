@@ -12,6 +12,8 @@ exports.getProfiles = asyncHandler(async (req, res) => {
 
   const profiles = resp.map((element) => {
     return {
+      _id: element._id,
+      userId: element.userId,
       firstName: element.firstName,
       lastName: element.lastName,
       description: element.description,
@@ -41,6 +43,8 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
     }
   } else {
     const profile = {
+      _id: resp._id,
+      userId: resp.userId,
       firstName: resp.firstName,
       lastName: resp.lastName,
       description: resp.description,
