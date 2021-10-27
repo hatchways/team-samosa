@@ -11,10 +11,9 @@ import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { ProfileData, ProfileSuccess } from '../../../interface/Profile';
-import { useEffect, useState } from 'react';
-import { getProfile } from '../../../helpers/APICalls/getProfile';
 import { useSnackBar } from '../../../context/useSnackbarContext';
 import EditProfileInput from '../../../components/Profile/EditProfileInput';
+import { useAuth } from '../../../context/useAuthContext';
 interface Props {
   handleSubmit: (
     { exist, firstName, lastName, gender, birthDate, email, phoneNum, address, description }: ProfileSuccess,
@@ -22,33 +21,23 @@ interface Props {
   ) => void;
 }
 
-const profileclear: ProfileData = {};
 export default function EditProfile({ handleSubmit }: Props): JSX.Element {
   const classes = useStyles();
   const { updateSnackBarMessage } = useSnackBar();
-  const [profile, setProfile] = useState(profileclear);
-  useEffect(() => {
-    getProfile().then((res) => {
-      if (res.error) {
-        updateSnackBarMessage(res.error);
-      } else {
-        setProfile(res);
-      }
-    });
-  }, [updateSnackBarMessage]);
+  const { userProfile } = useAuth();
   return (
     <Formik
       enableReinitialize={true}
       initialValues={{
-        exist: profile.success ? true : false,
-        firstName: profile.success ? profile.success.firstName : '',
-        lastName: profile.success ? profile.success.lastName : '',
-        gender: profile.success ? profile.success.gender : '',
-        birthDate: profile.success ? profile.success.birthDate : new Date('1998-06-15'),
-        email: profile.success ? profile.success.email : '',
-        phoneNum: profile.success ? profile.success.phoneNum : '',
-        address: profile.success ? profile.success.address : '',
-        description: profile.success ? profile.success.description : '',
+        exist: !userProfile ? false : true,
+        firstName: !userProfile ? '' : userProfile.firstName,
+        lastName: !userProfile ? '' : userProfile.lastName,
+        gender: !userProfile ? '' : userProfile.gender,
+        birthDate: !userProfile ? new Date('1998-06-15') : userProfile.birthDate,
+        email: !userProfile ? '' : userProfile.email,
+        phoneNum: !userProfile ? '' : userProfile.phoneNum,
+        address: !userProfile ? '' : userProfile.address,
+        description: !userProfile ? '' : userProfile.description,
       }}
       validationSchema={Yup.object().shape({
         firstName: Yup.string().required('FirstName is required'),
