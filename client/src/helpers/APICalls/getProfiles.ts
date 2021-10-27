@@ -8,7 +8,7 @@ export async function getProfiles(): Promise<{ profiles: Array<Profile> }> {
   };
   const res = await fetch('/profile', fetchOptions);
   const resp = await res.json();
-  const parsed = resp.requests.map((element: any) => {
+  const parsed = resp.profiles.map((element: any) => {
     const birthDateObject = new Date(Date.parse(element.birthDate));
 
     return {
