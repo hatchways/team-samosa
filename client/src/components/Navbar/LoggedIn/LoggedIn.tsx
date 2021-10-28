@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Link from '@material-ui/core/Link';
 import React from 'react';
 import { useAuth } from '../../../context/useAuthContext';
 
@@ -33,27 +34,25 @@ export default function LoggedIn(): JSX.Element {
 
   return (
     <React.Fragment>
-      <Grid item>
-        <Typography variant="subtitle1">
-          <Box pr={8}>MySitters</Box>
-        </Typography>
-      </Grid>
-      <Grid item>
-        <Box pr={8}>
+      <Box mr={8}>
+        <Link href="/dashboard/my-sitters" color="inherit">
+          <Typography variant="subtitle1">MySitters</Typography>
+        </Link>
+      </Box>
+      <Box mr={8}>
+        <Link href="/dashboard/messages" color="inherit">
           <Badge color="primary" variant="dot">
             <Typography variant="subtitle1">Messages</Typography>
           </Badge>
-        </Box>
-      </Grid>
-      <Grid item>
-        <IconButton onClick={handleClick}>
-          <Avatar className={classes.avatar} />
-        </IconButton>
-        <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-        </Menu>
-      </Grid>
+        </Link>
+      </Box>
+      <IconButton onClick={handleClick}>
+        <Avatar className={classes.avatar} />
+      </IconButton>
+      <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+      </Menu>
     </React.Fragment>
   );
 }
