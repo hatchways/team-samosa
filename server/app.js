@@ -51,12 +51,6 @@ app.use("/request", requestRouter);
 app.use("/profile", profileRouter);
 app.use("/availablity", availabilityRouter);
 
-app.use("/profile", profileRouter);
-app.use("/availablity", availabilityRouter);
-
-app.use("/profile", profileRouter);
-app.use("/availablity", availabilityRouter);
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));
 
