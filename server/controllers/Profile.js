@@ -39,14 +39,16 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
       const profile = resp;
       res.send({
         success: {
-      firstName: profile.firstName,
-      lastName: profile.lastName,
-      gender: profile.gender,
-      birthDate: profile.birthDate,
-      email: user.email,
-      phoneNum: profile.phoneNum,
-      address: profile.address,
-      description: profile.description, });
+          firstName: profile.firstName,
+          lastName: profile.lastName,
+          gender: profile.gender,
+          birthDate: profile.birthDate,
+          email: user.email,
+          phoneNum: profile.phoneNum,
+          address: profile.address,
+          description: profile.description,
+        },
+      });
     }
   } else {
     const profile = {
