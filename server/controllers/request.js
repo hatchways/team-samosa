@@ -1,5 +1,5 @@
-const Request = require("../Models/Request");
 const User = require("../models/User");
+const Request = require("../Models/Request");
 const asyncHandler = require("express-async-handler");
 
 // @route GET /request
@@ -10,7 +10,12 @@ exports.getRequests = asyncHandler(async (req, res, next) => {
 
   const requests = await Request.find({
     $or: [{ userId: userId }, { sitterId: userId }],
-  });
+  })
+    .populate([
+      { path: "sitterId", select: "username" },
+      { path: "userId", select: "username" },
+    ])
+    .exec();
 
   res.send({ requests });
 });
@@ -55,7 +60,12 @@ exports.updateRequest = asyncHandler(async (req, res, next) => {
 
   const userId = req.user.id;
 
-  const { requestStatus } = req.body;
+  const { status } = req.body;
+
+  if (status !== "declined" && status !== "accepted" && status !== "pending") {
+    res.status(400);
+    throw new Error("Invalid status field");
+  }
 
   const request = await Request.findById(requestId);
 
@@ -69,7 +79,7 @@ exports.updateRequest = asyncHandler(async (req, res, next) => {
     throw new Error("Unauthorized user");
   }
 
-  request.status = requestStatus;
+  request.status = status;
 
   await request.save();
 

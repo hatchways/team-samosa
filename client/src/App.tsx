@@ -4,15 +4,19 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Signup from './pages/SignUp/SignUp';
 import Dashboard from './pages/Dashboard/Dashboard';
+import MySitters from './pages/MySitters/MySitters';
 import { AuthProvider } from './context/useAuthContext';
 import { SocketProvider } from './context/useSocketContext';
 import { SnackBarProvider } from './context/useSnackbarContext';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 import './App.css';
 
 function App(): JSX.Element {
   return (
     <MuiThemeProvider theme={theme}>
+      <CssBaseline />
       <BrowserRouter>
         <SnackBarProvider>
           <AuthProvider>
@@ -21,7 +25,8 @@ function App(): JSX.Element {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/dashboard">
-                  <Dashboard />
+                  {/* <Dashboard /> disabled until Navbar setup */}
+                  <MySitters />
                 </Route>
                 <Route path="*">
                   <Redirect to="/login" />

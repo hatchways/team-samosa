@@ -11,6 +11,7 @@ const logger = require("morgan");
 
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
+const requestRouter = require("./routes/request");
 
 const profileRouter = require("./routes/profile");
 const availabilityRouter = require("./routes/availability");
@@ -45,6 +46,13 @@ app.use((req, res, next) => {
 
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
+app.use("/request", requestRouter);
+
+app.use("/profile", profileRouter);
+app.use("/availablity", availabilityRouter);
+
+app.use("/profile", profileRouter);
+app.use("/availablity", availabilityRouter);
 
 app.use("/profile", profileRouter);
 app.use("/availablity", availabilityRouter);
