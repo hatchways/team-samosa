@@ -4,21 +4,18 @@ const useStyles = makeStyles(() => ({
   root: {
     minHeight: '100vh',
     '& .MuiInput-underline:before': {
-      borderBottom: '1.2px solid rgba(0, 0, 0, 0.2)',
+      borderBottom: '0.8px solid rgba(0, 0, 0, 0.2)',
     },
-    marginTop: '2%',
-    bbackgroundColor: '#000000',
+    marginTop: '5%',
   },
   authWrapper: {
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'column',
-    minHeight: '100vh',
-    paddingTop: 23,
+    paddingTop: 35,
   },
   back: {
-    color: 'white',
     backgroundColor: '#fafafa',
   },
   welcome: {
@@ -26,7 +23,8 @@ const useStyles = makeStyles(() => ({
     paddingBottom: 20,
     color: '#000000',
     fontWeight: 700,
-    fontFamily: theme.typography.body2.fontFamily,
+    fontFamily: "'Open Sans'",
+    textAlign: 'center',
   },
 }));
 

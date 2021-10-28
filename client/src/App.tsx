@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Signup from './pages/SignUp/SignUp';
 import ProfileEditionMock from './pages/ProfileSkeleton/ProfileEditionMock/ProfileEditionMock';
+import ProfilePhoto from './pages/ProfileSkeleton/ProfilePhoto/ProfilePhoto';
 import Dashboard from './pages/Dashboard/Dashboard';
 import MySitters from './pages/MySitters/MySitters';
 import { AuthProvider } from './context/useAuthContext';
@@ -22,10 +23,10 @@ function App(): JSX.Element {
           <AuthProvider>
             <SocketProvider>
               <Switch>
-                <Route exact path="/profileEditionMock" component={ProfileEditionMock} />
+                <Route exact path="/profilePhoto" component={ProfilePhoto} />
                 <Route exact path="/signup" component={Signup} />
                 <Route path="*">
-                  <Redirect to="/profileEditionMock" />
+                  <Redirect to="/profilePhoto" />
                 </Route>
               </Switch>
             </SocketProvider>
