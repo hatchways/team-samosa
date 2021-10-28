@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
-import StarIcon from '@material-ui/icons/Star';
+import Rating from '@material-ui/lab/Rating';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
 
@@ -33,11 +33,7 @@ export default function ProfileRequest({ profile }: Props): JSX.Element {
                 <Typography variant="h5">$14/hr</Typography>
               </Grid>
               <Grid item>
-                <StarIcon className={classes.star} />
-                <StarIcon className={classes.star} />
-                <StarIcon className={classes.star} />
-                <StarIcon className={classes.star} />
-                <StarIcon className={classes.star} />
+                <Rating name="read-only" value={4.5} precision={0.5} readOnly />
               </Grid>
             </Grid>
             <form>

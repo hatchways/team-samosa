@@ -7,12 +7,12 @@ import Signup from './pages/SignUp/SignUp';
 import Dashboard from './pages/Dashboard/Dashboard';
 import NavBar from './components/Navbar/NavBar';
 import ProfileListings from './components/ProfileListings/ProfileListings';
+import ProfileDetails from './components/ProfileDetails/ProfileDetails';
 import { AuthProvider } from './context/useAuthContext';
 import { SocketProvider } from './context/useSocketContext';
 import { SnackBarProvider } from './context/useSnackbarContext';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import Profiles from './components/Profiles/Profiles';
 
 import './App.css';
 
@@ -42,7 +42,7 @@ function App(): JSX.Element {
                 </Route>
                 <Route path="/profiles/:profileId">
                   <NavBar elevation={16} color="inherit" />
-                  <Profiles />
+                  <ProfileDetails />
                 </Route>
                 <Route path="/dashboard">
                   <NavBar elevation={16} color="inherit" />
