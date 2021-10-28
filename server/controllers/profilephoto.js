@@ -28,9 +28,9 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
         }
         await s3.deleteObject(deleteParams, (err, data) => {
             if (err) {
-                console.log('Error occured while trying to delete previous file in S3 bucket', err);
+                res.send({ err: 'Error occured while trying to delete previous file in S3 bucket' });
             } else {
-                console.log('Delete previous file successfully', err);
+                res.send('Delete previous file successfully');
             }
         });
     }
