@@ -6,7 +6,7 @@ import Login from './pages/Login/Login';
 import Signup from './pages/SignUp/SignUp';
 import Dashboard from './pages/Dashboard/Dashboard';
 import NavBar from './components/Navbar/NavBar';
-import Profiles from './components/Profiles/Profiles';
+import ProfileDetails from './components/ProfileDetails/ProfileDetails';
 import { AuthProvider } from './context/useAuthContext';
 import { SocketProvider } from './context/useSocketContext';
 import { SnackBarProvider } from './context/useSnackbarContext';
@@ -36,7 +36,7 @@ function App(): JSX.Element {
                 </Route>
                 <Route exact path="/profiles">
                   <NavBar elevation={16} color="inherit" />
-                  <Profiles />
+                  <ProfileDetails />
                 </Route>
                 <Route path="/dashboard">
                   <NavBar elevation={16} color="inherit" />

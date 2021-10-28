@@ -5,7 +5,7 @@ import useStyles from './useStyles';
 import ProfileRequest from './ProfileRequest/ProfileRequest';
 import ProfileMain from './ProfileMain/ProfileMain';
 
-export default function Profiles(): JSX.Element {
+export default function ProfileDetails(): JSX.Element {
   const classes = useStyles();
 
   return (
