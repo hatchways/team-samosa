@@ -5,7 +5,7 @@ const {
   getProfile,
   createProfile,
   updateProfile,
-} = require("../controllers/Profile");
+} = require("../controllers/profile");
 
 router.route("/").get(protect, getProfile);
 

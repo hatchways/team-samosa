@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("../models/User");
 const Profile = require("../Models/Profile");
 const asyncHandler = require("express-async-handler");
 
@@ -8,9 +9,26 @@ const asyncHandler = require("express-async-handler");
 exports.getProfile = asyncHandler(async (req, res) => {
   const userId = req.user.id;
 
-  const profile = await Profile.findOne({ userId });
 
-  res.send({ profile });
+  const user = await User.findOne({ _id: userId });
+  const profile = await Profile.findOne({ userId });
+  if (profile) {
+    res.status(400);
+    throw new Error("The user profile is not created");
+  }
+
+  res.send({
+    success: {
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      gender: profile.gender,
+      birthDate: profile.birthDate,
+      email: user.email,
+      phoneNum: profile.phoneNum,
+      address: profile.address,
+      description: profile.description,
+    }
+  });
 });
 
 // @route POST /profile
@@ -32,6 +50,11 @@ exports.createProfile = asyncHandler(async (req, res) => {
   if (!firstName || !lastName || !phoneNum) {
     res.status(400);
     throw new Error("Incomplete profile field");
+  }
+  const userIdExists = await Profile.findOne({ userId });
+  if (userIdExists) {
+    res.status(400);
+    throw new Error("There already a profile");
   }
 
   const phoneNumExists = await Profile.findOne({ phoneNum });
@@ -63,18 +86,50 @@ exports.createProfile = asyncHandler(async (req, res) => {
 exports.updateProfile = asyncHandler(async (req, res) => {
   const userId = req.user.id;
 
-  const { profileUpdates } = req.body;
+  const {
+    firstName,
+    lastName,
+    gender,
+    birthDate,
+    email,
+    phoneNum,
+    address,
+    description,
+  } = req.body;
 
-  const profile = await Profile.findById(userId);
+  const profile = await Profile.findOne({ userId });
 
   if (!profile) {
     res.status(404);
     throw new Error("User id do not exist! Error happened!");
   }
-
-  profile.status = profileUpdates;
-
+  if (profile.firstName !== firstName) {
+    profile.firstName = firstName;
+  }
+  if (profile.lastName !== lastName) {
+    profile.lastName = lastName;
+  }
+  if (profile.gender !== gender) {
+    profile.gender = gender;
+  }
+  if (profile.birthDate !== birthDate) {
+    profile.birthDate = birthDate;
+  }
+  if (profile.address !== address) {
+    profile.address = address;
+  }
+  if (profile.phoneNum !== phoneNum) {
+    profile.phoneNum = phoneNum;
+  }
+  if (profile.description !== description) {
+    profile.description = description;
+  }
   await profile.save();
 
-  res.status(200).json(profile);
+  const user = await User.findOne({ _id: userId });
+  if (user.email !== email) {
+    user.email = email;
+    await user.save();
+  }
+  res.status(200).json(user);
 });
