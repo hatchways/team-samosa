@@ -26,7 +26,7 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(userId)) {
     return res.status(400).send("Bad Request");
   }
-
+  const user = await User.findOne({ _id: userId });
   const resp = await Profile.findOne({ userId });
   if (!resp) {
     res.status(404);
@@ -37,7 +37,16 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
     const user = verifyToken(req.headers.cookie);
     if (user.id === userId) {
       const profile = resp;
-      res.send({ profile });
+      res.send({
+        success: {
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      gender: profile.gender,
+      birthDate: profile.birthDate,
+      email: user.email,
+      phoneNum: profile.phoneNum,
+      address: profile.address,
+      description: profile.description, });
     }
   } else {
     const profile = {
