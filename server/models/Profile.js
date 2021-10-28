@@ -42,6 +42,9 @@ const profileSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  stripeId: {
+    type: String,
+  },
 });
 
 module.exports = Profile = mongoose.model("Profile", profileSchema);
