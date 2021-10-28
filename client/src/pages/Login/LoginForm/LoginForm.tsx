@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './useStyles';
 import { CircularProgress } from '@material-ui/core';
+import DemoButton from '../../../components/DemoButton/DemoButton';
 
 interface Props {
   handleSubmit: (
@@ -81,8 +82,9 @@ export default function Login({ handleSubmit }: Props): JSX.Element {
           />
           <Box textAlign="center">
             <Button type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
-              {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'Login'}
+              {isSubmitting ? <CircularProgress className={classes.circularProgess} /> : 'Login'}
             </Button>
+            <DemoButton />
           </Box>
         </form>
       )}
