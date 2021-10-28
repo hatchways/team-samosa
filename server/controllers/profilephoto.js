@@ -29,6 +29,8 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
         await s3.deleteObject(deleteParams, (err, data) => {
             if (err) {
                 res.send({ err: 'Error occured while trying to delete previous file in S3 bucket' });
+            } else {
+                res.send('Delete previous file successfully');
             }
         });
     }
@@ -45,13 +47,13 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
             fs.unlinkSync(req.file.path); // Empty temp folder
             const locationUrl = data.Location;
             profile.photoUrl = locationUrl;
-            profile
+            newUser
                 .save()
                 .then(profile => {
                     res.json({ message: 'Upload Photo successfully', profile });
                 })
                 .catch(err => {
-                    res.json('Error occured while trying to save to DB', err);
+                    console.log('Error occured while trying to save to DB', err);
                 });
         }
     });
