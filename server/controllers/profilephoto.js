@@ -2,18 +2,6 @@ const S3 = require("aws-sdk/clients/s3");
 const fs = require("fs");
 const Profile = require("../Models/Profile");
 const asyncHandler = require("express-async-handler");
-//require("dotenv").config();
-
-// @route GET /profileUrl
-// @desc the Url of the profilephoto of this user
-// @access Private
-exports.getPhoto = asyncHandler(async (req, res) => {
-    const userId = req.user.id;
-    const profile = await Profile.findOne({ userId });
-    res.send({
-        photoUrl: profile.photoUrl === "" ? "https://picsum.photos/id/237/200/300" : profile.photoUrl,
-    });
-});
 
 // @route Post /photourl
 // @desc Save user photo to AWS S3 bucket
