@@ -62,7 +62,7 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
       await loginWithCookies().then(async (data: AuthApiData) => {
         if (data.success) {
           updateLoginContext(data.success);
-          await getProfile().then((res) => {
+          await getProfile(data.success.user._id).then((res) => {
             if (res.success) {
               updateProfileContext(res.success);
             }
