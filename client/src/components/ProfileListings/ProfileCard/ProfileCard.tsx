@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import StarIcon from '@material-ui/icons/Star';
+import Rating from '@material-ui/lab/Rating';
 
 export default function ProfileCard(): JSX.Element {
   const classes = useStyles();
@@ -20,11 +20,7 @@ export default function ProfileCard(): JSX.Element {
           <Typography variant="h5">Loving pet sitter</Typography>
           <Grid item>
             <Box p={1}>
-              <StarIcon className={classes.star} />
-              <StarIcon className={classes.star} />
-              <StarIcon className={classes.star} />
-              <StarIcon className={classes.star} />
-              <StarIcon className={classes.star} />
+              <Rating name="read-only" value={4.5} precision={0.5} readOnly />
             </Box>
           </Grid>
 
