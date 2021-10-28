@@ -11,6 +11,7 @@ export const theme = createMuiTheme({
     },
     overline: { fontWeight: 700, fontSize: '0.75rem' },
   },
+
   palette: {
     primary: { main: '#de5048' },
     secondary: { main: grey[400] },
