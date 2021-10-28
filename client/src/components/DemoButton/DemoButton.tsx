@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import useStyles from './useStyles';
@@ -10,7 +9,6 @@ import { CircularProgress } from '@material-ui/core';
 
 export default function DemoButton(): JSX.Element {
   const classes = useStyles();
-
   const history = useHistory();
 
   const [isSubmitting, setSubmitting] = useState(false);
