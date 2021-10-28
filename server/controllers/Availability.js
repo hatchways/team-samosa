@@ -80,8 +80,7 @@ exports.updateAvailability = asyncHandler(async (req, res) => {
       throw new Error(
         "There is already a availability period with this start date"
       );
-    }
-    else {
+    } else {
       availability.startDate = startDate;
     }
   }
@@ -92,8 +91,7 @@ exports.updateAvailability = asyncHandler(async (req, res) => {
       throw new Error(
         "There is already a availability period with this end date"
       );
-    }
-    else {
+    } else {
       availability.endDate = endDate;
     }
   }
