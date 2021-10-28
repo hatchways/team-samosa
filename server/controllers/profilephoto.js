@@ -31,7 +31,7 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
         accessKeyId: process.env.AWS__ACCESS_KEY,
         secretAccessKey: process.env.AWS_SECRET_KEY,
     })
-    if (profile.photoUrl !== "") {
+    if (!profile.photoUrl) {
         let { pathname } = new URL(profile.photoUrl, 'http://example.org') // dummy domain to avoid invalid URL error
         pathname = pathname.substring(1) // remove first character '/'
         const deleteParams = {
