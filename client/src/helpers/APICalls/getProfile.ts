@@ -8,7 +8,6 @@ export async function getProfile(profileId: string): Promise<ProfileApiData> {
   };
   const res = await fetch(`/profile/${profileId}`, fetchOptions).then();
   const resp = await res.json();
-  console.log('resp: ', resp);
   if (resp.error) {
     return resp;
   }

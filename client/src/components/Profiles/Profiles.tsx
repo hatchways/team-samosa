@@ -38,7 +38,6 @@ export default function Profiles(): JSX.Element {
 
   useEffect(() => {
     getProfile(profileId).then((data) => {
-      console.log('getProfile: ', data);
       if (data.error) {
         updateSnackBarMessage(data.error.message);
         history.push('/profiles');
