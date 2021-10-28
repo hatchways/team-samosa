@@ -65,7 +65,7 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
                     res.json({ message: 'Upload Photo successfully', profile });
                 })
                 .catch(err => {
-                    console.log('Error occured while trying to save to DB');
+                    console.log('Error occured while trying to save to DB', err);
                 });
         }
     });
