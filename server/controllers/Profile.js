@@ -9,18 +9,10 @@ const protect = require("../middleware/auth");
 // @desc List of all profiles
 // @access Public
 exports.getProfiles = asyncHandler(async (req, res) => {
-  const resp = await Profile.find({ isSitter: true });
-
-  const profiles = resp.map((element) => {
-    return {
-      _id: element._id,
-      userId: element.userId,
-      firstName: element.firstName,
-      lastName: element.lastName,
-      description: element.description,
-      photoUrl: element.photoUrl,
-    };
-  });
+  const profiles = await Profile.find(
+    { isSitter: true },
+    "_id userId firstName lastName photoUrl description"
+  );
 
   res.send({ profiles });
 });
@@ -30,6 +22,11 @@ exports.getProfiles = asyncHandler(async (req, res) => {
 // @access Public
 exports.getProfile = asyncHandler(async (req, res, next) => {
   const userId = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).send("Bad Request");
+  }
+
   const resp = await Profile.findOne({ userId });
   if (!resp) {
     res.status(404);
