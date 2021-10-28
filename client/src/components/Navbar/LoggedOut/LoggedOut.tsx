@@ -12,7 +12,7 @@ export default function LoggedOut(): JSX.Element {
     <React.Fragment>
       <Grid item>
         <Button className={classes.button} size="large">
-          <Box px={4}>Become a sitter</Box>
+          Become a sitter
         </Button>
         <Button className={classes.button} to="/login" component={Link} color="primary" variant="outlined" size="large">
           Login
