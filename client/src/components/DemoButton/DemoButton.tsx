@@ -17,6 +17,7 @@ export default function DemoButton(): JSX.Element {
   const { updateSnackBarMessage } = useSnackBar();
 
   const handleSubmit = ({ email, password }: { email: string; password: string }) => {
+    setIsSubmitting(true);
     login(email, password).then((data) => {
       if (data.error) {
         setIsSubmitting(false);
