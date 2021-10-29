@@ -21,6 +21,7 @@ const useStyles = makeStyles(() => ({
   location: { color: theme.palette.primary.main, marginRight: 6 },
   star: { color: '#ffc527' },
   rate: { fontWeight: 700 },
+  content: { padding: theme.spacing(6) },
 }));
 
 export default useStyles;
