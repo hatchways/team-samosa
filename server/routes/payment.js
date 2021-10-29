@@ -20,6 +20,8 @@ router.route("/create-payment-intent").post(protect, createPaymentIntent);
 
 router.route("/list-payment-methods").get(protect, listPaymentMethods);
 
+//POST /payment/create-payment-method is included for testing purposes
+//route should not be used in production
 router.route("/create-payment-method").post(protect, createPaymentMethod);
 
 module.exports = router;

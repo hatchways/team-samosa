@@ -3,13 +3,16 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 const User = require("../models/User");
 const Profile = require("../Models/Profile");
 const asyncHandler = require("express-async-handler");
+const verifyProfile = require("../utils/verifyProfile");
 const verifyStripeCustomer = require("../utils/verifyStripeCustomer");
 
 // @route POST /payment
 // @desc Create new customer
 // @access Private
 exports.createCustomer = asyncHandler(async (req, res, next) => {
-  const customer = await verifyStripeCustomer(req);
+  const profile = await verifyProfile(req);
+
+  const customer = await stripe.customers.create();
 
   profile.stripeId = customer.id;
 
@@ -74,6 +77,9 @@ exports.createPaymentIntent = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({ paymentIntent });
 });
+
+//POST /payment/create-payment-method is included for testing purposes
+//route should not be used in production
 
 // @route POST /payment/create-payment-method
 // @desc Create fake payment method for testing
