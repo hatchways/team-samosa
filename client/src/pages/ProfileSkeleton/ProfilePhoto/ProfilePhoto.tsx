@@ -4,9 +4,14 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './useStyles';
 import ProfileSelection from '../../../components/ProfileSelection/ProfileSelection';
+import Avatar from '@mui/material/Avatar';
+import { useAuth } from '../../../context/useAuthContext';
+import Button from '@material-ui/core/Button';
+import { CircularProgress } from '@material-ui/core';
 
 export default function ProfilePhoto(): JSX.Element {
   const classes = useStyles();
+  const { userProfile } = useAuth();
   return (
     <Grid container className={classes.root}>
       <Grid item xs={6} sm={6} md={5} elevation={0} component={Paper} square className={classes.back}>
@@ -23,10 +28,21 @@ export default function ProfilePhoto(): JSX.Element {
       </Grid>
       <Grid item xs={6} sm={3} md={6} elevation={6} component={Paper} square>
         <Box className={classes.authWrapper}>
-          <Box width="100%" maxWidth={250} p={3} alignSelf="center">
+          <Box width="100%" maxWidth={350} p={3} alignSelf="center">
             <Typography className={classes.welcome} component="h1" variant="h5">
               Profile Photo
             </Typography>
+            <Avatar
+              alt="Profile Image"
+              src={!userProfile ? `https://robohash.org/suv.png` : userProfile.email || `https://robohash.org/suv.png`}
+              sx={{ width: 240, height: 240 }}
+            />
+            <Typography className={classes.desp} component="h1" variant="h5">
+              Be sure to use a photo that clearly shows your face
+            </Typography>
+            <Button type="submit" size="large" variant="outlined" color="primary" className={classes.submit}>
+              {false ? <CircularProgress style={{ color: 'white' }} /> : 'Upload a photo from your device'}
+            </Button>
           </Box>
         </Box>
       </Grid>
