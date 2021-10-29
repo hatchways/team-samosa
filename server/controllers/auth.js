@@ -41,7 +41,6 @@ exports.registerUser = asyncHandler(async (req, res, next) => {
     username,
     email,
     password,
-    isSitter,
   });
 
   if (user) {
@@ -59,7 +58,6 @@ exports.registerUser = asyncHandler(async (req, res, next) => {
           id: user._id,
           username: user.username,
           email: user.email,
-          isSitter: user.isSitter,
         },
       },
     });
