@@ -7,6 +7,8 @@ import { useAuth } from '../../context/useAuthContext';
 import { useSnackBar } from '../../context/useSnackbarContext';
 import { CircularProgress } from '@material-ui/core';
 
+const demoUser = { email: 'user@demo.com', password: 'password' };
+
 export default function DemoButton(): JSX.Element {
   const classes = useStyles();
   const history = useHistory();
@@ -38,7 +40,7 @@ export default function DemoButton(): JSX.Element {
   return (
     <Button
       onClick={() => {
-        handleSubmit({ email: 'user@demo.com', password: 'password' });
+        handleSubmit(demoUser);
       }}
       size="large"
       variant="contained"
