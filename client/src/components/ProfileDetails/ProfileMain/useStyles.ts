@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
     marginTop: theme.spacing(-10),
     borderRadius: theme.spacing(12),
   },
-  dog: { width: theme.spacing(16), height: theme.spacing(16), borderRadius: 5 },
+  dog: { borderRadius: 5 },
   location: { color: theme.palette.primary.main, marginRight: 6 },
 }));
 
