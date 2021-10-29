@@ -1,6 +1,6 @@
 export interface Profile {
-  gender: string;
-  birthDate: Date;
+  gender?: string;
+  birthDate?: Date;
   address: string;
   description: string;
   photoUrl: string;
@@ -8,7 +8,7 @@ export interface Profile {
   userId: string;
   firstName: string;
   lastName: string;
-  phoneNum: string;
+  phoneNum?: string;
 }
 
 export interface ProfileApiData {

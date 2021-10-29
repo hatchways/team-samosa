@@ -6,7 +6,22 @@ const generateToken = require("../utils/generateToken");
 // @desc Register user
 // @access Public
 exports.registerUser = asyncHandler(async (req, res, next) => {
-  const { username, email, password, isSitter = false } = req.body;
+  const { username, email, password } = req.body;
+
+  if (!username) {
+    res.status(400);
+    throw new Error("Username is missing");
+  }
+
+  if (!email) {
+    res.status(400);
+    throw new Error("Email is missing");
+  }
+
+  if (!password) {
+    res.status(400);
+    throw new Error("Password is missing");
+  }
 
   const emailExists = await User.findOne({ email });
 

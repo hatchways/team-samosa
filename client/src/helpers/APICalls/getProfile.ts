@@ -6,7 +6,7 @@ export async function getProfile(profileId: string): Promise<ProfileApiData> {
     method: 'GET',
     credentials: 'include',
   };
-  const res = await fetch(`/profile/${profileId}`, fetchOptions).then();
+  const res = await fetch(`/profile/${profileId}`, fetchOptions);
   const resp = await res.json();
   if (resp.error) {
     return resp;

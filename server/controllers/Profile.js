@@ -18,6 +18,7 @@ exports.getProfiles = asyncHandler(async (req, res) => {
       lastName: element.lastName,
       description: element.description,
       photoUrl: element.photoUrl,
+      address: element.address,
     };
   });
 
@@ -29,6 +30,11 @@ exports.getProfiles = asyncHandler(async (req, res) => {
 // @access Public
 exports.getProfile = asyncHandler(async (req, res, next) => {
   const userId = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).send("Bad Request");
+  }
+
   const resp = await Profile.findOne({ userId });
   if (!resp) {
     res.status(404);
@@ -41,18 +47,17 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
       const profile = resp;
       res.send({ profile });
     }
-  } else {
-    const profile = {
-      _id: resp._id,
-      userId: resp.userId,
-      firstName: resp.firstName,
-      lastName: resp.lastName,
-      description: resp.description,
-      photoUrl: resp.photoUrl,
-    };
-
-    res.send({ profile });
   }
+  const profile = {
+    _id: resp._id,
+    userId: resp.userId,
+    firstName: resp.firstName,
+    lastName: resp.lastName,
+    description: resp.description,
+    photoUrl: resp.photoUrl,
+    address: resp.address,
+  };
+  res.send({ profile });
 });
 
 // @route POST /profile

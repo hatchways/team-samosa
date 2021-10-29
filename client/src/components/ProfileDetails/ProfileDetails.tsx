@@ -25,7 +25,7 @@ const EmptyProfile = {
   phoneNum: '',
 };
 
-export default function Profiles(): JSX.Element {
+export default function ProfileDetails(): JSX.Element {
   const classes = useStyles();
 
   const history = useHistory();
