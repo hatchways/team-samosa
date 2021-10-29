@@ -11,7 +11,7 @@ export default function DemoButton(): JSX.Element {
   const classes = useStyles();
   const history = useHistory();
 
-  const [isSubmitting, setSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { updateLoginContext } = useAuth();
   const { updateSnackBarMessage } = useSnackBar();
@@ -19,7 +19,7 @@ export default function DemoButton(): JSX.Element {
   const handleSubmit = ({ email, password }: { email: string; password: string }) => {
     login(email, password).then((data) => {
       if (data.error) {
-        setSubmitting(false);
+        setIsSubmitting(false);
         updateSnackBarMessage(data.error.message);
       } else if (data.success) {
         updateLoginContext(data.success);
@@ -28,7 +28,7 @@ export default function DemoButton(): JSX.Element {
         // should not get here from backend but this catch is for an unknown issue
         console.error({ data });
 
-        setSubmitting(false);
+        setIsSubmitting(false);
         updateSnackBarMessage('An unexpected error occurred. Please try again');
       }
     });
