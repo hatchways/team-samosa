@@ -51,7 +51,9 @@ export default function LoggedIn(): JSX.Element {
       </IconButton>
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem to="/dashboard/my-profile" component={RouterLink}>
+          Profile
+        </MenuItem>
       </Menu>
     </React.Fragment>
   );

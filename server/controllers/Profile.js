@@ -4,6 +4,7 @@ const Profile = require("../Models/Profile");
 const asyncHandler = require("express-async-handler");
 const verifyToken = require("../utils/verifyToken");
 const protect = require("../middleware/auth");
+const { validateRegister } = require("../validate");
 
 // @route GET /profiles
 // @desc List of all profiles
@@ -21,12 +22,16 @@ exports.getProfiles = asyncHandler(async (req, res) => {
 // @desc Returns public profile or full profile for auth user
 // @access Public
 exports.getProfile = asyncHandler(async (req, res, next) => {
-  const userId = req.params.id;
+  var userId = req.params.id;
 
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
-    return res.status(400).send("Bad Request");
+  if (userId) {
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).send("Bad Request");
+    }
+  } else {
+    userId = req.user.id;
   }
-  const user = await User.findOne({ _id: userId });
+
   const resp = await Profile.findOne({ userId });
   if (!resp) {
     res.status(404);
@@ -39,6 +44,7 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
       const profile = resp;
       res.send({
         success: {
+          _id: resp._id,
           firstName: profile.firstName,
           lastName: profile.lastName,
           gender: profile.gender,
