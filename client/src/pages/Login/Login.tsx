@@ -1,18 +1,12 @@
 import { useHistory } from 'react-router-dom';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 import { FormikHelpers } from 'formik';
-import Typography from '@material-ui/core/Typography';
-import useStyles from './useStyles';
+import ModalPaper from '../../components/Modal/ModalPaper/ModalPaper';
 import login from '../../helpers/APICalls/login';
 import LoginForm from './LoginForm/LoginForm';
 import { useAuth } from '../../context/useAuthContext';
 import { useSnackBar } from '../../context/useSnackbarContext';
 
 export default function Login(): JSX.Element {
-  const classes = useStyles();
-
   const history = useHistory();
 
   const { updateLoginContext } = useAuth();
@@ -40,22 +34,8 @@ export default function Login(): JSX.Element {
   };
 
   return (
-    <Grid container component="main" className={classes.root} justify="center" alignItems="center">
-      <Grid item xs={12} sm={8} md={7}>
-        <Paper className={classes.authWrapper} elevation={8}>
-          <Box width="100%" maxWidth={450} p={3} alignSelf="center">
-            <Grid container justify="center">
-              <Grid item>
-                <Typography className={classes.welcome} component="h1" variant="h5">
-                  Welcome back!
-                </Typography>
-              </Grid>
-            </Grid>
-            <LoginForm handleSubmit={handleSubmit} />
-          </Box>
-          <Box p={1} alignSelf="center" />
-        </Paper>
-      </Grid>
-    </Grid>
+    <ModalPaper title="Welcome back!">
+      <LoginForm handleSubmit={handleSubmit} />
+    </ModalPaper>
   );
 }

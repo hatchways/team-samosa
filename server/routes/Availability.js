@@ -5,7 +5,7 @@ const {
   getAvailability,
   createAvailability,
   updateAvailability,
-} = require("../controllers/Availability");
+} = require("../controllers/availability");
 
 router.route("/").get(protect, getAvailability);
 
