@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-  root: { margin: 0, maxWidth: '1536px', [theme.breakpoints.up('md')]: { margin: 48 } },
+const useStyles = makeStyles(() => ({
+  root: { minHeight: '100vh', paddingTop: 80 },
 }));
 
 export default useStyles;
