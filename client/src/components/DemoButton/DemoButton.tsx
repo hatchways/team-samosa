@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 import useStyles from './useStyles';
 import login from '../../helpers/APICalls/login';
 import { useAuth } from '../../context/useAuthContext';
 import { useSnackBar } from '../../context/useSnackbarContext';
 import { CircularProgress } from '@material-ui/core';
+import ModalButton from '../Modal/ModalButton/ModalButton';
 
 const demoUser = { email: 'user@demo.com', password: 'password' };
 
@@ -38,16 +38,12 @@ export default function DemoButton(): JSX.Element {
   };
 
   return (
-    <Button
+    <ModalButton
       onClick={() => {
         handleSubmit(demoUser);
       }}
-      size="large"
-      variant="contained"
-      color="primary"
-      className={classes.submit}
     >
       {isSubmitting ? <CircularProgress className={classes.circularProgess} /> : 'Login Demo User'}
-    </Button>
+    </ModalButton>
   );
 }
