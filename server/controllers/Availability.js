@@ -65,41 +65,35 @@ exports.updateAvailability = asyncHandler(async (req, res) => {
   }
   const userId = req.user.id;
 
-  const { availabilityupdates } = req.body;
+  const { startDate, endDate } = req.body;
 
   const availability = await Availability.findById(availabilityId);
 
-  if (!availability) {
+  if (!availability || availability.userId != userId) {
     res.status(404);
     throw new Error("Invalid availability id");
   }
-  if (availability.userId != userId) {
-    res.status(404);
-    throw new Error("Invalid availability id");
+  if (availability.startDate !== startDate) {
+    const startDateExists = await Availability.findOne({ userId, startDate });
+    if (startDateExists) {
+      res.status(400);
+      throw new Error(
+        "There is already a availability period with this start date"
+      );
+    } else {
+      availability.startDate = startDate;
+    }
   }
-
-  availability.status = availabilityupdates;
-
-  const startDate = availability.startDate;
-
-  const startDateExists = await Availability.findOne({ userId, startDate });
-
-  if (startDateExists) {
-    res.status(400);
-    throw new Error(
-      "There is already a availability period with this start date"
-    );
-  }
-
-  const endDate = availability.endDate;
-
-  const endDateExists = await Availability.findOne({ userId, endDate });
-
-  if (endDateExists) {
-    res.status(400);
-    throw new Error(
-      "There is already a availability period with this end date"
-    );
+  if (availability.endDate !== endDate) {
+    const endDateExists = await Availability.findOne({ userId, endDate });
+    if (endDateExists) {
+      res.status(400);
+      throw new Error(
+        "There is already a availability period with this end date"
+      );
+    } else {
+      availability.endDate = endDate;
+    }
   }
 
   await availability.save();

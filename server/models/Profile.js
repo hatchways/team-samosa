@@ -38,6 +38,10 @@ const profileSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  isSitter: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-module.exports = Profile = mongoose.model("profile", profileSchema);
+module.exports = Profile = mongoose.model("Profile", profileSchema);

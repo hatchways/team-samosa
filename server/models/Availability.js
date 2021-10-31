@@ -17,6 +17,6 @@ const availabilitySchema = new mongoose.Schema({
 });
 
 module.exports = Availability = mongoose.model(
-  "availability",
+  "Availability",
   availabilitySchema
 );
