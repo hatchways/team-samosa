@@ -6,7 +6,7 @@ const generateToken = require("../utils/generateToken");
 // @desc Register user
 // @access Public
 exports.registerUser = asyncHandler(async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, isSitter = false } = req.body;
 
   const emailExists = await User.findOne({ email });
 
@@ -26,6 +26,7 @@ exports.registerUser = asyncHandler(async (req, res, next) => {
     username,
     email,
     password,
+    isSitter,
   });
 
   if (user) {
@@ -43,6 +44,7 @@ exports.registerUser = asyncHandler(async (req, res, next) => {
           id: user._id,
           username: user.username,
           email: user.email,
+          isSitter: user.isSitter,
         },
       },
     });
