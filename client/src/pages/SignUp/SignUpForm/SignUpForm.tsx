@@ -41,7 +41,7 @@ const SignUpForm = ({ handleSubmit }: Props): JSX.Element => {
         username: '',
       }}
       validationSchema={Yup.object().shape({
-        username: Yup.string().required('Name is required').max(40, 'Name is too long'),
+        username: Yup.string().required('Username is required').max(40, 'Username is too long'),
         email: Yup.string().required('Email is required').email('Email is not valid'),
         password: Yup.string()
           .required('Password is required')
@@ -53,11 +53,11 @@ const SignUpForm = ({ handleSubmit }: Props): JSX.Element => {
       {({ handleSubmit, handleChange, values, touched, errors, isSubmitting }) => (
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <label htmlFor="username">
-            <Typography variant="overline">Name</Typography>
+            <Typography variant="overline">Username</Typography>
           </label>
           <TextField
             id="username"
-            placeholder="Your name"
+            placeholder="Create a username"
             fullWidth
             margin="normal"
             name="username"
