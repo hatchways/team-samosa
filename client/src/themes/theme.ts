@@ -9,6 +9,11 @@ export const theme = createMuiTheme({
         minWidth: 128,
       },
     },
+    MuiTextField: {
+      root: {
+        marginTop: 0,
+      },
+    },
   },
   typography: {
     fontFamily: '"Poppins", "Open Sans", "sans-serif", "Roboto"',
