@@ -17,7 +17,7 @@ export default function BookingsSideBanner({ requests }: Props): JSX.Element {
       <Grid item>
         <NextBooking request={nextBooking} />
       </Grid>
-      <Grid item>{requests.length > 1 ? <BookingsPaper requests={requests} /> : ''}</Grid>
+      <Grid item>{requests.length > 1 && <BookingsPaper requests={requests} />}</Grid>
     </Grid>
   );
 }

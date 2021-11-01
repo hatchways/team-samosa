@@ -1,10 +1,12 @@
 import { MuiThemeProvider } from '@material-ui/core';
 import { theme } from './themes/theme';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import Welcome from './pages/Welcome/Welcome';
 import Login from './pages/Login/Login';
 import Signup from './pages/SignUp/SignUp';
 import Dashboard from './pages/Dashboard/Dashboard';
-import MySitters from './pages/MySitters/MySitters';
+import NavBar from './components/Navbar/NavBar';
+import ProfileListings from './components/ProfileListings/ProfileListings';
 import { AuthProvider } from './context/useAuthContext';
 import { SocketProvider } from './context/useSocketContext';
 import { SnackBarProvider } from './context/useSnackbarContext';
@@ -22,14 +24,27 @@ function App(): JSX.Element {
           <AuthProvider>
             <SocketProvider>
               <Switch>
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={Signup} />
-                <Route exact path="/dashboard">
-                  {/* <Dashboard /> disabled until Navbar setup */}
-                  <MySitters />
+                <Route exact path="/">
+                  <Welcome />
+                </Route>
+                <Route exact path="/login">
+                  <NavBar elevation={16} color="inherit" />
+                  <Login />
+                </Route>
+                <Route exact path="/signup">
+                  <NavBar elevation={16} color="inherit" />
+                  <Signup />
+                </Route>
+                <Route exact path="/profiles">
+                  <NavBar elevation={16} color="inherit" />
+                  <ProfileListings />
+                </Route>
+                <Route path="/dashboard">
+                  <NavBar elevation={16} color="inherit" />
+                  <Dashboard />
                 </Route>
                 <Route path="*">
-                  <Redirect to="/login" />
+                  <Redirect to="/" />
                 </Route>
               </Switch>
             </SocketProvider>

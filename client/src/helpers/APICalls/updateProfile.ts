@@ -1,4 +1,4 @@
-import { ProfileData } from '../../interface/Profile';
+import { ProfileApiData } from '../../interface/Profile';
 import { FetchOptions } from '../../interface/FetchOptions';
 
 const updateProfile = async (
@@ -10,7 +10,7 @@ const updateProfile = async (
   phoneNum: string,
   address: string,
   description: string,
-): Promise<ProfileData> => {
+): Promise<ProfileApiData> => {
   const fetchOptions: FetchOptions = {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },

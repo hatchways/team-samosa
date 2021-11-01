@@ -10,7 +10,22 @@ export interface ProfileSuccess {
   description: string;
 }
 
-export interface ProfileData {
-  error?: string;
+export interface ProfileApiData {
+  error?: { message: string };
   success?: ProfileSuccess;
+}
+
+export interface PublicProfileSuccess {
+  firstName: string;
+  lastName: string;
+  description: string;
+  id: string;
+  userId: string;
+  photoUrl: string;
+  address: string;
+}
+
+export interface PublicProfileApiData {
+  error?: { message: string };
+  success?: PublicProfileSuccess;
 }
