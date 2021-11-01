@@ -6,14 +6,19 @@ const verifyToken = require("../utils/verifyToken");
 const protect = require("../middleware/auth");
 const { validateRegister } = require("../validate");
 
-// @route GET /userprofile
+
+// @route GET /profile/user
 // @desc the profile of the relevant user
 // @access Private
 exports.getUProfile = asyncHandler(async (req, res) => {
   const userId = req.user.id;
-
   const user = await User.findOne({ _id: userId });
   const profile = await Profile.findOne({ userId });
+  if (profile) {
+    res.status(400);
+    throw new Error("The user profile is not created");
+  }
+
   res.send({
     success: {
       firstName: profile.firstName,
@@ -87,64 +92,6 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
     photoUrl: resp.photoUrl,
     address: resp.address,
   };
-  res.send({ profile });
-});
-
-// @route GET /profiles
-// @desc List of all profiles
-// @access Public
-exports.getProfiles = asyncHandler(async (req, res) => {
-  const profiles = await Profile.find(
-    { isSitter: true },
-    "_id userId firstName lastName photoUrl description address"
-  );
-  res.send({ profiles });
-});
-
-// @route GET /profile
-// @desc Returns full profile for auth user
-// @access Public
-exports.getProfile = asyncHandler(async (req, res, next) => {
-  const userId = req.user.id;
-
-  if (userId) {
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res.status(400).send("Bad Request");
-    }
-  }
-
-  const resp = await Profile.findOne({ userId });
-  if (!resp) {
-    res.status(404);
-    throw new Error("Invalid profile id");
-  }
-
-  res.send({
-    success: {
-      _id: resp._id,
-      userId: resp.userId,
-      firstName: resp.firstName,
-      lastName: resp.lastName,
-      gender: resp.gender,
-      birthDate: resp.birthDate,
-      email: resp.email,
-      phoneNum: resp.phoneNum,
-      address: resp.address,
-      description: resp.description,
-    },
-  });
-});
-
-// @route GET /public-profile
-// @desc Returns public user profile
-// @access Public
-exports.getPublicProfile = asyncHandler(async (req, res, next) => {
-  const userId = req.params.id;
-
-  const profile = await Profile.findOne(
-    { userId },
-    "_id userId firstName lastName photoUrl description address"
-  );
   res.send({ profile });
 });
 

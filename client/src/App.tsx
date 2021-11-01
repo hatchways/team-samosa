@@ -25,10 +25,27 @@ function App(): JSX.Element {
           <AuthProvider>
             <SocketProvider>
               <Switch>
-                <Route exact path="/profilePhoto" component={ProfilePhoto} />
-                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/">
+                  <Welcome />
+                </Route>
+                <Route exact path="/login">
+                  <NavBar elevation={16} color="inherit" />
+                  <Login />
+                </Route>
+                <Route exact path="/signup">
+                  <NavBar elevation={16} color="inherit" />
+                  <Signup />
+                </Route>
+                <Route exact path="/profiles">
+                  <NavBar elevation={16} color="inherit" />
+                  <ProfileListings />
+                </Route>
+                <Route path="/dashboard">
+                  <NavBar elevation={16} color="inherit" />
+                  <Dashboard />
+                </Route>
                 <Route path="*">
-                  <Redirect to="/profilePhoto" />
+                  <Redirect to="/" />
                 </Route>
               </Switch>
             </SocketProvider>

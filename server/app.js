@@ -15,6 +15,7 @@ const requestRouter = require("./routes/request");
 
 const profileRouter = require("./routes/profile");
 const uProfileRouter = require("./routes/uprofile");
+const photoRouter = require("./routes/profilephoto");
 const availabilityRouter = require("./routes/availability");
 const { json, urlencoded } = express;
 

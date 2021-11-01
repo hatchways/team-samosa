@@ -34,6 +34,7 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
   }, []);
 
   const updateProfileContext = useCallback((profile: ProfileSuccess) => {
+    console.log('update');
     setUserProfile(profile);
   }, []);
 
