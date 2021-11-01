@@ -6,6 +6,7 @@ import { useSocket } from '../../context/useSocketContext';
 import { useHistory } from 'react-router-dom';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import Profile from '../Profile/Profile';
+import ProfilePhoto from '../ProfileSkeleton/ProfilePhoto/ProfilePhoto';
 
 import MySitters from '../MySitters/MySitters';
 
@@ -33,7 +34,7 @@ export default function Dashboard(): JSX.Element {
           </Route>
           <Route path="/dashboard/my-jobs">{/* TODO: add MyJobs component */}</Route>
           <Route path="/dashboard/my-profile">
-            <Profile />
+            <ProfilePhoto />
           </Route>
           <Route path="*">
             <Redirect to="/dashboard/my-sitters" />

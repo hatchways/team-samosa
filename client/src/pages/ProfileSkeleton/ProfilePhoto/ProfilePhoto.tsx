@@ -9,6 +9,7 @@ import { useAuth } from '../../../context/useAuthContext';
 import Button from '@material-ui/core/Button';
 import { CircularProgress } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
+import uploadPhoto from '../../../helpers/APICalls/uploadPhoto';
 
 export default function ProfilePhoto(): JSX.Element {
   const { register, handleSubmit } = useForm();
@@ -39,14 +40,16 @@ export default function ProfilePhoto(): JSX.Element {
             </Typography>
             <Avatar
               alt="Profile Image"
-              src={!userProfile ? `https://robohash.org/suv.png` : userProfile.email || `https://robohash.org/suv.png`}
+              src={
+                !userProfile ? `https://robohash.org/suv.png` : userProfile.photoUrl || `https://robohash.org/suv.png`
+              }
               sx={{ width: 240, height: 240 }}
             />
             <Typography className={classes.desp} component="h1" variant="h5">
               Be sure to use a photo that clearly shows your face
             </Typography>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <input {...register('upload')} type="file" name="picture" />
+            <form onSubmit={handleSubmit(uploadPhoto)}>
+              <input {...register('picture')} type="file" name="picture" />
               <Button type="submit" size="large" variant="outlined" color="primary" className={classes.submit}>
                 {false ? <CircularProgress style={{ color: 'white' }} /> : 'Upload a photo from your device'}
               </Button>

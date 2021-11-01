@@ -8,8 +8,8 @@ const {
 } = require("../controllers/Profilephoto");
 
 
-router.route("/").post(protect, multer({ dest: 'temp/', limits: { fieldSize: 8 * 1024 * 1024 } }).single(
-  'avatar'
+router.route("/").post(protect, multer({ dest: '/', limits: { fieldSize: 8 * 1024 * 1024 } }).single(
+  'picture'
 ), uploadPhoto);
 
 
