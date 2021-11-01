@@ -1,11 +1,9 @@
-import { ProfileData } from '../../interface/Profile';
-
-const uploadPhoto = async (image: string): Promise<ProfileData> => {
+const uploadPhoto = async (image: string): Promise<string> => {
   const fd = new FormData();
 
   fd.append('image', image);
 
-  return await fetch(`/profile`, {
+  return await fetch(`/profile-photo`, {
     method: 'POST',
     headers: { 'Content-Type': 'multipart/form-data' },
     body: fd,

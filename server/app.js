@@ -51,7 +51,7 @@ app.use("/request", requestRouter);
 
 app.use("/profile", profileRouter);
 app.use("/userprofile", uProfileRouter);
-app.use("/profilephoto", photoRouter);
+app.use("/profile-photo", photoRouter);
 
 app.use("/availablity", availabilityRouter);
 
