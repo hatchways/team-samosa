@@ -2,13 +2,13 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import useStyles from './useStyles';
-import ProfileSelection from '../../../components/ProfileSelection/ProfileSelection';
+import useStyles from './ProfileEditionMock/useStyles';
+import ProfileSelection from '../../components/ProfileSelection/ProfileSelection';
 import { Switch, Route } from 'react-router-dom';
-import mockpage1 from './ProfileEditionMock';
-import mockpage2 from './ProfileEditionMock';
+import mockpage1 from './ProfileEditionMock/ProfileEditionMock';
+import mockpage2 from './ProfileEditionMock/ProfileEditionMock';
 
-export default function ProfileEditionMock(): JSX.Element {
+export default function ProfilePhotoMock(): JSX.Element {
   const classes = useStyles();
   return (
     <Grid container className={classes.root}>
@@ -27,7 +27,7 @@ export default function ProfileEditionMock(): JSX.Element {
       </Grid>
       <Grid item xs={6} sm={6} md={6} elevation={6} component={Paper} square>
         <Typography className={classes.welcome} component="h1" variant="h5">
-          MOCK1
+          MOCK2
         </Typography>
       </Grid>
     </Grid>
