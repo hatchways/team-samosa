@@ -4,9 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './useStyles';
 import ProfileSelection from '../../../components/ProfileSelection/ProfileSelection';
-import { Switch, Route } from 'react-router-dom';
-import mockpage1 from './ProfileEditionMock';
-import mockpage2 from './ProfileEditionMock';
 
 export default function ProfileEditionMock(): JSX.Element {
   const classes = useStyles();

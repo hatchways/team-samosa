@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Signup from './pages/SignUp/SignUp';
 import ProfileEditionMock from './pages/ProfileSkeleton/ProfileEditionMock/ProfileEditionMock';
-import ProfilePhotoMock from './pages/ProfileSkeleton/ProfilePhotoMock';
+import ProfilePhotoMock from './pages/ProfileSkeleton/ProfilePhotoMock/ProfilePhotoMock';
 import Dashboard from './pages/Dashboard/Dashboard';
 import MySitters from './pages/MySitters/MySitters';
 import { AuthProvider } from './context/useAuthContext';

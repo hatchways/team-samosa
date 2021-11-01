@@ -2,11 +2,8 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import useStyles from './ProfileEditionMock/useStyles';
-import ProfileSelection from '../../components/ProfileSelection/ProfileSelection';
-import { Switch, Route } from 'react-router-dom';
-import mockpage1 from './ProfileEditionMock/ProfileEditionMock';
-import mockpage2 from './ProfileEditionMock/ProfileEditionMock';
+import useStyles from '../ProfileEditionMock/useStyles';
+import ProfileSelection from '../../../components/ProfileSelection/ProfileSelection';
 
 export default function ProfilePhotoMock(): JSX.Element {
   const classes = useStyles();

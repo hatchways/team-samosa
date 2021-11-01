@@ -13,7 +13,7 @@ const SidebarLink = (props: { name: string; link: string }): JSX.Element => {
           to={props.link}
           color="inherit"
           className={classes.accBtn}
-          activeClassName="classes.accBtnselected"
+          activeClassName={classes.accBtnselected}
           variant="contained"
         >
           {props.name}
