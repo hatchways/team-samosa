@@ -8,40 +8,17 @@ const asyncHandler = require("express-async-handler");
 exports.getRequests = asyncHandler(async (req, res, next) => {
   const userId = req.user.id;
 
-  const { type } = req.params;
+  const requests = await Request.find({
+    $or: [{ userId: userId }, { sitterId: userId }],
+  })
+    .populate([
+      { path: "sitterId", select: "username" },
+      { path: "userId", select: "username" },
+    ])
+    .sort({ startDate: "desc" })
+    .exec();
 
-  if (type !== "owner" && type !== "sitter") {
-    res.status(400);
-    throw new Error("Request type is incorrect");
-  }
-
-  if (type === "owner") {
-    const requests = await Request.find({
-      userId: userId,
-    })
-      .populate([
-        { path: "sitterId", select: "username" },
-        { path: "userId", select: "username" },
-      ])
-      .sort({ startDate: "desc" })
-      .exec();
-
-    res.send({ requests });
-  }
-
-  if (type === "sitter") {
-    const requests = await Request.find({
-      sitterId: userId,
-    })
-      .populate([
-        { path: "sitterId", select: "username" },
-        { path: "userId", select: "username" },
-      ])
-      .sort({ startDate: "desc" })
-      .exec();
-
-    res.send({ requests });
-  }
+  res.send({ requests });
 });
 
 // @route POST /request

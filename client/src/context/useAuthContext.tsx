@@ -2,9 +2,9 @@ import { useState, useContext, createContext, FunctionComponent, useEffect, useC
 import { useHistory } from 'react-router-dom';
 import { AuthApiData, AuthApiDataSuccess } from '../interface/AuthApiData';
 import { User } from '../interface/User';
-import { ProfileSuccess } from '../interface/Profile';
+import { ProfileSuccess, ProfileApiData } from '../interface/Profile';
 import loginWithCookies from '../helpers/APICalls/loginWithCookies';
-import { getUProfile } from '../helpers/APICalls/getUProfile';
+import { getProfile } from '../helpers/APICalls/getProfile';
 import logoutAPI from '../helpers/APICalls/logout';
 
 interface IAuthContext {
@@ -53,7 +53,7 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
       await loginWithCookies().then(async (data: AuthApiData) => {
         if (data.success) {
           updateLoginContext(data.success);
-          await getUProfile().then((res) => {
+          await getProfile().then((res) => {
             if (res.success) {
               updateProfileContext(res.success);
             }

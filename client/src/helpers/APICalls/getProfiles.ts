@@ -6,7 +6,7 @@ export async function getProfiles(): Promise<{ profiles: Array<PublicProfileSucc
     method: 'GET',
     credentials: 'include',
   };
-  const res = await fetch('/profile/all', fetchOptions);
+  const res = await fetch('/profile', fetchOptions);
   const resp = await res.json();
   const parsed = resp.profiles.map((element: any) => {
     return {
@@ -16,7 +16,6 @@ export async function getProfiles(): Promise<{ profiles: Array<PublicProfileSucc
       userId: element.userId,
       firstName: element.firstName,
       lastName: element.lastName,
-      address: element.address,
     };
   });
   return { profiles: parsed };
