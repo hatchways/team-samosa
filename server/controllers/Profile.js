@@ -12,14 +12,14 @@ const { validateRegister } = require("../validate");
 exports.getProfiles = asyncHandler(async (req, res) => {
   const profiles = await Profile.find(
     { isSitter: true },
-    "_id userId firstName lastName photoUrl description"
+    "_id userId firstName lastName photoUrl description address"
   );
 
   res.send({ profiles });
 });
 
 // @route GET /profile
-// @desc Returns public profile or full profile for auth user
+// @desc Returns full profile for auth user
 // @access Public
 exports.getProfile = asyncHandler(async (req, res, next) => {
   const userId = req.params.id;
@@ -56,15 +56,18 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
       });
     }
   }
-  const profile = {
-    _id: resp._id,
-    userId: resp.userId,
-    firstName: resp.firstName,
-    lastName: resp.lastName,
-    description: resp.description,
-    photoUrl: resp.photoUrl,
-    address: resp.address,
-  };
+});
+
+// @route GET /public-profile
+// @desc Returns public user profile
+// @access Public
+exports.getPublicProfile = asyncHandler(async (req, res, next) => {
+  const userId = req.params.id;
+
+  const profile = await Profile.findOne(
+    { userId },
+    "_id userId firstName lastName photoUrl description address"
+  );
   res.send({ profile });
 });
 
