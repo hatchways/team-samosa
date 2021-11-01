@@ -6,7 +6,6 @@ const uploadPhoto = async (image: FieldValues): Promise<FieldValues> => {
 
   return await fetch(`/profile-photo`, {
     method: 'POST',
-    //headers: { 'Content-Type': 'multipart/form-data' },
     body: fd,
     credentials: 'include',
   })

@@ -5,7 +5,9 @@ import { User } from '../interface/User';
 import { ProfileSuccess } from '../interface/Profile';
 import loginWithCookies from '../helpers/APICalls/loginWithCookies';
 import { getUProfile } from '../helpers/APICalls/getUProfile';
+import { downloadPhoto } from '../helpers/APICalls/downloadPhoto';
 import logoutAPI from '../helpers/APICalls/logout';
+//import { saveAs } from 'file-saver';
 
 interface IAuthContext {
   loggedInUser: User | null | undefined;
@@ -55,6 +57,9 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
           updateLoginContext(data.success);
           await getUProfile().then((res) => {
             if (res.success) {
+              downloadPhoto().then((res) => {
+                console.log(res);
+              });
               updateProfileContext(res.success);
             }
           });

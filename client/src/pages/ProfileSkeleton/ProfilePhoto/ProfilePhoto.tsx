@@ -15,9 +15,6 @@ export default function ProfilePhoto(): JSX.Element {
   const { register, handleSubmit } = useForm();
   const classes = useStyles();
   const { userProfile } = useAuth();
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
   return (
     <Grid container className={classes.root}>
       <Grid item xs={6} sm={6} md={5} elevation={0} component={Paper} square className={classes.back}>
