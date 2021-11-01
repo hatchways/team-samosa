@@ -9,10 +9,10 @@ import Rating from '@material-ui/lab/Rating';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
 
-import { Profile } from '../../../interface/Profile';
+import { PublicProfileSuccess } from '../../../interface/Profile';
 
 interface Props {
-  profile?: Profile;
+  profile?: PublicProfileSuccess;
 }
 
 export default function ProfileRequest({ profile }: Props): JSX.Element {

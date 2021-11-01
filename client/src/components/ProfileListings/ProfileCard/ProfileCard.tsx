@@ -6,14 +6,14 @@ import Link from '@material-ui/core/Link';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import { Profile } from '../../../interface/Profile';
+import { PublicProfileSuccess } from '../../../interface/Profile';
 import Rating from '@material-ui/lab/Rating';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 
 interface Props {
-  profile: Profile;
+  profile: PublicProfileSuccess;
 }
 
 export default function ProfileCard({ profile }: Props): JSX.Element {

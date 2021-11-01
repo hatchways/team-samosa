@@ -1,4 +1,3 @@
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import { Formik, FormikHelpers } from 'formik';
@@ -6,6 +5,7 @@ import * as Yup from 'yup';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './useStyles';
 import { CircularProgress } from '@material-ui/core';
+import ModalButton from '../../../components/Modal/ModalButton/ModalButton';
 import DemoButton from '../../../components/DemoButton/DemoButton';
 
 interface Props {
@@ -81,9 +81,9 @@ export default function Login({ handleSubmit }: Props): JSX.Element {
             variant="outlined"
           />
           <Box textAlign="center">
-            <Button type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
+            <ModalButton>
               {isSubmitting ? <CircularProgress className={classes.circularProgess} /> : 'Login'}
-            </Button>
+            </ModalButton>
             <DemoButton />
           </Box>
         </form>

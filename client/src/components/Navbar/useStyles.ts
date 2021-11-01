@@ -6,9 +6,10 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
   },
   logoText: {
-    fontWeight: 800,
     letterSpacing: '-0.5px',
+    fontWeight: 800,
   },
+  logoTextLink: { color: 'inherit', textDecoration: 'none' },
   logoImg: {
     height: '35px',
     width: '35px',

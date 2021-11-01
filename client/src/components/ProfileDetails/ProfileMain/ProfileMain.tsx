@@ -7,10 +7,10 @@ import Avatar from '@material-ui/core/Avatar';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import { Profile } from '../../../interface/Profile';
+import { PublicProfileSuccess } from '../../../interface/Profile';
 
 interface Props {
-  profile?: Profile | undefined;
+  profile?: PublicProfileSuccess | undefined;
 }
 
 export default function ProfileMain({ profile }: Props): JSX.Element {

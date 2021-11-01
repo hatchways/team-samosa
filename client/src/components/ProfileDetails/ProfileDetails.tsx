@@ -1,28 +1,25 @@
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getProfile } from '../../helpers/APICalls/getProfile';
+import { getPublicProfile } from '../../helpers/APICalls/getPublicProfile';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import useStyles from './useStyles';
 import ProfileRequest from './ProfileRequest/ProfileRequest';
 import ProfileMain from './ProfileMain/ProfileMain';
-import { Profile } from '../../interface/Profile';
+import { PublicProfileSuccess } from '../../interface/Profile';
 import { useSnackBar } from '../../context/useSnackbarContext';
 
 type ProfileParam = { profileId: string };
 
 const EmptyProfile = {
-  gender: '',
-  birthDate: new Date(),
-  address: '',
   description: '',
   photoUrl: '',
   id: '',
   userId: '',
   firstName: '',
   lastName: '',
-  phoneNum: '',
+  address: '',
 };
 
 export default function ProfileDetails(): JSX.Element {
@@ -34,10 +31,10 @@ export default function ProfileDetails(): JSX.Element {
 
   const { updateSnackBarMessage } = useSnackBar();
 
-  const [profile, setProfile] = useState<Profile>(EmptyProfile);
+  const [profile, setProfile] = useState<PublicProfileSuccess>(EmptyProfile);
 
   useEffect(() => {
-    getProfile(profileId).then((data) => {
+    getPublicProfile(profileId).then((data) => {
       if (data.error) {
         updateSnackBarMessage(data.error.message);
         history.push('/profiles');
