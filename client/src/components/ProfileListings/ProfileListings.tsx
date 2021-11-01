@@ -5,9 +5,9 @@ import ProfileCard from './ProfileCard/ProfileCard';
 import Container from '@material-ui/core/Container';
 import { getProfiles } from '../../helpers/APICalls/getProfiles';
 
-import { Profile } from '../../interface/Profile';
+import { PublicProfileSuccess } from '../../interface/Profile';
 
-const emptyProfiles: Array<Profile> = [];
+const emptyProfiles: Array<PublicProfileSuccess> = [];
 
 export default function ProfileListings(): JSX.Element {
   const [profiles, setProfiles] = useState(emptyProfiles);

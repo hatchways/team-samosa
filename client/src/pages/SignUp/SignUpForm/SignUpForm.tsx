@@ -1,4 +1,3 @@
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import { Formik, FormikHelpers } from 'formik';
@@ -6,6 +5,7 @@ import * as Yup from 'yup';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './useStyles';
 import { CircularProgress } from '@material-ui/core';
+import ModalButton from '../../../components/Modal/ModalButton/ModalButton';
 import DemoButton from '../../../components/DemoButton/DemoButton';
 
 interface Props {
@@ -41,7 +41,7 @@ const SignUpForm = ({ handleSubmit }: Props): JSX.Element => {
         username: '',
       }}
       validationSchema={Yup.object().shape({
-        username: Yup.string().required('Name is required').max(40, 'Name is too long'),
+        username: Yup.string().required('Username is required').max(40, 'Username is too long'),
         email: Yup.string().required('Email is required').email('Email is not valid'),
         password: Yup.string()
           .required('Password is required')
@@ -53,11 +53,11 @@ const SignUpForm = ({ handleSubmit }: Props): JSX.Element => {
       {({ handleSubmit, handleChange, values, touched, errors, isSubmitting }) => (
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <label htmlFor="username">
-            <Typography variant="overline">Name</Typography>
+            <Typography variant="overline">Username</Typography>
           </label>
           <TextField
             id="username"
-            placeholder="Your name"
+            placeholder="Create a username"
             fullWidth
             margin="normal"
             name="username"
@@ -102,9 +102,9 @@ const SignUpForm = ({ handleSubmit }: Props): JSX.Element => {
             variant="outlined"
           />
           <Box textAlign="center">
-            <Button type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
+            <ModalButton>
               {isSubmitting ? <CircularProgress className={classes.circularProgess} /> : 'Sign up'}
-            </Button>
+            </ModalButton>
             <DemoButton />
           </Box>
         </form>
