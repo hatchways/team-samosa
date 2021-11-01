@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
-import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
+import ModalButton from '../../Modal/ModalButton/ModalButton';
 
 import useStyles from './useStyles';
 
@@ -45,9 +46,10 @@ const SetupForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <Button disabled={!stripe} className={classes.button} color="primary" variant="contained" size="large">
-        Save card
-      </Button>
+      <Box textAlign="center" paddingTop={6}>
+        <ModalButton>Save card</ModalButton>
+      </Box>
+
       {/* Show error message to your customers */}
       {errorMessage && <div>{errorMessage}</div>}
     </form>
