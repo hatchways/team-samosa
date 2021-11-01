@@ -9,9 +9,9 @@ const {
   updateProfile,
 } = require("../controllers/profile");
 
-router.route("/").get(getProfiles);
+router.route("/").get(protect, getProfile);
 
-router.route("/:id").get(getProfile);
+router.route("/all").get(getProfiles);
 
 router.route("/public/:id").get(getPublicProfile);
 

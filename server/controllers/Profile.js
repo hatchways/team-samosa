@@ -14,7 +14,6 @@ exports.getProfiles = asyncHandler(async (req, res) => {
     { isSitter: true },
     "_id userId firstName lastName photoUrl description address"
   );
-
   res.send({ profiles });
 });
 
@@ -22,14 +21,12 @@ exports.getProfiles = asyncHandler(async (req, res) => {
 // @desc Returns full profile for auth user
 // @access Public
 exports.getProfile = asyncHandler(async (req, res, next) => {
-  const userId = req.params.id;
+  const userId = req.user.id;
 
   if (userId) {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(400).send("Bad Request");
     }
-  } else {
-    userId = req.user.id;
   }
 
   const resp = await Profile.findOne({ userId });
@@ -38,24 +35,20 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
     throw new Error("Invalid profile id");
   }
 
-  if (req.headers.cookie) {
-    const user = verifyToken(req.headers.cookie);
-    if (user.id === userId) {
-      const user = await User.findOne({ _id: userId });
-      res.send({
-        _id: resp._id,
-        userId: resp.userId,
-        firstName: resp.firstName,
-        lastName: resp.lastName,
-        gender: resp.gender,
-        birthDate: resp.birthDate,
-        email: user.email,
-        phoneNum: resp.phoneNum,
-        address: resp.address,
-        description: resp.description,
-      });
-    }
-  }
+  res.send({
+    success: {
+      _id: resp._id,
+      userId: resp.userId,
+      firstName: resp.firstName,
+      lastName: resp.lastName,
+      gender: resp.gender,
+      birthDate: resp.birthDate,
+      email: resp.email,
+      phoneNum: resp.phoneNum,
+      address: resp.address,
+      description: resp.description,
+    },
+  });
 });
 
 // @route GET /public-profile
