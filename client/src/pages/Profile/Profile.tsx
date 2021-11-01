@@ -19,7 +19,7 @@ export default function Profile(): JSX.Element {
     exist
       ? updateProfile(firstName, lastName, gender, birthDate, email, phoneNum, address, description).then((data) => {
           if (data.error) {
-            updateSnackBarMessage(data.error);
+            updateSnackBarMessage(data.error.message);
           } else {
             updateSnackBarMessage('Profile was successfully Updated');
           }
@@ -27,7 +27,7 @@ export default function Profile(): JSX.Element {
         })
       : createProfile(firstName, lastName, gender, birthDate, email, phoneNum, address, description).then((data) => {
           if (data.error) {
-            updateSnackBarMessage(data.error);
+            updateSnackBarMessage(data.error.message);
           } else {
             updateSnackBarMessage('Profile was successfully created');
           }
