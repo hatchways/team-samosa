@@ -15,7 +15,7 @@ export default function ProfileEditionMock(): JSX.Element {
       <Grid item xs={6} sm={6} md={5} elevation={0} component={Paper} square className={classes.back}>
         <Box className={classes.authWrapper}>
           <Box width="100%" maxWidth={450} p={3} alignSelf="center">
-            <ProfileSelection name={'Edit profile'} link={'/rofileEditionMock'} />
+            <ProfileSelection name={'Edit profile'} link={'/profileEditionMock'} />
             <ProfileSelection name={'Profile photo'} link={'/profilePhotoMock'} />
             <ProfileSelection name={'Availability'} link={'/profile-edition-mock'} />
             <ProfileSelection name={'Payment'} link={'/profile-edition-mock'} />
