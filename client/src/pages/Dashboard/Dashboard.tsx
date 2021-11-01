@@ -34,7 +34,7 @@ export default function Dashboard(): JSX.Element {
           </Route>
           <Route path="/dashboard/my-jobs">{/* TODO: add MyJobs component */}</Route>
           <Route path="/dashboard/my-profile">
-            <ProfilePhoto />
+            <Profile />
           </Route>
           <Route path="*">
             <Redirect to="/dashboard/my-sitters" />

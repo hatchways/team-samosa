@@ -4,7 +4,7 @@ const Profile = require("../Models/Profile");
 const asyncHandler = require("express-async-handler");
 
 // @route Post /photourl
-// @desc Save user photo to AWS S3 bucket
+// @desc Save user photo to AWS S3 bucket and remove the previous one to save storage
 // @access Private
 exports.uploadPhoto = asyncHandler(async (req, res) => {
     const userId = req.user.id;
@@ -57,3 +57,33 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
 
 });
 
+// @route get /photourl
+// @desc Save user photo to local storage
+// @access Private
+exports.downloadPhoto = asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+
+    const profile = await Profile.findOne({ userId });
+    if (!profile) {
+        res.status(404);
+        throw new Error("No profile to check");
+    }
+    const s3 = new S3({
+        region: process.env.AWS_REGION,
+        accessKeyId: process.env.AWS__ACCESS_KEY,
+        secretAccessKey: process.env.AWS_SECRET_KEY,
+    })
+    if (profile.photoUrl) {
+        const pathname = profile.photoUrl.substring(48);
+        const downloadParams = {
+            //response_target: local_path,
+            Bucket: process.env.AWS_BUCKET,
+            Key: pathname,
+            Expires: 300
+        }
+        const presignedPutUrl = s3.getSignedUrl('getObject', downloadParams);
+        console.log('sending presigned url', presignedPutUrl);
+        res.send({ url: presignedPutUrl })
+    }
+
+});
