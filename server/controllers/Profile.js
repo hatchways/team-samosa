@@ -22,7 +22,7 @@ exports.getProfiles = asyncHandler(async (req, res) => {
 // @desc Returns public profile or full profile for auth user
 // @access Public
 exports.getProfile = asyncHandler(async (req, res, next) => {
-  var userId = req.params.id;
+  const userId = req.params.id;
 
   if (userId) {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
@@ -41,18 +41,18 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
   if (req.headers.cookie) {
     const user = verifyToken(req.headers.cookie);
     if (user.id === userId) {
-      const profile = resp;
+      const user = await User.findOne({ _id: userId });
       res.send({
         _id: resp._id,
         userId: resp.userId,
-        firstName: profile.firstName,
-        lastName: profile.lastName,
-        gender: profile.gender,
-        birthDate: profile.birthDate,
+        firstName: resp.firstName,
+        lastName: resp.lastName,
+        gender: resp.gender,
+        birthDate: resp.birthDate,
         email: user.email,
-        phoneNum: profile.phoneNum,
-        address: profile.address,
-        description: profile.description,
+        phoneNum: resp.phoneNum,
+        address: resp.address,
+        description: resp.description,
       });
     }
   }
