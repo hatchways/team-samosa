@@ -9,13 +9,7 @@ import Rating from '@material-ui/lab/Rating';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
 
-import { PublicProfileSuccess } from '../../../interface/Profile';
-
-interface Props {
-  profile?: PublicProfileSuccess;
-}
-
-export default function ProfileRequest({ profile }: Props): JSX.Element {
+export default function ProfileRequest(): JSX.Element {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date('2014-08-18T21:11:54'));
 

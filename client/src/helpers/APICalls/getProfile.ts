@@ -1,14 +1,17 @@
 import { FetchOptions } from '../../interface/FetchOptions';
 import { ProfileApiData } from '../../interface/Profile';
-
-export async function getProfile(): Promise<ProfileApiData> {
+export async function getProfile(profileId?: string | ''): Promise<ProfileApiData> {
   const fetchOptions: FetchOptions = {
     method: 'GET',
     credentials: 'include',
   };
-  return await fetch(`/profile`, fetchOptions)
-    .then((res) => res.json())
-    .catch(() => ({
-      error: { message: 'Unable to connect to server. Please try again' },
-    }));
+  const res = await fetch(`/profile/${profileId}`, fetchOptions);
+  const resp = await res.json();
+  if (resp.error) {
+    return resp;
+  }
+
+  const profile = resp.profile;
+
+  return { success: profile };
 }

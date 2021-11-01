@@ -1,7 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import useStyles from './useStyles';
-import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
@@ -21,7 +20,7 @@ export default function ProfileCard({ profile }: Props): JSX.Element {
 
   return (
     <Card elevation={8}>
-      <Link to={`/profiles/${profile.userId}`} component={CardActionArea}>
+      <CardActionArea>
         <CardContent className={classes.content}>
           <Grid container direction="column" alignItems="center" spacing={2}>
             <Avatar className={classes.avatar} src={`/mock/${profile.photoUrl}`} />
@@ -39,14 +38,14 @@ export default function ProfileCard({ profile }: Props): JSX.Element {
             </Box>
           </Grid>
         </CardContent>
-      </Link>
+      </CardActionArea>
       <Divider />
       <Box padding={3}>
         <Grid container justify="space-between" alignItems="center">
           <Grid item>
             <Grid container alignItems="center">
               <LocationOnIcon className={classes.location} fontSize="large" />
-              <Typography variant="body1">Toronto, Ontario</Typography>
+              <Typography variant="body1">{profile.address}</Typography>
             </Grid>
           </Grid>
           <Grid item>

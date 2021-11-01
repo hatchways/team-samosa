@@ -5,7 +5,7 @@ export async function getPublicProfile(profileId: string): Promise<PublicProfile
     method: 'GET',
     credentials: 'include',
   };
-  const res = await fetch(`/profile/public/${profileId}`, fetchOptions);
+  const res = await fetch(`/profile/${profileId}`, fetchOptions);
   const resp = await res.json();
   if (resp.error) {
     return resp;
