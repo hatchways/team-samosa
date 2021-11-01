@@ -7,7 +7,6 @@ import loginWithCookies from '../helpers/APICalls/loginWithCookies';
 import { getUProfile } from '../helpers/APICalls/getUProfile';
 import { downloadPhoto } from '../helpers/APICalls/downloadPhoto';
 import logoutAPI from '../helpers/APICalls/logout';
-//import { saveAs } from 'file-saver';
 
 interface IAuthContext {
   loggedInUser: User | null | undefined;
@@ -54,15 +53,13 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
     const checkLoginWithCookies = async () => {
       await loginWithCookies().then(async (data: AuthApiData) => {
         if (data.success) {
-          updateLoginContext(data.success);
           await getUProfile().then((res) => {
             if (res.success) {
-              downloadPhoto().then((res) => {
-                console.log(res);
-              });
+              downloadPhoto();
               updateProfileContext(res.success);
             }
           });
+          updateLoginContext(data.success);
         } else {
           // don't need to provide error feedback as this just means user doesn't have saved cookies or the cookies have not been authenticated on the backend
           setLoggedInUser(null);

@@ -74,16 +74,28 @@ exports.downloadPhoto = asyncHandler(async (req, res) => {
         secretAccessKey: process.env.AWS_SECRET_KEY,
     })
     if (profile.photoUrl) {
-        const pathname = profile.photoUrl.substring(48);
         const downloadParams = {
             //response_target: local_path,
             Bucket: process.env.AWS_BUCKET,
-            Key: pathname,
-            Expires: 300
+            Key: profile.photoUrl.substring(48),
+            //Expires: 300
         }
-        const presignedPutUrl = s3.getSignedUrl('getObject', downloadParams);
-        console.log('sending presigned url', presignedPutUrl);
-        res.send({ url: presignedPutUrl })
+        await s3.getObject(downloadParams,
+            function (error, data) {
+                if (error) {
+                    res.json("Failed to retrieve an object: " + error);
+                } else {
+                    console.log("hello");
+                    fs.writeFile("../client/src/Images/" + profile.photoUrl.substring(72), data.Body, (err) => {
+                        if (err)
+                            res.json('Error occured while writing file', err);
+                        else {
+                            res.json("File written successfully");
+                        }
+                    });
+                }
+            }
+        );
     }
 
 });

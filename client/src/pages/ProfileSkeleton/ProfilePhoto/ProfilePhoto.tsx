@@ -15,6 +15,7 @@ export default function ProfilePhoto(): JSX.Element {
   const { register, handleSubmit } = useForm();
   const classes = useStyles();
   const { userProfile } = useAuth();
+  console.log(!userProfile ? 0 : userProfile.photoUrl.substring(72));
   return (
     <Grid container className={classes.root}>
       <Grid item xs={6} sm={6} md={5} elevation={0} component={Paper} square className={classes.back}>
@@ -38,7 +39,9 @@ export default function ProfilePhoto(): JSX.Element {
             <Avatar
               alt="Profile Image"
               src={
-                !userProfile ? `https://robohash.org/suv.png` : userProfile.photoUrl || `https://robohash.org/suv.png`
+                userProfile && userProfile.photoUrl
+                  ? '/../../../Images/' + `${userProfile.photoUrl.substring(72)}`
+                  : `../../../Images/68f55f7799df6c8078a874cfe0a61a5e6e9e1687.png`
               }
               sx={{ width: 240, height: 240 }}
             />
