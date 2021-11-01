@@ -1,11 +1,12 @@
-const uploadPhoto = async (image: string): Promise<string> => {
+type FieldValues = Record<string, any>;
+const uploadPhoto = async (image: FieldValues): Promise<FieldValues> => {
   const fd = new FormData();
 
-  fd.append('image', image);
+  fd.append('picture', image.picture[0]);
 
   return await fetch(`/profile-photo`, {
     method: 'POST',
-    headers: { 'Content-Type': 'multipart/form-data' },
+    //headers: { 'Content-Type': 'multipart/form-data' },
     body: fd,
     credentials: 'include',
   })
