@@ -40,7 +40,7 @@ export default function ProfilePhoto(): JSX.Element {
               alt="Profile Image"
               src={
                 userProfile && userProfile.photoUrl
-                  ? '/../../../Images/' + `${userProfile.photoUrl.substring(72)}`
+                  ? `../../../Images/${userProfile.photoUrl.substring(72)}`
                   : `../../../Images/68f55f7799df6c8078a874cfe0a61a5e6e9e1687.png`
               }
               sx={{ width: 240, height: 240 }}
