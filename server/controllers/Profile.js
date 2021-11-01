@@ -6,6 +6,33 @@ const verifyToken = require("../utils/verifyToken");
 const protect = require("../middleware/auth");
 const { validateRegister } = require("../validate");
 
+// @route GET /userprofile
+// @desc the profile of the relevant user
+// @access Private
+exports.getUProfile = asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+
+  const user = await User.findOne({ _id: userId });
+  const profile = await Profile.findOne({ userId });
+  if (!profile) {
+    res.status(400);
+    throw new Error("The user profile is not created");
+  }
+
+  res.send({
+    success: {
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      gender: profile.gender,
+      birthDate: profile.birthDate,
+      email: user.email,
+      phoneNum: profile.phoneNum,
+      address: profile.address,
+      description: profile.description,
+    }
+  });
+});
+
 // @route GET /profiles
 // @desc List of all profiles
 // @access Public
