@@ -47,7 +47,7 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
             fs.unlinkSync(req.file.path); // Empty temp folder
             const locationUrl = data.Location;
             profile.photoUrl = locationUrl;
-            newUser
+            profile
                 .save()
                 .then(profile => {
                     res.json({ message: 'Upload Photo successfully', profile });

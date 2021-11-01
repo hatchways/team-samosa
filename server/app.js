@@ -50,7 +50,7 @@ app.use("/users", userRouter);
 app.use("/request", requestRouter);
 
 app.use("/profile", profileRouter);
-app.use("/profilephoto", photoRouter);
+app.use("/profile-photo", photoRouter);
 app.use("/availablity", availabilityRouter);
 
 if (process.env.NODE_ENV === "production") {
