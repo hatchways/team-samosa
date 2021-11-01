@@ -43,31 +43,29 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
     if (user.id === userId) {
       const profile = resp;
       res.send({
-        success: {
-          _id: resp._id,
-          firstName: profile.firstName,
-          lastName: profile.lastName,
-          gender: profile.gender,
-          birthDate: profile.birthDate,
-          email: user.email,
-          phoneNum: profile.phoneNum,
-          address: profile.address,
-          description: profile.description,
-        },
+        _id: resp._id,
+        userId: resp.userId,
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        gender: profile.gender,
+        birthDate: profile.birthDate,
+        email: user.email,
+        phoneNum: profile.phoneNum,
+        address: profile.address,
+        description: profile.description,
       });
     }
-  } else {
-    const profile = {
-      _id: resp._id,
-      userId: resp.userId,
-      firstName: resp.firstName,
-      lastName: resp.lastName,
-      description: resp.description,
-      photoUrl: resp.photoUrl,
-    };
-
-    res.send({ profile });
   }
+  const profile = {
+    _id: resp._id,
+    userId: resp.userId,
+    firstName: resp.firstName,
+    lastName: resp.lastName,
+    description: resp.description,
+    photoUrl: resp.photoUrl,
+    address: resp.address,
+  };
+  res.send({ profile });
 });
 
 // @route POST /profile
