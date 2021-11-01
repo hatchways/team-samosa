@@ -6,71 +6,65 @@ const verifyToken = require("../utils/verifyToken");
 const protect = require("../middleware/auth");
 const { validateRegister } = require("../validate");
 
-// @route GET /userprofile
-// @desc the profile of the relevant user
-// @access Private
-exports.getUProfile = asyncHandler(async (req, res) => {
-  const userId = req.user.id;
-
-  const user = await User.findOne({ _id: userId });
-  const profile = await Profile.findOne({ userId });
-  res.send({
-    success: {
-      firstName: profile.firstName,
-      lastName: profile.lastName,
-      gender: profile.gender,
-      birthDate: profile.birthDate,
-      email: user.email,
-      phoneNum: profile.phoneNum,
-      address: profile.address,
-      description: profile.description,
-    },
-  });
-});
-
 // @route GET /profiles
 // @desc List of all profiles
 // @access Public
 exports.getProfiles = asyncHandler(async (req, res) => {
   const profiles = await Profile.find(
     { isSitter: true },
-    "_id userId firstName lastName photoUrl description address"
+    "_id userId firstName lastName photoUrl description"
   );
+
   res.send({ profiles });
 });
 
 // @route GET /profile
-// @desc Returns full profile for auth user
+// @desc Returns public profile or full profile for auth user
 // @access Public
 exports.getProfile = asyncHandler(async (req, res, next) => {
-  const userId = req.user.id;
+  var userId = req.params.id;
 
   if (userId) {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(400).send("Bad Request");
     }
+  } else {
+    userId = req.user.id;
   }
 
-  const profile = await Profile.findOne({ userId });
-  if (!profile) {
-    res
-      .status(404)
-      .send(JSON.stringify({ error: { message: "Invalid profile id" } }));
+  const resp = await Profile.findOne({ userId });
+  if (!resp) {
+    res.status(404);
+    throw new Error("Invalid profile id");
   }
 
-  res.send({ profile });
-});
-
-// @route GET /public-profile
-// @desc Returns public user profile
-// @access Public
-exports.getPublicProfile = asyncHandler(async (req, res, next) => {
-  const userId = req.params.id;
-
-  const profile = await Profile.findOne(
-    { userId },
-    "_id userId firstName lastName photoUrl description address"
-  );
+  if (req.headers.cookie) {
+    const user = verifyToken(req.headers.cookie);
+    if (user.id === userId) {
+      const user = await User.findOne({ _id: userId });
+      res.send({
+        _id: resp._id,
+        userId: resp.userId,
+        firstName: resp.firstName,
+        lastName: resp.lastName,
+        gender: resp.gender,
+        birthDate: resp.birthDate,
+        email: user.email,
+        phoneNum: resp.phoneNum,
+        address: resp.address,
+        description: resp.description,
+      });
+    }
+  }
+  const profile = {
+    _id: resp._id,
+    userId: resp.userId,
+    firstName: resp.firstName,
+    lastName: resp.lastName,
+    description: resp.description,
+    photoUrl: resp.photoUrl,
+    address: resp.address,
+  };
   res.send({ profile });
 });
 
