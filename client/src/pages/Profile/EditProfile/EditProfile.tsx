@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { ProfileData, ProfileSuccess } from '../../../interface/Profile';
+import { ProfileApiData, ProfileSuccess } from '../../../interface/Profile';
 import { useSnackBar } from '../../../context/useSnackbarContext';
 import EditProfileInput from '../../../components/Profile/EditProfileInput';
 import { useAuth } from '../../../context/useAuthContext';
@@ -77,7 +77,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
             label={'Gender'}
             helperText={touched.gender ? errors.gender : ''}
             error={touched.gender && Boolean(errors.gender)}
-            value={values.gender}
+            value={values.gender || ''}
             multiline={false}
           />
           <Grid container alignItems="center" spacing={2}>
@@ -102,7 +102,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
             label={'Email address'}
             helperText={touched.email ? errors.email : ''}
             error={touched.email && Boolean(errors.email)}
-            value={values.email}
+            value={values.email || ''}
             multiline={false}
           />
           <EditProfileInput
@@ -111,7 +111,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
             label={'Phone number'}
             helperText={touched.phoneNum ? errors.phoneNum : ''}
             error={touched.phoneNum && Boolean(errors.phoneNum)}
-            value={values.phoneNum}
+            value={values.phoneNum || ''}
             multiline={false}
           />
           <EditProfileInput
@@ -120,7 +120,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
             label={'Where are you live'}
             helperText={touched.address ? errors.address : ''}
             error={touched.address && Boolean(errors.address)}
-            value={values.address}
+            value={values.address || ''}
             multiline={true}
           />
           <EditProfileInput

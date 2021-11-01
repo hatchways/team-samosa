@@ -18,7 +18,7 @@ export default function NextBooking({ request }: Props): JSX.Element {
       <Grid container direction="column" spacing={1}>
         {request ? (
           <>
-            <Grid item container justify="space-between" alignItems="center">
+            <Grid item container xs={12} justify="space-between" alignItems="center">
               <Grid item>
                 <Typography variant="overline">Your next booking:</Typography>
               </Grid>

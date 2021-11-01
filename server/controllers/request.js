@@ -15,6 +15,7 @@ exports.getRequests = asyncHandler(async (req, res, next) => {
       { path: "sitterId", select: "username" },
       { path: "userId", select: "username" },
     ])
+    .sort({ startDate: "desc" })
     .exec();
 
   res.send({ requests });
