@@ -4,7 +4,7 @@ import { AuthApiData, AuthApiDataSuccess } from '../interface/AuthApiData';
 import { User } from '../interface/User';
 import { ProfileSuccess, ProfileApiData } from '../interface/Profile';
 import loginWithCookies from '../helpers/APICalls/loginWithCookies';
-import { getUProfile } from '../helpers/APICalls/getUprofile';
+import { getUProfile } from '../helpers/APICalls/getUProfile';
 import logoutAPI from '../helpers/APICalls/logout';
 
 interface IAuthContext {
