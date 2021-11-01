@@ -6,12 +6,15 @@ import Typography from '@material-ui/core/Typography';
 import useStyles from './useStyles';
 import createProfile from '../../helpers/APICalls/createProfile';
 import updateProfile from '../../helpers/APICalls/updateProfile';
+import { getUProfile } from '../../helpers/APICalls/getUProfile';
+import { useAuth } from '../../context/useAuthContext';
 import EditProfile from './EditProfile/EditProfile';
 import { useSnackBar } from '../../context/useSnackbarContext';
 import { ProfileSuccess } from '../../interface/Profile';
 export default function Profile(): JSX.Element {
   const classes = useStyles();
   const { updateSnackBarMessage } = useSnackBar();
+  const { updateProfileContext } = useAuth();
   const handleSubmit = (
     { exist, firstName, lastName, gender, birthDate, email, phoneNum, address, description }: ProfileSuccess,
     { setSubmitting }: FormikHelpers<ProfileSuccess>,
@@ -21,6 +24,11 @@ export default function Profile(): JSX.Element {
           if (data.error) {
             updateSnackBarMessage(data.error.message);
           } else {
+            getUProfile().then((res) => {
+              if (res.success) {
+                updateProfileContext(res.success);
+              }
+            });
             updateSnackBarMessage('Profile was successfully Updated');
           }
           setSubmitting(false);
@@ -29,6 +37,11 @@ export default function Profile(): JSX.Element {
           if (data.error) {
             updateSnackBarMessage(data.error.message);
           } else {
+            getUProfile().then((res) => {
+              if (res.success) {
+                updateProfileContext(res.success);
+              }
+            });
             updateSnackBarMessage('Profile was successfully created');
           }
           setSubmitting(false);

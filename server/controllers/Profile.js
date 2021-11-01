@@ -14,11 +14,6 @@ exports.getUProfile = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ _id: userId });
   const profile = await Profile.findOne({ userId });
-  if (!profile) {
-    res.status(400);
-    throw new Error("The user profile is not created");
-  }
-
   res.send({
     success: {
       firstName: profile.firstName,
