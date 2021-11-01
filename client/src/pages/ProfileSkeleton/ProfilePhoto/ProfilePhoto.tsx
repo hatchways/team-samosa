@@ -8,21 +8,26 @@ import Avatar from '@mui/material/Avatar';
 import { useAuth } from '../../../context/useAuthContext';
 import Button from '@material-ui/core/Button';
 import { CircularProgress } from '@material-ui/core';
+import { useForm } from 'react-hook-form';
 
 export default function ProfilePhoto(): JSX.Element {
+  const { register, handleSubmit } = useForm();
   const classes = useStyles();
   const { userProfile } = useAuth();
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
   return (
     <Grid container className={classes.root}>
       <Grid item xs={6} sm={6} md={5} elevation={0} component={Paper} square className={classes.back}>
         <Box className={classes.authWrapper}>
           <Box width="100%" maxWidth={450} p={3} alignSelf="center">
-            <ProfileSelection name={'Edit profile'} link={'/profileEditionMock'} selected={false} />
-            <ProfileSelection name={'Profile photo'} link={'/profilephoto'} selected={true} />
-            <ProfileSelection name={'Availability'} link={'/profileEditionMock'} selected={false} />
-            <ProfileSelection name={'Payment'} link={'/profileEditionMock'} selected={false} />
-            <ProfileSelection name={'Security'} link={'/profileEditionMock'} selected={false} />
-            <ProfileSelection name={'Settings'} link={'/profileEditionMock'} selected={false} />
+            <ProfileSelection name={'Edit profile'} link={'/profileEditionMock'} />
+            <ProfileSelection name={'Profile photo'} link={'/profilephoto'} />
+            <ProfileSelection name={'Availability'} link={'/profileEditionMock'} />
+            <ProfileSelection name={'Payment'} link={'/profileEditionMock'} />
+            <ProfileSelection name={'Security'} link={'/profileEditionMock'} />
+            <ProfileSelection name={'Settings'} link={'/profileEditionMock'} />
           </Box>
         </Box>
       </Grid>
@@ -40,9 +45,12 @@ export default function ProfilePhoto(): JSX.Element {
             <Typography className={classes.desp} component="h1" variant="h5">
               Be sure to use a photo that clearly shows your face
             </Typography>
-            <Button type="submit" size="large" variant="outlined" color="primary" className={classes.submit}>
-              {false ? <CircularProgress style={{ color: 'white' }} /> : 'Upload a photo from your device'}
-            </Button>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input {...register('upload')} type="file" name="picture" />
+              <Button type="submit" size="large" variant="outlined" color="primary" className={classes.submit}>
+                {false ? <CircularProgress style={{ color: 'white' }} /> : 'Upload a photo from your device'}
+              </Button>
+            </form>
           </Box>
         </Box>
       </Grid>
