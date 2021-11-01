@@ -7,15 +7,14 @@ const protect = require("../middleware/auth");
 const { validateRegister } = require("../validate");
 
 
-// @route GET /userprofile
+// @route GET /profile/user
 // @desc the profile of the relevant user
 // @access Private
 exports.getUProfile = asyncHandler(async (req, res) => {
   const userId = req.user.id;
-
   const user = await User.findOne({ _id: userId });
   const profile = await Profile.findOne({ userId });
-  if (!profile) {
+  if (profile) {
     res.status(400);
     throw new Error("The user profile is not created");
   }

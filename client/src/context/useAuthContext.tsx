@@ -4,7 +4,7 @@ import { AuthApiData, AuthApiDataSuccess } from '../interface/AuthApiData';
 import { User } from '../interface/User';
 import { ProfileSuccess, ProfileApiData } from '../interface/Profile';
 import loginWithCookies from '../helpers/APICalls/loginWithCookies';
-import { getProfile } from '../helpers/APICalls/getProfile';
+import { getUProfile } from '../helpers/APICalls/getUProfile';
 import logoutAPI from '../helpers/APICalls/logout';
 
 interface IAuthContext {
@@ -34,6 +34,7 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
   }, []);
 
   const updateProfileContext = useCallback((profile: ProfileSuccess) => {
+    console.log('update');
     setUserProfile(profile);
   }, []);
 
@@ -53,7 +54,8 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
       await loginWithCookies().then(async (data: AuthApiData) => {
         if (data.success) {
           updateLoginContext(data.success);
-          await getProfile().then((res) => {
+          await getUProfile().then((res) => {
+            console.log(res);
             if (res.success) {
               updateProfileContext(res.success);
             }

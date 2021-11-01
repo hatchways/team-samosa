@@ -25,6 +25,7 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
   const classes = useStyles();
   const { updateSnackBarMessage } = useSnackBar();
   const { userProfile } = useAuth();
+  console.log(useAuth());
   return (
     <Formik
       enableReinitialize={true}
