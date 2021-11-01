@@ -22,4 +22,5 @@ const SidebarLink = (props: { name: string; link: string }): JSX.Element => {
     </Grid>
   );
 };
+
 export default SidebarLink;
