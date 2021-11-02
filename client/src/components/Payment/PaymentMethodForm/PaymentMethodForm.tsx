@@ -16,25 +16,25 @@ const stripePromise = loadStripe(
 export default function PaymentMethodForm(): JSX.Element {
   const [AddPaymentMethod, setAddPaymentMethod] = useState(<div>Loading...</div>);
   useEffect(() => {
-    fetch('/payment/setup-payment-intent', {
-      method: 'POST',
-    }).then((res) => {
-      res.json().then((data) => {
-        const clientSecret = { clientSecret: data.client_secret };
-        const options: StripeElementsOptions = { ...clientSecret, ...ELEMENT_OPTIONS };
-        setAddPaymentMethod(
-          <Elements stripe={stripePromise} options={options}>
-            <Box width="100%" p={3} alignSelf="center">
-              <Grid container justify="center" direction="column">
-                <Grid item>
-                  <SetupForm />
-                </Grid>
-              </Grid>
-            </Box>
-          </Elements>,
-        );
+    (async function () {
+      const res = await fetch('/payment/setup-payment-intent', {
+        method: 'POST',
       });
-    });
+      const data = await res.json();
+      const clientSecret = { clientSecret: data.client_secret };
+      const options: StripeElementsOptions = { ...clientSecret, ...ELEMENT_OPTIONS };
+      setAddPaymentMethod(
+        <Elements stripe={stripePromise} options={options}>
+          <Box width="100%" p={3} alignSelf="center">
+            <Grid container justify="center" direction="column">
+              <Grid item>
+                <SetupForm />
+              </Grid>
+            </Grid>
+          </Box>
+        </Elements>,
+      );
+    })();
   }, []);
   return AddPaymentMethod;
 }
