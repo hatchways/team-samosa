@@ -21,12 +21,12 @@ export default function MySitters(): JSX.Element {
   }, []);
 
   return (
-    <Grid container justify="center">
-      <Grid className={classes.root} item container spacing={10} direction="row-reverse">
-        <Grid lg={7} item>
+    <Grid className={classes.root} container alignItems="center">
+      <Grid item container direction="row-reverse" spacing={4}>
+        <Grid xs={12} lg={7} item>
           <BookingsCalendar requests={requests} />
         </Grid>
-        <Grid lg={5} item>
+        <Grid xs={12} lg={5} item>
           <BookingsSideBanner requests={requests} />
         </Grid>
       </Grid>

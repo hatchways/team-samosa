@@ -1,12 +1,14 @@
 import { MuiThemeProvider } from '@material-ui/core';
 import { theme } from './themes/theme';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import Welcome from './pages/Welcome/Welcome';
 import Login from './pages/Login/Login';
 import Signup from './pages/SignUp/SignUp';
-import ProfileEditionMock from './pages/ProfileSkeleton/ProfileEditionMock/ProfileEditionMock';
-import ProfilePhoto from './pages/ProfileSkeleton/ProfilePhoto/ProfilePhoto';
+import ProfilePhotoMock from './pages/ProfileSkeleton/ProfilePhotoMock/ProfilePhotoMock';
 import Dashboard from './pages/Dashboard/Dashboard';
-import MySitters from './pages/MySitters/MySitters';
+import NavBar from './components/Navbar/NavBar';
+import ProfileListings from './components/ProfileListings/ProfileListings';
+import ProfileDetails from './components/ProfileDetails/ProfileDetails';
 import { AuthProvider } from './context/useAuthContext';
 import { SocketProvider } from './context/useSocketContext';
 import { SnackBarProvider } from './context/useSnackbarContext';
@@ -24,10 +26,31 @@ function App(): JSX.Element {
           <AuthProvider>
             <SocketProvider>
               <Switch>
-                <Route exact path="/profilePhoto" component={ProfilePhoto} />
-                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/">
+                  <Welcome />
+                </Route>
+                <Route exact path="/login">
+                  <NavBar elevation={16} color="inherit" />
+                  <Login />
+                </Route>
+                <Route exact path="/signup">
+                  <NavBar elevation={16} color="inherit" />
+                  <Signup />
+                </Route>
+                <Route exact path="/profiles">
+                  <NavBar elevation={16} color="inherit" />
+                  <ProfileListings />
+                </Route>
+                <Route path="/profiles/:profileId">
+                  <NavBar elevation={16} color="inherit" />
+                  <ProfileDetails />
+                </Route>
+                <Route path="/dashboard">
+                  <NavBar elevation={16} color="inherit" />
+                  <Dashboard />
+                </Route>
                 <Route path="*">
-                  <Redirect to="/profilePhoto" />
+                  <Redirect to="/" />
                 </Route>
               </Switch>
             </SocketProvider>
