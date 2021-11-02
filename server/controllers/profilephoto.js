@@ -29,8 +29,6 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
         await s3.deleteObject(deleteParams, (err, data) => {
             if (err) {
                 res.send({ err: 'Error occured while trying to delete previous file in S3 bucket' });
-            } else {
-                res.send('Delete previous file successfully');
             }
         });
     }
@@ -53,7 +51,7 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
                     res.json({ message: 'Upload Photo successfully', profile });
                 })
                 .catch(err => {
-                    console.log('Error occured while trying to save to DB', err);
+                    res.json('Error occured while trying to save to DB', err);
                 });
         }
     });
