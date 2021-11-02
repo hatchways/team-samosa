@@ -4,8 +4,6 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import Welcome from './pages/Welcome/Welcome';
 import Login from './pages/Login/Login';
 import Signup from './pages/SignUp/SignUp';
-import ProfileEdition from './pages/ProfileSkeleton/ProfileEdition/ProfileEdition';
-import ProfilePhoto from './pages/ProfileSkeleton/ProfilePhoto/ProfilePhoto';
 import Dashboard from './pages/Dashboard/Dashboard';
 import NavBar from './components/Navbar/NavBar';
 import ProfileListings from './components/ProfileListings/ProfileListings';

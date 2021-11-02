@@ -18,21 +18,21 @@ export default function ProfilePhoto(): JSX.Element {
   const { userProfile } = useAuth();
   return (
     <Grid container className={classes.root}>
-      <Grid item xs={6} sm={6} md={5} elevation={0} component={Paper} square className={classes.back}>
+      <Grid item xs={3} sm={3} md={3} elevation={0} component={Paper} square className={classes.back}>
         <Box className={classes.authWrapper}>
           <Box width="100%" maxWidth={450} p={3} alignSelf="center">
-            <ProfileSelection name={'Edit profile'} link={'/profileEdition'} />
-            <ProfileSelection name={'Profile photo'} link={'/profilephoto'} />
-            <ProfileSelection name={'Availability'} link={'/profileEditionMock'} />
-            <ProfileSelection name={'Payment'} link={'/profileEditionMock'} />
-            <ProfileSelection name={'Security'} link={'/profileEditionMock'} />
-            <ProfileSelection name={'Settings'} link={'/profileEditionMock'} />
+            <ProfileSelection name={'Edit profile'} link={'/dashboard/my-profile/profile-edition'} />
+            <ProfileSelection name={'Profile photo'} link={'/dashboard/my-profile/profile-photo'} />
+            <ProfileSelection name={'Availability'} link={'/dashboard/my-profile/profile-edition'} />
+            <ProfileSelection name={'Payment'} link={'/dashboard/my-profile/profile-edition'} />
+            <ProfileSelection name={'Security'} link={'/dashboard/my-profile/profile-edition'} />
+            <ProfileSelection name={'Settings'} link={'/dashboard/my-profile/profile-edition'} />
           </Box>
         </Box>
       </Grid>
-      <Grid item xs={6} sm={3} md={6} elevation={6} component={Paper} square>
+      <Grid item xs={12} sm={8} md={7} elevation={6} component={Paper} square>
         <Box className={classes.authWrapper}>
-          <Box width="100%" maxWidth={350} p={3} alignSelf="center">
+          <Box width="100%" maxWidth={960} sx={{ pl: 16 }} alignSelf="center">
             <Typography className={classes.welcome} component="h1" variant="h5">
               Profile Photo
             </Typography>

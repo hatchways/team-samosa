@@ -8,7 +8,6 @@ const useStyles = makeStyles(() => ({
       borderBottom: '1.2px solid rgba(0, 0, 0, 0.2)',
     },
     marginTop: '10%',
-    bbackgroundColor: '#000000',
   },
   authWrapper: {
     display: 'flex',
@@ -18,7 +17,6 @@ const useStyles = makeStyles(() => ({
     paddingTop: 35,
   },
   back: {
-    color: 'white',
     backgroundColor: '#fafafa',
   },
   welcome: {
@@ -27,6 +25,7 @@ const useStyles = makeStyles(() => ({
     color: '#000000',
     fontWeight: 700,
     fontFamily: theme.typography.body2.fontFamily,
+    textAlign: 'center',
   },
 }));
 

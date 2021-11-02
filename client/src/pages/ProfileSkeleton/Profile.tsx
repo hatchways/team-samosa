@@ -5,14 +5,13 @@ import { useAuth } from '../../context/useAuthContext';
 import { useSocket } from '../../context/useSocketContext';
 import { useHistory } from 'react-router-dom';
 import { Route, Redirect, Switch } from 'react-router-dom';
-//import ProfilePhoto from '../ProfileSkeleton/ProfilePhoto/ProfilePhoto';
-import Profile from '../ProfileSkeleton/Profile';
-import ProfileEdition from '../ProfileSkeleton/ProfileEdition/ProfileEdition';
+import ProfilePhoto from './ProfilePhoto/ProfilePhoto';
+import ProfileEdition from './ProfileEdition/ProfileEdition';
 
 import MySitters from '../MySitters/MySitters';
 
 import { useEffect } from 'react';
-export default function Dashboard(): JSX.Element {
+export default function Profile(): JSX.Element {
   const { loggedInUser } = useAuth();
   const { initSocket } = useSocket();
   const history = useHistory();
@@ -30,15 +29,14 @@ export default function Dashboard(): JSX.Element {
     <Grid container component="main">
       <Container>
         <Switch>
-          <Route path="/dashboard/my-sitters">
-            <MySitters />
+          <Route path="/dashboard/my-profile/profile-photo">
+            <ProfilePhoto />
           </Route>
-          <Route path="/dashboard/my-jobs">{/* TODO: add MyJobs component */}</Route>
-          <Route path="/dashboard/my-profile">
-            <Profile />
+          <Route path="/dashboard/my-profile/profile-edition">
+            <ProfileEdition />
           </Route>
           <Route path="*">
-            <Redirect to="/dashboard/my-sitters" />
+            <Redirect to="/dashboard/my-profile/profile-edition" />
           </Route>
         </Switch>
       </Container>
