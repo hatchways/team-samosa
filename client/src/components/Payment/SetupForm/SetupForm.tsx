@@ -5,14 +5,14 @@ import ModalButton from '../../Modal/ModalButton/ModalButton';
 import { useSnackBar } from '../../../context/useSnackbarContext';
 import { CircularProgress } from '@material-ui/core';
 
-const SetupForm = () => {
+export default function SetupForm(): JSX.Element {
   const stripe = useStripe();
   const elements = useElements();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { updateSnackBarMessage } = useSnackBar();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     setIsSubmitting(true);
     event.preventDefault();
 
@@ -28,7 +28,7 @@ const SetupForm = () => {
     });
 
     if (error) {
-      updateSnackBarMessage(error.message);
+      updateSnackBarMessage(error.message ? error.message : 'Unknown error');
     } else {
       updateSnackBarMessage('Card added');
     }
@@ -43,6 +43,4 @@ const SetupForm = () => {
       </Box>
     </form>
   );
-};
-
-export default SetupForm;
+}

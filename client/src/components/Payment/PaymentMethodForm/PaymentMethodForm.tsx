@@ -7,8 +7,6 @@ import Box from '@material-ui/core/Box';
 import { ELEMENT_OPTIONS } from './elementsOptions';
 import SetupForm from '../SetupForm/SetupForm';
 
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(
   'pk_test_51Jpf1xL3yecqfVKoBMYtgnFlrSlM0P9EtRpP6PoVpvlckjmwX5J595j2M35S6w4Plxe2ThjCO1cbAENg3bzJmPt900SDffRaaG',
 );
