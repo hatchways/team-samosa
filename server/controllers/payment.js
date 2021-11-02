@@ -3,14 +3,17 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 const User = require("../models/User");
 const Profile = require("../Models/Profile");
 const asyncHandler = require("express-async-handler");
-const verifyProfile = require("../utils/verifyProfile");
-const verifyStripeCustomer = require("../utils/verifyStripeCustomer");
 
 // @route POST /payment
 // @desc Create new customer
 // @access Private
 exports.createCustomer = asyncHandler(async (req, res, next) => {
-  const profile = await verifyProfile(req);
+  const profile = req.profile;
+
+  if (profile.stripeId) {
+    res.status(400);
+    throw new Error("User already has a stripe Id");
+  }
 
   const customer = await stripe.customers.create();
 
@@ -25,7 +28,7 @@ exports.createCustomer = asyncHandler(async (req, res, next) => {
 // @desc Retrieve customer payment details
 // @access Private
 exports.getCustomer = asyncHandler(async (req, res, next) => {
-  const customer = await verifyStripeCustomer(req);
+  const customer = req.customer;
 
   res.status(200).json({ customer });
 });
@@ -34,7 +37,7 @@ exports.getCustomer = asyncHandler(async (req, res, next) => {
 // @desc Setup a customer payment intent
 // @access Private
 exports.setupPaymentIntent = asyncHandler(async (req, res, next) => {
-  const customer = await verifyStripeCustomer(req);
+  const customer = req.customer;
 
   const intent = await stripe.setupIntents.create({
     customer: customer.id,
@@ -48,7 +51,7 @@ exports.setupPaymentIntent = asyncHandler(async (req, res, next) => {
 // @desc List payment methods
 // @access Private
 exports.listPaymentMethods = asyncHandler(async (req, res, next) => {
-  const customer = await verifyStripeCustomer(req);
+  const customer = req.customer;
 
   const paymentMethods = await stripe.paymentMethods.list({
     customer: customer.id,
@@ -64,7 +67,12 @@ exports.listPaymentMethods = asyncHandler(async (req, res, next) => {
 exports.createPaymentIntent = asyncHandler(async (req, res, next) => {
   const { amount, currency, paymentMethod } = req.body;
 
-  const customer = await verifyStripeCustomer(req);
+  if (!amount || !currency || !paymentMethod) {
+    res.status(400);
+    throw new Error("Request body has an empty field");
+  }
+
+  const customer = req.customer;
 
   const paymentIntent = await stripe.paymentIntents.create({
     amount: amount,
@@ -85,26 +93,7 @@ exports.createPaymentIntent = asyncHandler(async (req, res, next) => {
 // @desc Create fake payment method for testing
 // @access Private
 exports.createPaymentMethod = asyncHandler(async (req, res, next) => {
-  const userId = req.user.id;
-
-  const profile = await Profile.findOne({ userId });
-
-  if (!profile) {
-    res.status(400);
-    throw new Error("User does not have a profile");
-  }
-
-  if (!profile.stripeId) {
-    res.status(400);
-    throw new Error("User does not have a stripe Id");
-  }
-
-  const customer = await stripe.customers.retrieve(profile.stripeId);
-
-  if (!customer) {
-    res.status(500);
-    throw new Error("Couldn't retrieve customer");
-  }
+  const customer = req.customer;
 
   const paymentMethod = await stripe.paymentMethods.create({
     type: "card",
