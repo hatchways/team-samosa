@@ -22,7 +22,7 @@ export const theme = createMuiTheme({
   },
 
   palette: {
-    primary: { main: '#de5048' },
+    primary: { main: '#ea3f45' },
     secondary: { main: grey[400] },
     text: { primary: grey[800], secondary: grey[400], disabled: grey[100] },
     background: { default: grey[50] },
