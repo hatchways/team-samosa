@@ -37,7 +37,6 @@ const useStyles = makeStyles(() => ({
     paddingTop: 10,
   },
   submit: {
-    //margin: theme.spacing(3, 2, 2),
     padding: 10,
     width: 315,
     height: 56,

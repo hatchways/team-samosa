@@ -75,17 +75,14 @@ exports.downloadPhoto = asyncHandler(async (req, res) => {
     })
     if (profile.photoUrl) {
         const downloadParams = {
-            //response_target: local_path,
             Bucket: process.env.AWS_BUCKET,
             Key: profile.photoUrl.substring(48),
-            //Expires: 300
         }
         await s3.getObject(downloadParams,
             function (error, data) {
                 if (error) {
                     res.json("Failed to retrieve an object: " + error);
                 } else {
-                    console.log("hello");
                     fs.writeFile("../client/src/Images/" + profile.photoUrl.substring(72), data.Body, (err) => {
                         if (err)
                             res.json('Error occured while writing file', err);
