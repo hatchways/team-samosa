@@ -22,6 +22,7 @@ exports.getUProfile = asyncHandler(async (req, res) => {
       birthDate: profile.birthDate,
       email: user.email,
       phoneNum: profile.phoneNum,
+      photoUrl: profile.photoUrl,
       address: profile.address,
       description: profile.description,
     }

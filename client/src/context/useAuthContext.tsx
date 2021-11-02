@@ -55,7 +55,6 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
         if (data.success) {
           await getUProfile().then((res) => {
             if (res.success) {
-              downloadPhoto();
               updateProfileContext(res.success);
             }
           });
