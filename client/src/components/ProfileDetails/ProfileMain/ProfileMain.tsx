@@ -7,8 +7,13 @@ import Avatar from '@material-ui/core/Avatar';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import { PublicProfileSuccess } from '../../../interface/Profile';
 
-export default function ProfileMain(): JSX.Element {
+interface Props {
+  profile?: PublicProfileSuccess | undefined;
+}
+
+export default function ProfileMain({ profile }: Props): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -24,12 +29,13 @@ export default function ProfileMain(): JSX.Element {
         <Paper className={classes.avatarBorder} elevation={8}>
           <Avatar className={classes.avatar} src="/mock/68f55f7799df6c8078a874cfe0a61a5e6e9e1687.png" />
         </Paper>
-        <Typography variant="h3">Norma Byers</Typography>
+
+        <Typography variant="h3">{`${profile?.firstName} ${profile?.lastName}`}</Typography>
         <Typography variant="h5">Loving pet sitter</Typography>
         <Box paddingTop={3}>
           <Grid item container justify="center" alignItems="center">
             <LocationOnIcon className={classes.location} fontSize="large" />
-            <Typography>Toronto, Ontario</Typography>
+            <Typography>{profile?.address}</Typography>
           </Grid>
         </Box>
       </Grid>
@@ -38,9 +44,7 @@ export default function ProfileMain(): JSX.Element {
           About me
         </Typography>
         <Typography variant="body1" gutterBottom paragraph={true}>
-          Animals are my passion! I will look after your pets with loving care. I have some availability for pet care in
-          my home as well. I have 10 yrs of experience at the Animal Hospital, and have owned multiple pets for many
-          years, including numerous rescues. Kindly email, text or call me and I will respond promptly!
+          {profile?.description}
         </Typography>
         <ImageList cols={3} gap={8}>
           <ImageListItem key={1} classes={{ item: classes.dog }}>

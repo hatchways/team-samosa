@@ -9,6 +9,7 @@ import ProfilePhotoMock from './pages/ProfileSkeleton/ProfilePhotoMock/ProfilePh
 import Dashboard from './pages/Dashboard/Dashboard';
 import NavBar from './components/Navbar/NavBar';
 import ProfileListings from './components/ProfileListings/ProfileListings';
+import ProfileDetails from './components/ProfileDetails/ProfileDetails';
 import { AuthProvider } from './context/useAuthContext';
 import { SocketProvider } from './context/useSocketContext';
 import { SnackBarProvider } from './context/useSnackbarContext';
@@ -40,6 +41,10 @@ function App(): JSX.Element {
                 <Route exact path="/profiles">
                   <NavBar elevation={16} color="inherit" />
                   <ProfileListings />
+                </Route>
+                <Route path="/profiles/:profileId">
+                  <NavBar elevation={16} color="inherit" />
+                  <ProfileDetails />
                 </Route>
                 <Route path="/dashboard">
                   <NavBar elevation={16} color="inherit" />
