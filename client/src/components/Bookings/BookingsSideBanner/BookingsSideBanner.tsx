@@ -14,10 +14,10 @@ export default function BookingsSideBanner({ requests }: Props): JSX.Element {
 
   return (
     <Grid container direction="column" spacing={3}>
-      <Grid item>{nextBooking ? <NextBooking request={nextBooking} /> : ''}</Grid>
       <Grid item>
-        <BookingsPaper requests={requests} />
+        <NextBooking request={nextBooking} />
       </Grid>
+      <Grid item>{requests.length > 1 && <BookingsPaper requests={requests} />}</Grid>
     </Grid>
   );
 }

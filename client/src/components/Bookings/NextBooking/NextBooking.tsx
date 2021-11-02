@@ -8,7 +8,7 @@ import { BookingRequest } from '../../../interface/Request';
 import useStyles from './useStyles';
 
 interface Props {
-  request: BookingRequest;
+  request: BookingRequest | undefined;
 }
 
 export default function NextBooking({ request }: Props): JSX.Element {
@@ -16,31 +16,39 @@ export default function NextBooking({ request }: Props): JSX.Element {
   return (
     <Paper className={classes.root} elevation={8}>
       <Grid container direction="column" spacing={1}>
-        <Grid item container justify="space-between" alignItems="center">
-          <Grid item>
-            <Typography variant="overline">Your next booking:</Typography>
-          </Grid>
-          <Grid item>
-            <BookingMoreMenu request={request} size="medium" fontSize="default" />
-          </Grid>
-        </Grid>
-        <Grid item>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm container spacing={2}>
+        {request ? (
+          <>
+            <Grid item container xs={12} justify="space-between" alignItems="center">
               <Grid item>
-                <BookingsDate request={request} />
+                <Typography variant="overline">Your next booking:</Typography>
               </Grid>
-              <Grid item container spacing={2} alignItems="center">
-                <Grid item>
-                  <Avatar className={classes.avatar} alt="avatar" src="" />
-                </Grid>
-                <Grid item>
-                  <Typography variant="h5">{request.name}</Typography>
+              <Grid item>
+                <BookingMoreMenu request={request} size="medium" fontSize="default" />
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm container spacing={2}>
+                  <Grid item>
+                    <BookingsDate request={request} />
+                  </Grid>
+                  <Grid item container spacing={2} alignItems="center">
+                    <Grid item>
+                      <Avatar className={classes.avatar} alt="avatar" src="" />
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="h5">{request.sitter.username}</Typography>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
+          </>
+        ) : (
+          <Grid item xs={12}>
+            <Typography>{"You don't have any upcoming bookings"}</Typography>
           </Grid>
-        </Grid>
+        )}
       </Grid>
     </Paper>
   );

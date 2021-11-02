@@ -2,15 +2,25 @@ import { createMuiTheme } from '@material-ui/core';
 import grey from '@material-ui/core/colors/grey';
 
 export const theme = createMuiTheme({
+  overrides: {
+    MuiButton: {
+      root: {
+        minHeight: 48,
+        minWidth: 128,
+      },
+    },
+    MuiTextField: {
+      root: {
+        marginTop: 0,
+      },
+    },
+  },
   typography: {
     fontFamily: '"Poppins", "Open Sans", "sans-serif", "Roboto"',
     fontSize: 12,
-    button: {
-      textTransform: 'uppercase',
-      fontWeight: 700,
-    },
     overline: { fontWeight: 700, fontSize: '0.75rem' },
   },
+
   palette: {
     primary: { main: '#de5048' },
     secondary: { main: grey[400] },

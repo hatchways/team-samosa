@@ -1,6 +1,5 @@
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import { BookingRequest } from '../../../interface/Request';
 import BookingsList from '../BookingsList/BookingsList';
 
@@ -25,12 +24,10 @@ export default function BookingsPaper({ requests }: Props): JSX.Element {
             <BookingsList title="Current Bookings:" requests={currentBookings} />
           </Grid>
         ) : (
-          <Grid item xs={12}>
-            <Typography className={classes.empty}>{"You don't have any upcoming bookings"}</Typography>
-          </Grid>
+          ''
         )}
         {pastBookings.length ? (
-          <Grid item>
+          <Grid item xs={12}>
             <BookingsList title="Past Bookings:" requests={pastBookings} />
           </Grid>
         ) : (
