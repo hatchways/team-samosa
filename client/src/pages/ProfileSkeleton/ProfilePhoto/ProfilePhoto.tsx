@@ -21,7 +21,7 @@ export default function ProfilePhoto(): JSX.Element {
       <Grid item xs={6} sm={6} md={5} elevation={0} component={Paper} square className={classes.back}>
         <Box className={classes.authWrapper}>
           <Box width="100%" maxWidth={450} p={3} alignSelf="center">
-            <ProfileSelection name={'Edit profile'} link={'/profileEditionMock'} />
+            <ProfileSelection name={'Edit profile'} link={'/profileEdition'} />
             <ProfileSelection name={'Profile photo'} link={'/profilephoto'} />
             <ProfileSelection name={'Availability'} link={'/profileEditionMock'} />
             <ProfileSelection name={'Payment'} link={'/profileEditionMock'} />

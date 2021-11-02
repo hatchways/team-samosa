@@ -10,9 +10,9 @@ import Grid from '@material-ui/core/Grid';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { ProfileSuccess } from '../../../interface/Profile';
-import EditProfileInput from '../../../components/Profile/EditProfileInput';
-import { useAuth } from '../../../context/useAuthContext';
+import { ProfileSuccess } from '../../../../interface/Profile';
+import EditProfileInput from '../../../../components/Profile/EditProfileInput';
+import { useAuth } from '../../../../context/useAuthContext';
 interface Props {
   handleSubmit: (
     { exist, firstName, lastName, gender, birthDate, email, phoneNum, photoUrl, address, description }: ProfileSuccess,

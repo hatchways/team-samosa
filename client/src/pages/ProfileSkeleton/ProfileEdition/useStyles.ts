@@ -7,16 +7,15 @@ const useStyles = makeStyles(() => ({
     '& .MuiInput-underline:before': {
       borderBottom: '1.2px solid rgba(0, 0, 0, 0.2)',
     },
-    marginTop: '2%',
+    marginTop: '10%',
     bbackgroundColor: '#000000',
   },
   authWrapper: {
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'column',
-    minHeight: '100vh',
-    paddingTop: 23,
+    paddingTop: 35,
   },
   back: {
     color: 'white',

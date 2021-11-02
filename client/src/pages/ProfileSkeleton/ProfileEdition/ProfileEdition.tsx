@@ -1,17 +1,19 @@
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import { FormikHelpers } from 'formik';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './useStyles';
-import createProfile from '../../helpers/APICalls/createProfile';
-import updateProfile from '../../helpers/APICalls/updateProfile';
-import { getUProfile } from '../../helpers/APICalls/getUProfile';
-import { useAuth } from '../../context/useAuthContext';
+import ProfileSelection from '../../../components/ProfileSelection/ProfileSelection';
+import { useSnackBar } from '../../../context/useSnackbarContext';
+import { useAuth } from '../../../context/useAuthContext';
+import { FormikHelpers } from 'formik';
+import { ProfileSuccess } from '../../../interface/Profile';
+import updateProfile from '../../../helpers/APICalls/updateProfile';
+import { getUProfile } from '../../../helpers/APICalls/getUProfile';
+import createProfile from '../../../helpers/APICalls/createProfile';
 import EditProfile from './EditProfile/EditProfile';
-import { useSnackBar } from '../../context/useSnackbarContext';
-import { ProfileSuccess } from '../../interface/Profile';
-export default function Profile(): JSX.Element {
+
+export default function ProfileEdition(): JSX.Element {
   const classes = useStyles();
   const { updateSnackBarMessage } = useSnackBar();
   const { updateProfileContext } = useAuth();
@@ -48,10 +50,23 @@ export default function Profile(): JSX.Element {
         });
   };
   return (
-    <Grid container component="main" className={classes.root}>
-      <Grid item xs={12} sm={8} md={7} elevation={6} component={Paper} square>
+    <Grid container className={classes.root}>
+      <Grid item xs={3} sm={3} md={3} elevation={0} component={Paper} square className={classes.back}>
         <Box className={classes.authWrapper}>
           <Box width="100%" maxWidth={450} p={3} alignSelf="center">
+            <ProfileSelection name={'Edit profile'} link={'/profileEdition'} />
+            <ProfileSelection name={'Profile photo'} link={'/profilePhoto'} />
+            <ProfileSelection name={'Availability'} link={'/profile-edition-mock'} />
+            <ProfileSelection name={'Payment'} link={'/profile-edition-mock'} />
+            <ProfileSelection name={'Security'} link={'/profile-edition-mock'} />
+            <ProfileSelection name={'Settings'} link={'/profile-edition-mock'} />
+          </Box>
+          <Box p={1} alignSelf="center" />
+        </Box>
+      </Grid>
+      <Grid item xs={12} sm={8} md={7} elevation={6} component={Paper} square>
+        <Box className={classes.authWrapper}>
+          <Box width="100%" maxWidth={960} sx={{ pl: 16 }} alignSelf="center">
             <Grid container>
               <Grid item xs>
                 <Typography className={classes.welcome} component="h1" variant="h5">
