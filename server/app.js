@@ -14,6 +14,7 @@ const userRouter = require("./routes/user");
 const requestRouter = require("./routes/request");
 
 const profileRouter = require("./routes/profile");
+const photoRouter = require("./routes/profilephoto");
 const uProfileRouter = require("./routes/uprofile");
 const availabilityRouter = require("./routes/availability");
 const { json, urlencoded } = express;
@@ -50,6 +51,7 @@ app.use("/users", userRouter);
 app.use("/request", requestRouter);
 
 app.use("/profile", profileRouter);
+app.use("/profile-photo", photoRouter);
 app.use("/userprofile", uProfileRouter);
 app.use("/availablity", availabilityRouter);
 

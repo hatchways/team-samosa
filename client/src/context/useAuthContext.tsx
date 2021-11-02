@@ -2,7 +2,7 @@ import { useState, useContext, createContext, FunctionComponent, useEffect, useC
 import { useHistory } from 'react-router-dom';
 import { AuthApiData, AuthApiDataSuccess } from '../interface/AuthApiData';
 import { User } from '../interface/User';
-import { ProfileSuccess, ProfileApiData } from '../interface/Profile';
+import { ProfileSuccess } from '../interface/Profile';
 import loginWithCookies from '../helpers/APICalls/loginWithCookies';
 import { getUProfile } from '../helpers/APICalls/getUProfile';
 import logoutAPI from '../helpers/APICalls/logout';
