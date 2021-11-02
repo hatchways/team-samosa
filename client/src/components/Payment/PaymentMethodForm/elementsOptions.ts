@@ -15,7 +15,6 @@ export const ELEMENT_OPTIONS = {
       colorDanger: '#df1b41',
       fontFamily: 'Poppins',
       borderRadius: `${theme.shape.borderRadius}px`,
-      // See all possible variables below
     },
     rules: {
       '.Input': {
