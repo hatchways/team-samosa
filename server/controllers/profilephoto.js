@@ -25,24 +25,25 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
             Bucket: process.env.AWS_BUCKET,
             Key: pathname,
         }
-        await s3.deleteObject(deleteParams, (err, data) => {
+        await s3.deleteObject(deleteParams, (err) => {
             if (err) {
-                res.send({ err: 'Error occured while trying to delete previous file in S3 bucket' });
+                res.status(400);
+                throw new Error('Error occured while trying to delete previous file in S3 bucket', err);
             }
-            console.log(data)
         });
     }
     const uploadParams = {
         Bucket: process.env.AWS_BUCKET,
         Body: fs.createReadStream(req.file.path),
-        Key: profile.userId + (`${req.file.originalname}`)
+        Key: profile.userId + (`${req.file.originalname}`),
+        ACL: 'public-read'
     };
     s3.upload(uploadParams, (err, data) => {
         if (err) {
-            res.json('Error occured while trying to upload to S3 bucket', err);
+            res.status(403).send('Error occured while trying to upload to S3 bucket');
         }
         if (data) {
-            fs.unlinkSync(req.file.path); // Empty temp folder
+            fs.unlinkSync(req.file.path);
             profile.photoUrl = data.Location;
             profile
                 .save()
@@ -50,7 +51,7 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
                     res.json({ message: 'Upload Photo successfully', profile });
                 })
                 .catch(err => {
-                    res.json('Error occured while trying to save to DB', err);
+                    res.status(400).send('Error occured while trying to save to DB');
                 });
         }
     });
@@ -81,11 +82,11 @@ exports.downloadPhoto = asyncHandler(async (req, res) => {
         await s3.getObject(downloadParams,
             function (error, data) {
                 if (error) {
-                    res.json("Failed to retrieve an object: " + error);
+                    res.json("Failed to retrieve an object: ");
                 } else {
                     fs.writeFile("../client/src/Images/" + profile.photoUrl.substring(72), data.Body, (err) => {
                         if (err)
-                            res.json('Error occured while writing file', err);
+                            res.json('Error occured while writing file');
                         else {
                             res.json("File written successfully");
                         }

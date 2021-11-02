@@ -47,11 +47,11 @@ export default function LoggedIn(): JSX.Element {
         </Link>
       </Box>
       <IconButton onClick={handleClick}>
-        <Avatar
-          alt="Profile Image"
-          className={classes.avatar}
-          src={userProfile && userProfile.photoUrl ? userProfile.photoUrl : loggedInUser?.username}
-        />
+        {userProfile && userProfile.photoUrl ? (
+          <Avatar alt="Profile Image" className={classes.avatar} src={userProfile.photoUrl} />
+        ) : (
+          <Avatar className={classes.avatar} />
+        )}
       </IconButton>
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
