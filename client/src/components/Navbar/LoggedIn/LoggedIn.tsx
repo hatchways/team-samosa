@@ -15,7 +15,7 @@ import useStyles from './useStyles';
 export default function LoggedIn(): JSX.Element {
   const classes = useStyles();
 
-  const { logout } = useAuth();
+  const { logout, userProfile, loggedInUser } = useAuth();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -47,7 +47,11 @@ export default function LoggedIn(): JSX.Element {
         </Link>
       </Box>
       <IconButton onClick={handleClick}>
-        <Avatar className={classes.avatar} />
+        <Avatar
+          alt="Profile Image"
+          className={classes.avatar}
+          src={userProfile && userProfile.photoUrl ? userProfile.photoUrl : loggedInUser?.username}
+        />
       </IconButton>
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
