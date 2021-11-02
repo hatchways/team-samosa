@@ -10,18 +10,20 @@ import Grid from '@material-ui/core/Grid';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { ProfileSuccess } from '../../../interface/Profile';
+import { ProfileApiData, ProfileSuccess } from '../../../interface/Profile';
+import { useSnackBar } from '../../../context/useSnackbarContext';
 import EditProfileInput from '../../../components/Profile/EditProfileInput';
 import { useAuth } from '../../../context/useAuthContext';
 interface Props {
   handleSubmit: (
-    { exist, firstName, lastName, gender, birthDate, email, phoneNum, photoUrl, address, description }: ProfileSuccess,
+    { exist, firstName, lastName, gender, birthDate, email, phoneNum, address, description }: ProfileSuccess,
     { setStatus, setSubmitting }: FormikHelpers<ProfileSuccess>,
   ) => void;
 }
 
 export default function EditProfile({ handleSubmit }: Props): JSX.Element {
   const classes = useStyles();
+  const { updateSnackBarMessage } = useSnackBar();
   const { userProfile } = useAuth();
   return (
     <Formik
@@ -33,7 +35,6 @@ export default function EditProfile({ handleSubmit }: Props): JSX.Element {
         gender: !userProfile ? '' : userProfile.gender,
         birthDate: !userProfile ? new Date('1998-06-15') : userProfile.birthDate,
         email: !userProfile ? '' : userProfile.email,
-        photoUrl: !userProfile ? '' : userProfile.photoUrl,
         phoneNum: !userProfile ? '' : userProfile.phoneNum,
         address: !userProfile ? '' : userProfile.address,
         description: !userProfile ? '' : userProfile.description,
