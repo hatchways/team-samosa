@@ -21,7 +21,6 @@ exports.getUProfile = asyncHandler(async (req, res) => {
       gender: profile.gender,
       birthDate: profile.birthDate,
       email: user.email,
-      photoUrl: profile.photoUrl,
       phoneNum: profile.phoneNum,
       address: profile.address,
       description: profile.description,
@@ -35,24 +34,21 @@ exports.getUProfile = asyncHandler(async (req, res) => {
 exports.getProfiles = asyncHandler(async (req, res) => {
   const profiles = await Profile.find(
     { isSitter: true },
-    "_id userId firstName lastName photoUrl description"
+    "_id userId firstName lastName photoUrl description address"
   );
-
   res.send({ profiles });
 });
 
 // @route GET /profile
-// @desc Returns public profile or full profile for auth user
+// @desc Returns full profile for auth user
 // @access Public
 exports.getProfile = asyncHandler(async (req, res, next) => {
-  var userId = req.params.id;
+  const userId = req.user.id;
 
   if (userId) {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(400).send("Bad Request");
     }
-  } else {
-    userId = req.user.id;
   }
 
   const resp = await Profile.findOne({ userId });
@@ -61,33 +57,32 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
     throw new Error("Invalid profile id");
   }
 
-  if (req.headers.cookie) {
-    const user = verifyToken(req.headers.cookie);
-    if (user.id === userId) {
-      const profile = resp;
-      res.send({
-        _id: resp._id,
-        userId: resp.userId,
-        firstName: profile.firstName,
-        lastName: profile.lastName,
-        gender: profile.gender,
-        birthDate: profile.birthDate,
-        email: user.email,
-        phoneNum: profile.phoneNum,
-        address: profile.address,
-        description: profile.description,
-      });
-    }
-  }
-  const profile = {
-    _id: resp._id,
-    userId: resp.userId,
-    firstName: resp.firstName,
-    lastName: resp.lastName,
-    description: resp.description,
-    photoUrl: resp.photoUrl,
-    address: resp.address,
-  };
+  res.send({
+    success: {
+      _id: resp._id,
+      userId: resp.userId,
+      firstName: resp.firstName,
+      lastName: resp.lastName,
+      gender: resp.gender,
+      birthDate: resp.birthDate,
+      email: resp.email,
+      phoneNum: resp.phoneNum,
+      address: resp.address,
+      description: resp.description,
+    },
+  });
+});
+
+// @route GET /public-profile
+// @desc Returns public user profile
+// @access Public
+exports.getPublicProfile = asyncHandler(async (req, res, next) => {
+  const userId = req.params.id;
+
+  const profile = await Profile.findOne(
+    { userId },
+    "_id userId firstName lastName photoUrl description address"
+  );
   res.send({ profile });
 });
 
