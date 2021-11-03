@@ -7,7 +7,7 @@ let profiles = JSON.parse(raw);
 console.log("Injecting db with mock entires for User and Profile");
 
 (async function () {
-  for (i = 0; i < 10; i++) {
+  for (i = 0; i < profiles.length; i++) {
     try {
       console.log("profiles[i].username: ", profiles[i].username);
       const res = await axios({
