@@ -49,3 +49,8 @@ export interface PublicProfileApiData {
   error?: { message: string };
   success?: PublicProfileSuccess;
 }
+
+export interface PublicProfileArrayApi {
+  error?: { message: string; status: number };
+  success?: { profiles: [PublicProfileSuccess] };
+}
