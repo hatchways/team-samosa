@@ -18,7 +18,7 @@ export default function MySitters(): JSX.Element {
   const [requests, setRequests] = useState(emptyRequests);
 
   useEffect(() => {
-    getRequests('owner').then((res) => {
+    getRequests(bookingType).then((res) => {
       setRequests(res.requests);
     });
   }, []);
@@ -28,7 +28,7 @@ export default function MySitters(): JSX.Element {
       <Grid className={classes.root} container alignItems="center">
         <Grid item container direction="row-reverse" spacing={4} justify="center">
           <Grid xs={12} item>
-            <Typography variant="h2">My Sitter Bookings</Typography>
+            <Typography variant="h2">My Job Bookings</Typography>
           </Grid>
           <Grid xs={12} lg={7} item>
             <BookingsCalendar requests={requests} />

@@ -9,9 +9,10 @@ import { MOCK_TODAY } from '../mockRequests';
 
 interface Props {
   requests: Array<BookingRequest>;
+  bookingType: 'sitter' | 'owner';
 }
 
-export default function BookingsPaper({ requests }: Props): JSX.Element {
+export default function BookingsPaper({ requests, bookingType }: Props): JSX.Element {
   const classes = useStyles();
   const pastBookings = requests.filter((element) => element.startDate < MOCK_TODAY);
   const currentBookings = requests.filter((element) => element.startDate > MOCK_TODAY).slice(1);
@@ -21,14 +22,14 @@ export default function BookingsPaper({ requests }: Props): JSX.Element {
       <Grid container spacing={3}>
         {currentBookings.length ? (
           <Grid item xs={12}>
-            <BookingsList title="Current Bookings:" requests={currentBookings} />
+            <BookingsList title="Current Bookings:" requests={currentBookings} bookingType={bookingType} />
           </Grid>
         ) : (
           ''
         )}
         {pastBookings.length ? (
           <Grid item xs={12}>
-            <BookingsList title="Past Bookings:" requests={pastBookings} />
+            <BookingsList title="Past Bookings:" requests={pastBookings} bookingType={bookingType} />
           </Grid>
         ) : (
           ''

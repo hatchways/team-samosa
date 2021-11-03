@@ -15,6 +15,26 @@ export interface ProfileApiData {
   success?: ProfileSuccess;
 }
 
+export interface FullProfileSuccess {
+  profile: {
+    userId: string;
+    firstName: string;
+    lastName: string;
+    gender: string;
+    birthDate: Date;
+    phoneNum: string;
+    address: string;
+    description: string;
+    photoUrl: string;
+    isSitter: boolean;
+  };
+}
+
+export interface FullProfileApiData {
+  error?: { message: string };
+  success?: FullProfileSuccess;
+}
+
 export interface PublicProfileSuccess {
   firstName: string;
   lastName: string;

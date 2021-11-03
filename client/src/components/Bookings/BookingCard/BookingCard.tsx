@@ -10,9 +10,10 @@ import useStyles from './useStyles';
 
 interface Props {
   request: BookingRequest;
+  bookingType: 'sitter' | 'owner';
 }
 
-export default function BookingContent({ request }: Props): JSX.Element {
+export default function BookingContent({ request, bookingType }: Props): JSX.Element {
   const classes = useStyles();
   return (
     <Card className={classes.root} variant="outlined">
@@ -26,7 +27,9 @@ export default function BookingContent({ request }: Props): JSX.Element {
               <Avatar alt="avatar" src="" />
             </Grid>
             <Grid item>
-              <Typography variant="h6">{request.sitter.username}</Typography>
+              <Typography variant="h6">
+                {bookingType === 'sitter' ? request.user.username : request.sitter.username}
+              </Typography>
             </Grid>
           </Grid>
         </Grid>

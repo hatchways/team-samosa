@@ -6,9 +6,10 @@ import { BookingRequest } from '../../../interface/Request';
 interface Props {
   title: string;
   requests: Array<BookingRequest>;
+  bookingType: 'sitter' | 'owner';
 }
 
-export default function BookingsList({ title, requests }: Props): JSX.Element {
+export default function BookingsList({ title, requests, bookingType }: Props): JSX.Element {
   return (
     <Grid container direction="column" spacing={2}>
       <Grid item>
@@ -17,7 +18,7 @@ export default function BookingsList({ title, requests }: Props): JSX.Element {
       <Grid item container spacing={1}>
         {requests.map((element, index) => (
           <Grid xs={12} key={index} item>
-            <BookingCard request={element} />
+            <BookingCard request={element} bookingType={bookingType} />
           </Grid>
         ))}
       </Grid>
