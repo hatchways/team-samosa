@@ -46,7 +46,7 @@ export default function ProfileCard({ profile }: Props): JSX.Element {
           <Grid item>
             <Grid container alignItems="center">
               <LocationOnIcon className={classes.location} fontSize="large" />
-              <Typography variant="body1">Toronto, Ontario</Typography>
+              <Typography variant="body1">{profile.address}</Typography>
             </Grid>
           </Grid>
           <Grid item>

@@ -20,6 +20,7 @@ export async function getProfiles(search?: string): Promise<PublicProfileArrayAp
         userId: element.userId,
         firstName: element.firstName,
         lastName: element.lastName,
+        address: element.address,
       };
     });
     return { success: { profiles: parsed } };
