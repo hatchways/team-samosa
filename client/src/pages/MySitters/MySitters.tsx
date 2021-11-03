@@ -10,7 +10,7 @@ import { BookingRequest } from '../../interface/Request';
 
 const emptyRequests: Array<BookingRequest> = [];
 
-const bookingType = 'sitter';
+const bookingType = 'owner';
 
 export default function MySitters(): JSX.Element {
   const classes = useStyles();
@@ -18,7 +18,7 @@ export default function MySitters(): JSX.Element {
   const [requests, setRequests] = useState(emptyRequests);
 
   useEffect(() => {
-    getRequests('owner').then((res) => {
+    getRequests(bookingType).then((res) => {
       setRequests(res.requests);
     });
   }, []);
