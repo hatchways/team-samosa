@@ -7,3 +7,7 @@ export interface BookingRequest {
   user: { id: string; username: string };
   id: string;
 }
+export interface BookingRequestApiData {
+  error?: { message: string; status: number };
+  success?: BookingRequestApiData;
+}

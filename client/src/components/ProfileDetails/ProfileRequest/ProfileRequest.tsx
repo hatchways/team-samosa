@@ -1,26 +1,52 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-import useStyles from './useStyles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Rating from '@material-ui/lab/Rating';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
+import ModalButton from '../../Modal/ModalButton/ModalButton';
+import { createRequest } from '../../../helpers/APICalls/createRequest';
+import { useSnackBar } from '../../../context/useSnackbarContext';
 
 import { PublicProfileSuccess } from '../../../interface/Profile';
 
 interface Props {
-  profile?: PublicProfileSuccess;
+  profile: PublicProfileSuccess;
 }
 
 export default function ProfileRequest({ profile }: Props): JSX.Element {
-  const classes = useStyles();
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date('2014-08-18T21:11:54'));
+  const history = useHistory();
+  const { updateSnackBarMessage } = useSnackBar();
 
-  const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date);
+  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(new Date());
+  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(new Date());
+
+  const handleStartDateChange = (date: Date | null) => {
+    setSelectedStartDate(date);
+  };
+  const handleEndDateChange = (date: Date | null) => {
+    setSelectedEndDate(date);
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (selectedStartDate && selectedEndDate && profile?.userId) {
+      const data = await createRequest(profile?.userId, selectedStartDate, selectedEndDate);
+      if (data.success) {
+        updateSnackBarMessage('You have made a sucessful booking request');
+        history.push('/dashboard');
+      } else if (data.error) {
+        console.error(data.error);
+        if (data.error.status === 401) {
+          updateSnackBarMessage('Please log in to make a booking request');
+        }
+      } else {
+        updateSnackBarMessage('An unexpected error occurred. Please try again');
+      }
+    }
   };
 
   return (
@@ -36,7 +62,7 @@ export default function ProfileRequest({ profile }: Props): JSX.Element {
                 <Rating name="read-only" value={4.5} precision={0.5} readOnly />
               </Grid>
             </Grid>
-            <form>
+            <form onSubmit={handleSubmit}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <label htmlFor="date-picker-dropin">
                   <Typography variant="overline">Drop in</Typography>
@@ -47,9 +73,9 @@ export default function ProfileRequest({ profile }: Props): JSX.Element {
                   format="d MMMM yyyy  h:mm a"
                   margin="normal"
                   id="date-picker-dropin"
-                  value={selectedDate}
+                  value={selectedStartDate}
                   InputAdornmentProps={{ position: 'start' }}
-                  onChange={handleDateChange}
+                  onChange={handleStartDateChange}
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
                   }}
@@ -63,20 +89,18 @@ export default function ProfileRequest({ profile }: Props): JSX.Element {
                   format="d MMMM yyyy  h:mm a"
                   margin="normal"
                   id="date-picker-dropout"
-                  value={selectedDate}
+                  value={selectedEndDate}
                   InputAdornmentProps={{ position: 'start' }}
-                  onChange={handleDateChange}
+                  onChange={handleEndDateChange}
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
                   }}
                 />
               </MuiPickersUtilsProvider>
+              <Box textAlign="center">
+                <ModalButton>Send Request</ModalButton>
+              </Box>
             </form>
-            <Box textAlign="center">
-              <Button className={classes.submit} color="primary" variant="contained" size="large">
-                Send Request
-              </Button>
-            </Box>
           </Box>
         </Grid>
       </Grid>
