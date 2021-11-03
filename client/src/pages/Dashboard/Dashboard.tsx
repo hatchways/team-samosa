@@ -24,9 +24,9 @@ export default function Dashboard(): JSX.Element {
     (async function () {
       const data = await getProfile();
       if (data.error) {
-        updateSnackBarMessage(data.error.message);
-      } else {
-        setIsSitter(data.success?.profile.isSitter);
+        await updateSnackBarMessage(data.error.message);
+      } else if (data.success) {
+        await setIsSitter(data.success.profile.isSitter);
       }
     })();
   }, [updateSnackBarMessage]);

@@ -9,6 +9,10 @@ export async function getProfile(): Promise<FullProfileApiData> {
     };
     const res = await fetch(`/profile`, fetchOptions);
     const profile = await res.json();
+
+    if (profile.error) {
+      return profile;
+    }
     return { success: profile };
   } catch {
     return { error: { message: 'Unable to connect to server. Please try again' } };
