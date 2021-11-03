@@ -10,6 +10,8 @@ import useStyles from './useStyles';
 import { useDebounce } from 'use-debounce';
 import { PublicProfileSuccess } from '../../interface/Profile';
 import { useSnackBar } from '../../context/useSnackbarContext';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 const emptyProfiles: Array<PublicProfileSuccess> = [];
 
@@ -55,6 +57,13 @@ export default function ProfileListings(): JSX.Element {
               value={search}
               onChange={handleChange}
               variant="outlined"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <LocationOnIcon className={classes.location} />
+                  </InputAdornment>
+                ),
+              }}
             />
           </Grid>
         </Grid>
