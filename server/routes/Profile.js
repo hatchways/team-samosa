@@ -9,6 +9,8 @@ const {
   updateProfile,
 } = require("../controllers/profile");
 
+const { createMockProfile } = require("../controllers/createMockProfiles");
+
 router.route("/").get(protect, getProfile);
 
 router.route("/all").get(getProfiles);
@@ -16,6 +18,8 @@ router.route("/all").get(getProfiles);
 router.route("/public/:id").get(getPublicProfile);
 
 router.route("/").post(protect, createProfile);
+
+router.route("/mock").post(createMockProfile);
 
 router.route("/").patch(protect, updateProfile);
 
