@@ -13,7 +13,7 @@ const cardIcon = (brand: string) => {
     case 'visa':
       return '/payment-icons/flat-rounded/visa.svg';
     default:
-      return './payment-icons/flat-rounded/generiuc.svg';
+      return '/payment-icons/flat-rounded/generic.svg';
   }
 };
 
@@ -23,7 +23,7 @@ export default function PaymentCard({ card }: Props): JSX.Element {
     <Button variant="outlined">
       <Grid container className={classes.grid} spacing={2} alignItems="flex-start" direction="column">
         <Grid item>
-          <img src={cardIcon(cardIcon(card.brand))} className={classes.cardIcon} />
+          <img src={cardIcon(card.brand)} className={classes.cardIcon} />
         </Grid>
         <Grid item container alignItems="flex-start" direction="column">
           <Grid item>•••• •••• •••• {card.last4}</Grid>
