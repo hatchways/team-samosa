@@ -1,12 +1,13 @@
+const Profile = require("../Models/Profile");
 const Conversation = require("../Models/Conversation");
 const asyncHandler = require("express-async-handler");
 const Message = require("../models/Message");
-//const Profile = require("../models/Profile");
+
 
 // @route GET /conversation
 // @desc get all conversations relevant with the current user and all the messages
 // @access Private
-exports.getConversations = asyncHandler(async (req, res, next) => {
+exports.getConversations = asyncHandler(async (req, res) => {
   const userId = req.user.id;
   if (!req.user) {
     res.sendStatus(401);
@@ -27,8 +28,10 @@ exports.getConversations = asyncHandler(async (req, res, next) => {
         convoJSON.recipientId = convoJSON.user1Id == userId ? convoJSON.user2Id : convoJSON.user1Id;
         delete convoJSON[user1Id]; delete convoJSON[user2Id];
         let messages = await Message.find({ conversationId: data[i]._id }).sort({ sendTime: 'asc' }).map(message => message.toJSON());
+        let profile = await Profile.findOne({ userId: convoJSON.recipientId }, "firstName, lastName photoUrl",).map(res => res.toJSON());
         convoJSON.lastmessage = messages[messages.length - 1].text;
         convoJSON.updatedAt = messages[messages.length - 1].sendTime;
+        convoJSON.recipientPrpfile = profile
 
         for (let j = messages.length - 1; i > -1; i--) {
           if (messages[j].seen) {
@@ -40,6 +43,7 @@ exports.getConversations = asyncHandler(async (req, res, next) => {
       }
     }
   });
+  conversations.sort((a, b) => a.updatedAt >= b.updatedAt);
   res.send(conversations);
 
 });
