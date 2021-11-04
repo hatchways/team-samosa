@@ -28,7 +28,7 @@ export default function SetupForm(): JSX.Element {
     });
 
     if (error) {
-      updateSnackBarMessage(error.message ? error.message : 'Unknown error');
+      updateSnackBarMessage(error.message ? error.message : 'Card could not be added. Server error.');
     } else {
       updateSnackBarMessage('Card added');
     }
