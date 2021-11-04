@@ -80,8 +80,8 @@ exports.downloadPhoto = asyncHandler(async (req, res) => {
                 if (error) {
                     res.json("Failed to retrieve an object: ");
                 } else {
-                    res.setHeader("content-type", "some/type");
-                    fs.createReadStream(`./${profile.photoUrl.substring(72)}`).pipe(res);
+                    res.setHeader("content-type", "image/*");
+                    fs.createReadStream(`./${profile.photoUrl.substring(72)}`).pipe(data);
                 }
             }
         );

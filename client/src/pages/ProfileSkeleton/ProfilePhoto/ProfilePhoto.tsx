@@ -16,7 +16,7 @@ import { getUProfile } from '../../../helpers/APICalls/getUProfile';
 export default function ProfilePhoto(): JSX.Element {
   const { register, handleSubmit } = useForm();
   const classes = useStyles();
-  const updatephoto = (data: Record<string, any>) => {
+  const updatePhoto = (data: Record<string, any>) => {
     uploadPhoto(data).then(async (res) => {
       if (res) {
         await getUProfile().then((res) => {
@@ -57,7 +57,7 @@ export default function ProfilePhoto(): JSX.Element {
             <Typography className={classes.desp} component="h1" variant="h5">
               Be sure to use a photo that clearly shows your face
             </Typography>
-            <form onSubmit={handleSubmit(updatephoto)}>
+            <form onSubmit={handleSubmit(updatePhoto)}>
               <Input {...register('picture')} type="file" name="picture" />
               <Button type="submit" size="large" variant="outlined" color="primary" className={classes.submit}>
                 {false ? <CircularProgress style={{ color: 'white' }} /> : 'Upload a photo from your device'}
