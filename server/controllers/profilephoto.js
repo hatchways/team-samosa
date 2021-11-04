@@ -3,6 +3,12 @@ const fs = require("fs");
 const Profile = require("../Models/Profile");
 const asyncHandler = require("express-async-handler");
 
+const s3 = new S3({
+    region: process.env.AWS_REGION,
+    accessKeyId: process.env.AWS__ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_KEY,
+})
+
 // @route Post /photourl
 // @desc Save user photo to AWS S3 bucket and remove the previous one to save storage
 // @access Private
@@ -14,35 +20,32 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error("Please create your profile first");
     }
-    const s3 = new S3({
-        region: process.env.AWS_REGION,
-        accessKeyId: process.env.AWS__ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_KEY,
-    })
     if (profile.photoUrl) {
         const pathname = profile.photoUrl.substring(48);
         const deleteParams = {
             Bucket: process.env.AWS_BUCKET,
             Key: pathname,
         }
-        await s3.deleteObject(deleteParams, (err, data) => {
+        await s3.deleteObject(deleteParams, (err) => {
             if (err) {
-                res.send({ err: 'Error occured while trying to delete previous file in S3 bucket' });
+                res.status(400);
+                throw new Error('Error occured while trying to delete previous file in S3 bucket', err);
+
             }
-            console.log(data)
         });
     }
     const uploadParams = {
         Bucket: process.env.AWS_BUCKET,
         Body: fs.createReadStream(req.file.path),
-        Key: profile.userId + (`${req.file.originalname}`)
+        Key: profile.userId + (`${req.file.originalname}`),
+        ACL: 'public-read'
     };
     s3.upload(uploadParams, (err, data) => {
         if (err) {
-            res.json('Error occured while trying to upload to S3 bucket', err);
+            res.status(403).send('Error occured while trying to upload to S3 bucket');
         }
         if (data) {
-            fs.unlinkSync(req.file.path); // Empty temp folder
+            fs.unlinkSync(req.file.path);
             profile.photoUrl = data.Location;
             profile
                 .save()
@@ -50,16 +53,13 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
                     res.json({ message: 'Upload Photo successfully', profile });
                 })
                 .catch(err => {
-                    res.json('Error occured while trying to save to DB', err);
+                    res.status(400).send('Error occured while trying to save to DB');
                 });
         }
     });
 
 });
 
-// @route get /photourl
-// @desc Save user photo to local storage
-// @access Private
 exports.downloadPhoto = asyncHandler(async (req, res) => {
     const userId = req.user.id;
 
@@ -68,11 +68,6 @@ exports.downloadPhoto = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error("No profile to check");
     }
-    const s3 = new S3({
-        region: process.env.AWS_REGION,
-        accessKeyId: process.env.AWS__ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_KEY,
-    })
     if (profile.photoUrl) {
         const downloadParams = {
             Bucket: process.env.AWS_BUCKET,
@@ -81,15 +76,10 @@ exports.downloadPhoto = asyncHandler(async (req, res) => {
         await s3.getObject(downloadParams,
             function (error, data) {
                 if (error) {
-                    res.json("Failed to retrieve an object: " + error);
+                    res.json("Failed to retrieve an object: ");
                 } else {
-                    fs.writeFile("../client/src/Images/" + profile.photoUrl.substring(72), data.Body, (err) => {
-                        if (err)
-                            res.json('Error occured while writing file', err);
-                        else {
-                            res.json("File written successfully");
-                        }
-                    });
+                    res.setHeader("content-type", "image/*");
+                    fs.createReadStream(`./${profile.photoUrl.substring(72)}`).pipe(data);
                 }
             }
         );
