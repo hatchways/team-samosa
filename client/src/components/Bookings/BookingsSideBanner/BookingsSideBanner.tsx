@@ -7,17 +7,18 @@ import { MOCK_TODAY } from '../mockRequests';
 
 interface Props {
   requests: Array<BookingRequest>;
+  bookingType: 'sitter' | 'owner';
 }
 
-export default function BookingsSideBanner({ requests }: Props): JSX.Element {
+export default function BookingsSideBanner({ requests, bookingType }: Props): JSX.Element {
   const nextBooking: BookingRequest | undefined = requests.find((element) => element.startDate > MOCK_TODAY);
 
   return (
     <Grid container direction="column" spacing={3}>
       <Grid item>
-        <NextBooking request={nextBooking} />
+        <NextBooking request={nextBooking} bookingType={bookingType} />
       </Grid>
-      <Grid item>{requests.length > 1 && <BookingsPaper requests={requests} />}</Grid>
+      <Grid item>{requests.length > 1 && <BookingsPaper requests={requests} bookingType={bookingType} />}</Grid>
     </Grid>
   );
 }

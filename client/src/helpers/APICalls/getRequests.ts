@@ -1,12 +1,12 @@
 import { FetchOptions } from '../../interface/FetchOptions';
 import { BookingRequest } from '../../interface/Request';
 
-export async function getRequests(): Promise<{ requests: Array<BookingRequest> }> {
+export async function getRequests(profileType: string): Promise<{ requests: Array<BookingRequest> }> {
   const fetchOptions: FetchOptions = {
     method: 'GET',
     credentials: 'include',
   };
-  const res = await fetch('/request', fetchOptions);
+  const res = await fetch(`/request/${profileType}`, fetchOptions);
   const resp = await res.json();
   const parsed = resp.requests.map((element: any) => {
     const startDateObject = new Date(Date.parse(element.startDate));

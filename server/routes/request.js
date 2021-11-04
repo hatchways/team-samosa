@@ -7,7 +7,7 @@ const {
   updateRequest,
 } = require("../controllers/request");
 
-router.route("/").get(protect, getRequests);
+router.route("/:type").get(protect, getRequests);
 
 router.route("/").post(protect, createRequest);
 

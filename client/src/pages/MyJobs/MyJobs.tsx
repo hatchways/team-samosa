@@ -10,7 +10,7 @@ import { BookingRequest } from '../../interface/Request';
 
 const emptyRequests: Array<BookingRequest> = [];
 
-const bookingType = 'owner';
+const bookingType = 'sitter';
 
 export default function MySitters(): JSX.Element {
   const classes = useStyles();
@@ -28,7 +28,7 @@ export default function MySitters(): JSX.Element {
       <Grid className={classes.root} container alignItems="center">
         <Grid item container direction="row-reverse" spacing={4} justify="center">
           <Grid xs={12} item>
-            <Typography variant="h2">My Sitter Bookings</Typography>
+            <Typography variant="h2">My Job Bookings</Typography>
           </Grid>
           <Grid xs={12} lg={7} item>
             <BookingsCalendar requests={requests} />

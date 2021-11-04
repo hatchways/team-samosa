@@ -9,9 +9,10 @@ import useStyles from './useStyles';
 
 interface Props {
   request: BookingRequest | undefined;
+  bookingType: 'sitter' | 'owner';
 }
 
-export default function NextBooking({ request }: Props): JSX.Element {
+export default function NextBooking({ request, bookingType }: Props): JSX.Element {
   const classes = useStyles();
   return (
     <Paper className={classes.root} elevation={8}>
@@ -23,7 +24,9 @@ export default function NextBooking({ request }: Props): JSX.Element {
                 <Typography variant="overline">Your next booking:</Typography>
               </Grid>
               <Grid item>
-                <BookingMoreMenu request={request} size="medium" fontSize="default" />
+                {bookingType === 'sitter' && (
+                  <BookingMoreMenu request={request} bookingType={bookingType} size="medium" fontSize="default" />
+                )}
               </Grid>
             </Grid>
             <Grid item>
@@ -37,7 +40,9 @@ export default function NextBooking({ request }: Props): JSX.Element {
                       <Avatar className={classes.avatar} alt="avatar" src="" />
                     </Grid>
                     <Grid item>
-                      <Typography variant="h5">{request.sitter.username}</Typography>
+                      <Typography variant="h5">
+                        {bookingType === 'sitter' ? request.user.username : request.sitter.username}
+                      </Typography>
                     </Grid>
                   </Grid>
                 </Grid>

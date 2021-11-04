@@ -9,6 +9,9 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import React from 'react';
 import { useAuth } from '../../../context/useAuthContext';
+import { useState, useEffect } from 'react';
+import { getProfile } from '../../../helpers/APICalls/getProfile';
+import { useSnackBar } from '../../../context/useSnackbarContext';
 
 import useStyles from './useStyles';
 
@@ -16,6 +19,21 @@ export default function LoggedIn(): JSX.Element {
   const classes = useStyles();
 
   const { logout, userProfile, loggedInUser } = useAuth();
+  const { updateSnackBarMessage } = useSnackBar();
+
+
+  const [isSitter, setIsSitter] = useState(false);
+
+  useEffect(() => {
+    (async function () {
+      const data = await getProfile();
+      if (data.error) {
+        await updateSnackBarMessage(data.error.message);
+      } else if (data.success) {
+        await setIsSitter(data.success.profile.isSitter);
+      }
+    })();
+  }, [updateSnackBarMessage]);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -35,8 +53,15 @@ export default function LoggedIn(): JSX.Element {
   return (
     <React.Fragment>
       <Box mr={8}>
+        {isSitter && (
+          <Link to="/dashboard/my-jobs" component={RouterLink} color="inherit">
+            <Typography variant="subtitle1">My Jobs</Typography>
+          </Link>
+        )}
+      </Box>
+      <Box mr={8}>
         <Link to="/dashboard/my-sitters" component={RouterLink} color="inherit">
-          <Typography variant="subtitle1">MySitters</Typography>
+          <Typography variant="subtitle1">My Sitters</Typography>
         </Link>
       </Box>
       <Box mr={8}>

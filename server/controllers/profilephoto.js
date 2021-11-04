@@ -30,6 +30,7 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
             if (err) {
                 res.status(400);
                 throw new Error('Error occured while trying to delete previous file in S3 bucket', err);
+
             }
         });
     }
@@ -59,9 +60,6 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
 
 });
 
-// @route get /photourl
-// @desc Save user photo to local storage
-// @access Private
 exports.downloadPhoto = asyncHandler(async (req, res) => {
     const userId = req.user.id;
 
@@ -88,3 +86,4 @@ exports.downloadPhoto = asyncHandler(async (req, res) => {
     }
 
 });
+

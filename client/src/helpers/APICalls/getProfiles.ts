@@ -16,6 +16,7 @@ export async function getProfiles(): Promise<{ profiles: Array<PublicProfileSucc
       userId: element.userId,
       firstName: element.firstName,
       lastName: element.lastName,
+      address: element.address,
     };
   });
   return { profiles: parsed };

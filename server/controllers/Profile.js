@@ -25,7 +25,7 @@ exports.getUProfile = asyncHandler(async (req, res) => {
       photoUrl: profile.photoUrl,
       address: profile.address,
       description: profile.description,
-    }
+    },
   });
 });
 
@@ -52,26 +52,14 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
     }
   }
 
-  const resp = await Profile.findOne({ userId });
-  if (!resp) {
-    res.status(404);
-    throw new Error("Invalid profile id");
+  const profile = await Profile.findOne({ userId });
+  if (!profile) {
+    res
+      .status(404)
+      .send(JSON.stringify({ error: { message: "Invalid profile id" } }));
   }
 
-  res.send({
-    success: {
-      _id: resp._id,
-      userId: resp.userId,
-      firstName: resp.firstName,
-      lastName: resp.lastName,
-      gender: resp.gender,
-      birthDate: resp.birthDate,
-      email: resp.email,
-      phoneNum: resp.phoneNum,
-      address: resp.address,
-      description: resp.description,
-    },
-  });
+  res.send({ profile });
 });
 
 // @route GET /public-profile
