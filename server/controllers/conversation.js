@@ -1,6 +1,7 @@
 const Conversation = require("../Models/Conversation");
 const asyncHandler = require("express-async-handler");
 const Message = require("../models/Message");
+//const Profile = require("../models/Profile");
 
 // @route GET /conversation
 // @desc get all conversations relevant with the current user and all the messages
@@ -22,9 +23,13 @@ exports.getConversations = asyncHandler(async (req, res, next) => {
       for (let i = 0; i < data.length; i++) {
         const convo = conversations[i];
         const convoJSON = convo.toJSON();
+        convoJSON.senderId = convoJSON.user1Id == userId ? convoJSON.user1Id : convoJSON.user2Id;
+        convoJSON.recipientId = convoJSON.user1Id == userId ? convoJSON.user2Id : convoJSON.user1Id;
+        delete convoJSON[user1Id]; delete convoJSON[user2Id];
         let messages = await Message.find({ conversationId: data[i]._id }).sort({ sendTime: 'asc' }).map(message => message.toJSON());
         convoJSON.lastmessage = messages[messages.length - 1].text;
-        convoJSON.updatedAt = messages[messages.length - 1].text;
+        convoJSON.updatedAt = messages[messages.length - 1].sendTime;
+
         for (let j = messages.length - 1; i > -1; i--) {
           if (messages[j].seen) {
             convoJSON.seen = j;
@@ -33,41 +38,8 @@ exports.getConversations = asyncHandler(async (req, res, next) => {
         }
         conversations[i] = convo;
       }
-      res.send(conversations);
     }
   });
-});
+  res.send(conversations);
 
-// @route POST /conversation
-// @desc Create a new conversation
-// @access Private
-exports.createConversation = asyncHandler(async (req, res, next) => {
-  const userId = req.user.id;
-
-  const { user2Id } = req.body;
-
-  if (!user2Id) {
-    res.status(400);
-    throw new Error("Missing recipent");
-  }
-
-  const conversationExists = await Conversation.find(
-    {
-      $or: [
-        { $or: [{ user1Id: userId }, { user2Id: user2Id }] },
-        { $or: [{ user1Id: user2Id }, { user2Id: userId }] }
-      ]
-    });
-
-  if (!conversationExists) {
-    res.status(400);
-    throw new Error("There existing conversation between these two users!");
-  }
-
-  const conversation = {
-    user1Id: userId,
-    user2Id: user2Id,
-  };
-  const conv = await Request.create(conversation);
-  res.status(201).json(conv);
 });
