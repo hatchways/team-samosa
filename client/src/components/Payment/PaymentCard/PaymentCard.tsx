@@ -8,19 +8,22 @@ interface Props {
   card: { brand: string; exp_month: string; exp_year: string; last4: string; name: string };
 }
 
+const cardIcon = (brand: string) => {
+  switch (brand) {
+    case 'visa':
+      return '/payment-icons/flat-rounded/visa.svg';
+    default:
+      return './payment-icons/flat-rounded/generiuc.svg';
+  }
+};
+
 export default function PaymentCard({ card }: Props): JSX.Element {
   const classes = useStyles();
-  const cardIcon = () => {
-    switch (card.brand) {
-      case 'visa':
-        return '/payment-icons/flat-rounded/visa.svg';
-    }
-  };
   return (
     <Button variant="outlined">
       <Grid container className={classes.grid} spacing={2} alignItems="flex-start" direction="column">
         <Grid item>
-          <img src={cardIcon()} className={classes.cardIcon} />
+          <img src={cardIcon(cardIcon(card.brand))} className={classes.cardIcon} />
         </Grid>
         <Grid item container alignItems="flex-start" direction="column">
           <Grid item>•••• •••• •••• {card.last4}</Grid>
