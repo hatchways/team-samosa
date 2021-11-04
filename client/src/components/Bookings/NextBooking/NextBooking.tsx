@@ -24,7 +24,9 @@ export default function NextBooking({ request, bookingType }: Props): JSX.Elemen
                 <Typography variant="overline">Your next booking:</Typography>
               </Grid>
               <Grid item>
-                <BookingMoreMenu request={request} size="medium" fontSize="default" />
+                {bookingType === 'sitter' && (
+                  <BookingMoreMenu request={request} bookingType={bookingType} size="medium" fontSize="default" />
+                )}
               </Grid>
             </Grid>
             <Grid item>
