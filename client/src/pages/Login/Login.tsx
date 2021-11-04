@@ -5,7 +5,6 @@ import login from '../../helpers/APICalls/login';
 import LoginForm from './LoginForm/LoginForm';
 import { useAuth } from '../../context/useAuthContext';
 import { useSnackBar } from '../../context/useSnackbarContext';
-import Paper from '@material-ui/core';
 
 export default function Login(): JSX.Element {
   const history = useHistory();
