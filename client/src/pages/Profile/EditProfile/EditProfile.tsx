@@ -10,8 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { ProfileApiData, ProfileSuccess } from '../../../interface/Profile';
-import { useSnackBar } from '../../../context/useSnackbarContext';
+import { ProfileSuccess } from '../../../interface/Profile';
 import EditProfileInput from '../../../components/Profile/EditProfileInput';
 import { useAuth } from '../../../context/useAuthContext';
 interface Props {
@@ -23,7 +22,6 @@ interface Props {
 
 export default function EditProfile({ handleSubmit }: Props): JSX.Element {
   const classes = useStyles();
-  const { updateSnackBarMessage } = useSnackBar();
   const { userProfile } = useAuth();
   return (
     <Formik
