@@ -42,9 +42,17 @@ const useStyles = makeStyles(() => ({
     height: 56,
     borderRadius: theme.shape.borderRadius,
     marginTop: 49,
+    marginLeft: 100,
     fontSize: 16,
     color: '#f04040',
     fontWeight: 'bold',
+  },
+  input: {
+    marginLeft: 100,
+    paddingLeft: 20,
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 }));
 

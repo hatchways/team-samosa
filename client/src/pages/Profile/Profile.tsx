@@ -8,8 +8,6 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import ProfilePhoto from './ProfilePhoto/ProfilePhoto';
 import ProfileEdition from './ProfileEdition/ProfileEdition';
 
-import MySitters from '../MySitters/MySitters';
-
 import { useEffect } from 'react';
 export default function Profile(): JSX.Element {
   const { loggedInUser } = useAuth();

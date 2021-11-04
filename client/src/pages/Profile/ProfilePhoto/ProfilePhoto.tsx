@@ -15,7 +15,7 @@ import uploadPhoto from '../../../helpers/APICalls/uploadPhoto';
 export default function ProfilePhoto(): JSX.Element {
   const { register, handleSubmit } = useForm();
   const classes = useStyles();
-  const { userProfile } = useAuth();
+  const { userProfile, loggedInUser } = useAuth();
   return (
     <Grid container className={classes.root}>
       <Grid item xs={3} sm={3} md={3} elevation={0} component={Paper} square className={classes.back}>
@@ -38,18 +38,14 @@ export default function ProfilePhoto(): JSX.Element {
             </Typography>
             <Avatar
               alt="Profile Image"
-              src={
-                userProfile && userProfile.photoUrl
-                  ? `../../../Images/${userProfile.photoUrl.substring(72)}`
-                  : `../../../Images/68f55f7799df6c8078a874cfe0a61a5e6e9e1687.png`
-              }
-              sx={{ width: 240, height: 240 }}
+              src={userProfile && userProfile.photoUrl ? userProfile.photoUrl : loggedInUser?.username}
+              sx={{ width: 240, height: 240, ml: 16 }}
             />
             <Typography className={classes.desp} component="h1" variant="h5">
               Be sure to use a photo that clearly shows your face
             </Typography>
             <form onSubmit={handleSubmit(uploadPhoto)}>
-              <Input {...register('picture')} type="file" name="picture" />
+              <Input {...register('picture')} type="file" name="picture" className={classes.input} />
               <Button type="submit" size="large" variant="outlined" color="primary" className={classes.submit}>
                 {false ? <CircularProgress style={{ color: 'white' }} /> : 'Upload a photo from your device'}
               </Button>
