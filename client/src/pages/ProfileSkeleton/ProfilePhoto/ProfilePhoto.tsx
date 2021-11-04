@@ -11,11 +11,24 @@ import { CircularProgress } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import Input from '@mui/material/Input';
 import uploadPhoto from '../../../helpers/APICalls/uploadPhoto';
+import { getUProfile } from '../../../helpers/APICalls/getUProfile';
 
 export default function ProfilePhoto(): JSX.Element {
   const { register, handleSubmit } = useForm();
   const classes = useStyles();
-  const { userProfile, loggedInUser } = useAuth();
+  const updatephoto = (data: Record<string, any>) => {
+    uploadPhoto(data).then(async (res) => {
+      if (res) {
+        await getUProfile().then((res) => {
+          if (res.success) {
+            updateProfileContext(res.success);
+          }
+        });
+      }
+    });
+  };
+
+  const { userProfile, loggedInUser, updateProfileContext } = useAuth();
   return (
     <Grid container className={classes.root}>
       <Grid item xs={6} sm={6} md={5} elevation={0} component={Paper} square className={classes.back}>
@@ -44,7 +57,7 @@ export default function ProfilePhoto(): JSX.Element {
             <Typography className={classes.desp} component="h1" variant="h5">
               Be sure to use a photo that clearly shows your face
             </Typography>
-            <form onSubmit={handleSubmit(uploadPhoto)}>
+            <form onSubmit={handleSubmit(updatephoto)}>
               <Input {...register('picture')} type="file" name="picture" />
               <Button type="submit" size="large" variant="outlined" color="primary" className={classes.submit}>
                 {false ? <CircularProgress style={{ color: 'white' }} /> : 'Upload a photo from your device'}

@@ -13,8 +13,6 @@ router.route("/").get(protect, getProfile);
 
 router.route("/all").get(getProfiles);
 
-router.route("/all").get(getProfiles);
-
 router.route("/public/:id").get(getPublicProfile);
 
 router.route("/").post(protect, createProfile);

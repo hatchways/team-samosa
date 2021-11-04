@@ -26,8 +26,8 @@ export default function Login(): JSX.Element {
         await getUProfile().then((res) => {
           if (res.success) {
             updateProfileContext(res.success);
-            updateLoginContext(user);
           }
+          updateLoginContext(user);
         });
         history.push('/dashboard');
       } else {

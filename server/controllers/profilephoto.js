@@ -3,6 +3,12 @@ const fs = require("fs");
 const Profile = require("../Models/Profile");
 const asyncHandler = require("express-async-handler");
 
+const s3 = new S3({
+    region: process.env.AWS_REGION,
+    accessKeyId: process.env.AWS__ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_KEY,
+})
+
 // @route Post /photourl
 // @desc Save user photo to AWS S3 bucket and remove the previous one to save storage
 // @access Private
@@ -14,11 +20,6 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error("Please create your profile first");
     }
-    const s3 = new S3({
-        region: process.env.AWS_REGION,
-        accessKeyId: process.env.AWS__ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_KEY,
-    })
     if (profile.photoUrl) {
         const pathname = profile.photoUrl.substring(48);
         const deleteParams = {
@@ -69,11 +70,6 @@ exports.downloadPhoto = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error("No profile to check");
     }
-    const s3 = new S3({
-        region: process.env.AWS_REGION,
-        accessKeyId: process.env.AWS__ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_KEY,
-    })
     if (profile.photoUrl) {
         const downloadParams = {
             Bucket: process.env.AWS_BUCKET,
@@ -84,13 +80,8 @@ exports.downloadPhoto = asyncHandler(async (req, res) => {
                 if (error) {
                     res.json("Failed to retrieve an object: ");
                 } else {
-                    fs.writeFile("../client/src/Images/" + profile.photoUrl.substring(72), data.Body, (err) => {
-                        if (err)
-                            res.json('Error occured while writing file');
-                        else {
-                            res.json("File written successfully");
-                        }
-                    });
+                    res.setHeader("content-type", "some/type");
+                    fs.createReadStream(`./${profile.photoUrl.substring(72)}`).pipe(res);
                 }
             }
         );

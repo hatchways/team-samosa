@@ -5,7 +5,6 @@ import { User } from '../interface/User';
 import { ProfileSuccess } from '../interface/Profile';
 import loginWithCookies from '../helpers/APICalls/loginWithCookies';
 import { getUProfile } from '../helpers/APICalls/getUProfile';
-import { downloadPhoto } from '../helpers/APICalls/downloadPhoto';
 import logoutAPI from '../helpers/APICalls/logout';
 
 interface IAuthContext {
@@ -57,8 +56,8 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
           await getUProfile().then((res) => {
             if (res.success) {
               updateProfileContext(res.success);
-              updateLoginContext(user);
             }
+            updateLoginContext(user);
           });
         } else {
           // don't need to provide error feedback as this just means user doesn't have saved cookies or the cookies have not been authenticated on the backend
