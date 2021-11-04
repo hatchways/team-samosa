@@ -1,13 +1,13 @@
 import Avatar from '@material-ui/core/Avatar';
-import { User } from '../../interface/User';
+import { ProfileSuccess } from '../../interface/Profile';
 
 interface Props {
   loggedIn: boolean;
-  user: User;
+  profile: ProfileSuccess;
 }
 
-const AvatarDisplay = ({ user }: Props): JSX.Element => {
-  return <Avatar alt="Profile Image" src={`https://robohash.org/${user.email}.png`} />;
+const AvatarDisplay = ({ profile }: Props): JSX.Element => {
+  return <Avatar alt="Profile Image" src={profile.PhotoUrl} />;
 };
 
 export default AvatarDisplay;

@@ -4,16 +4,18 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './useStyles';
 import { User } from '../../interface/User';
+import { ProfileSuccess } from '../../interface/Profile';
 import AvatarDisplay from '../AvatarDisplay/AvatarDisplay';
 import Search from '../Search/Search';
 import AuthMenu from '../AuthMenu/AuthMenu';
 
 interface Props {
   loggedInUser: User;
+  userprofile: ProfileSuccess;
   handleDrawerToggle?: () => void;
 }
 
-const ChatSideBanner = ({ loggedInUser }: Props): JSX.Element => {
+const ChatSideBanner = ({ loggedInUser, userprofile }: Props): JSX.Element => {
   const [search, setSearch] = useState<string>('test');
   const [newChatUser, setNewChatUser] = useState<User | null>(null);
   const classes = useStyles();
@@ -29,7 +31,7 @@ const ChatSideBanner = ({ loggedInUser }: Props): JSX.Element => {
   return (
     <Grid className={classes.chatSideBanner}>
       <Box className={classes.userPanel}>
-        <AvatarDisplay loggedIn user={loggedInUser} />
+        <AvatarDisplay loggedIn profile={userprofile} />
         <Typography className={classes.userText} variant="h5">
           {loggedInUser.username}
         </Typography>
