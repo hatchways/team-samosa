@@ -1,13 +1,14 @@
 import { theme } from '../../../themes/theme';
+import { StripeElementsOptions } from '@stripe/stripe-js';
 
-export const ELEMENT_OPTIONS = {
+export const ELEMENT_OPTIONS: StripeElementsOptions = {
   fonts: [
     { cssSrc: 'https://fonts.googleapis.com/css2?family=Poppins' },
     { cssSrc: 'https://fonts.googleapis.com/css2?family=Open+Sans' },
     { cssSrc: 'https://fonts.googleapis.com/css2?family=Roboto' },
   ],
   appearance: {
-    theme: <'none' | 'stripe' | 'night' | undefined>'none',
+    theme: 'none',
     variables: {
       colorPrimary: theme.palette.primary.main,
       colorBackground: 'white',
