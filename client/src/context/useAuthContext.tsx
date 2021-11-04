@@ -52,11 +52,12 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
     const checkLoginWithCookies = async () => {
       await loginWithCookies().then(async (data: AuthApiData) => {
         if (data.success) {
-          updateLoginContext(data.success);
+          const user = data.success;
           await getUProfile().then((res) => {
             if (res.success) {
               updateProfileContext(res.success);
             }
+            updateLoginContext(user);
           });
         } else {
           // don't need to provide error feedback as this just means user doesn't have saved cookies or the cookies have not been authenticated on the backend
