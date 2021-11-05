@@ -8,6 +8,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import Profile from '../Profile/Profile';
 import { getProfile } from '../../helpers/APICalls/getProfile';
 import { useSnackBar } from '../../context/useSnackbarContext';
+import Message from '../Message/Message';
 
 import MySitters from '../MySitters/MySitters';
 import MyJobs from '../MyJobs/MyJobs';
@@ -55,6 +56,9 @@ export default function Dashboard(): JSX.Element {
           )}
           <Route path="/dashboard/my-profile">
             <Profile />
+          </Route>
+          <Route path="/dashboard/messages">
+            <Message />
           </Route>
           <Route path="*">
             <Redirect to="/dashboard/my-sitters" />
