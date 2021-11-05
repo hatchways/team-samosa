@@ -12,6 +12,7 @@ const logger = require("morgan");
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const requestRouter = require("./routes/request");
+const paymentRouter = require("./routes/payment");
 
 const profileRouter = require("./routes/profile");
 const uProfileRouter = require("./routes/uprofile");
@@ -22,7 +23,6 @@ const { json, urlencoded } = express;
 connectDB();
 const app = express();
 const server = http.createServer(app);
-
 
 const io = socketio(server, {
   cors: {
@@ -50,6 +50,7 @@ app.use((req, res, next) => {
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/request", requestRouter);
+app.use("/payment", paymentRouter);
 
 app.use("/profile", profileRouter);
 app.use("/userprofile", uProfileRouter);
