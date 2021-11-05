@@ -9,32 +9,45 @@ exports.registerUser = asyncHandler(async (req, res, next) => {
   const { username, email, password } = req.body;
 
   if (!username) {
-    res.status(400);
-    throw new Error("Username is missing");
+    res
+      .status(400)
+      .send(JSON.stringify({ error: { message: "Username is missing" } }));
   }
 
   if (!email) {
-    res.status(400);
-    throw new Error("Email is missing");
+    res.status(400).send(
+      JSON.stringify({
+        error: { message: "Email is missing" },
+      })
+    );
   }
 
   if (!password) {
-    res.status(400);
-    throw new Error("Password is missing");
+    res.status(400).send(
+      JSON.stringify({
+        error: { message: "Password is missing" },
+      })
+    );
   }
 
   const emailExists = await User.findOne({ email });
 
   if (emailExists) {
-    res.status(400);
-    throw new Error("A user with that email already exists");
+    res.status(400).send(
+      JSON.stringify({
+        error: { message: "A user with that email already exists" },
+      })
+    );
   }
 
   const usernameExists = await User.findOne({ username });
 
   if (usernameExists) {
-    res.status(400);
-    throw new Error("A user with that username already exists");
+    res.status(400).send(
+      JSON.stringify({
+        error: { message: "A user with that name already exists" },
+      })
+    );
   }
 
   const user = await User.create({
@@ -62,8 +75,9 @@ exports.registerUser = asyncHandler(async (req, res, next) => {
       },
     });
   } else {
-    res.status(400);
-    throw new Error("Invalid user data");
+    res
+      .status(400)
+      .send(JSON.stringify({ error: { message: "Invalid user data" } }));
   }
 });
 
@@ -94,8 +108,11 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
       },
     });
   } else {
-    res.status(401);
-    throw new Error("Invalid email or password");
+    res
+      .status(401)
+      .send(
+        JSON.stringify({ error: { message: "Invalid email or password" } })
+      );
   }
 });
 
@@ -106,8 +123,9 @@ exports.loadUser = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
   if (!user) {
-    res.status(401);
-    throw new Error("Not authorized");
+    res
+      .status(401)
+      .send(JSON.stringify({ error: { message: "Not authorized" } }));
   }
 
   res.status(200).json({

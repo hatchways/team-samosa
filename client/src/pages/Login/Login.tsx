@@ -21,6 +21,7 @@ export default function Login(): JSX.Element {
       if (data.error) {
         setSubmitting(false);
         updateSnackBarMessage(data.error.message);
+        console.log('data.error: ', data.error);
       } else if (data.success) {
         const user = data.success;
         await getUProfile().then((res) => {

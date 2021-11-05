@@ -11,8 +11,13 @@ exports.getRequests = asyncHandler(async (req, res, next) => {
   const { type } = req.params;
 
   if (type !== "owner" && type !== "sitter") {
-    res.status(400);
-    throw new Error("Request type is incorrect");
+    res.status(400).send(
+      JSON.stringify({
+        error: {
+          message: "Request type is incorrect",
+        },
+      })
+    );
   }
 
   if (type === "owner") {
@@ -53,15 +58,25 @@ exports.createRequest = asyncHandler(async (req, res, next) => {
   const { sitterId, startDate, endDate } = req.body;
 
   if (!startDate || !endDate) {
-    res.status(400);
-    throw new Error("Incomplete date field");
+    res.status(400).send(
+      JSON.stringify({
+        error: {
+          message: "Incomplete date field",
+        },
+      })
+    );
   }
 
   const sitterExists = await User.findById(sitterId);
 
   if (!sitterExists) {
-    res.status(400);
-    throw new Error("Invalid sitter id");
+    res.status(400).send(
+      JSON.stringify({
+        error: {
+          message: "Invalid sitter id",
+        },
+      })
+    );
   }
 
   const request = {
@@ -87,20 +102,35 @@ exports.updateRequest = asyncHandler(async (req, res, next) => {
   const { status } = req.body;
 
   if (status !== "declined" && status !== "accepted" && status !== "pending") {
-    res.status(400);
-    throw new Error("Invalid status field");
+    res.status(400).send(
+      JSON.stringify({
+        error: {
+          message: "Invalid status field",
+        },
+      })
+    );
   }
 
   const request = await Request.findById(requestId);
 
   if (!request) {
-    res.status(400);
-    throw new Error("Invalid request id");
+    res.status(400).send(
+      JSON.stringify({
+        error: {
+          message: "Invalid request id",
+        },
+      })
+    );
   }
 
   if (request.sitterId.toString() !== userId) {
-    res.status(400);
-    throw new Error("Unauthorized user");
+    res.status(400).send(
+      JSON.stringify({
+        error: {
+          message: "Unathorized user",
+        },
+      })
+    );
   }
 
   request.status = status;
