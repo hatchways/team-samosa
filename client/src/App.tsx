@@ -5,6 +5,8 @@ import Welcome from './pages/Welcome/Welcome';
 import Login from './pages/Login/Login';
 import Signup from './pages/SignUp/SignUp';
 import Dashboard from './pages/Dashboard/Dashboard';
+import PaymentMethod from './components/Payment/PaymentMethod/PaymentMethod';
+import PaymentList from './components/Payment/PaymentList/PaymentList';
 import NavBar from './components/Navbar/NavBar';
 import ProfileListings from './components/ProfileListings/ProfileListings';
 import ProfileDetails from './components/ProfileDetails/ProfileDetails';
@@ -46,6 +48,14 @@ function App(): JSX.Element {
                 <Route path="/dashboard">
                   <NavBar elevation={16} color="inherit" />
                   <Dashboard />
+                </Route>
+                <Route path="/payment-method">
+                  <NavBar elevation={16} color="inherit" />
+                  <PaymentMethod />
+                </Route>
+                <Route path="/payment-list">
+                  <NavBar elevation={16} color="inherit" />
+                  <PaymentList />
                 </Route>
                 <Route path="*">
                   <Redirect to="/" />
