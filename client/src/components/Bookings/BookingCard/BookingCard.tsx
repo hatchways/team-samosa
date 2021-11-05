@@ -39,7 +39,9 @@ export default function BookingContent({ request, bookingType }: Props): JSX.Ele
           </Typography>
         </Grid>
         <Grid className={classes.menu} item>
-          <BookingMoreMenu request={request} size="small" fontSize="small" />
+          {bookingType === 'sitter' && (
+            <BookingMoreMenu request={request} bookingType={bookingType} size="small" fontSize="small" />
+          )}
         </Grid>
       </Grid>
     </Card>

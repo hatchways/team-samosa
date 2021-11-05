@@ -3,8 +3,14 @@ const fs = require("fs");
 const Profile = require("../Models/Profile");
 const asyncHandler = require("express-async-handler");
 
+const s3 = new S3({
+    region: process.env.AWS_REGION,
+    accessKeyId: process.env.AWS__ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_KEY,
+})
+
 // @route Post /photourl
-// @desc Save user photo to AWS S3 bucket
+// @desc Save user photo to AWS S3 bucket and remove the previous one to save storage
 // @access Private
 exports.uploadPhoto = asyncHandler(async (req, res) => {
     const userId = req.user.id;
@@ -14,47 +20,70 @@ exports.uploadPhoto = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error("Please create your profile first");
     }
-    const s3 = new S3({
-        region: process.env.AWS_REGION,
-        accessKeyId: process.env.AWS__ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_KEY,
-    })
-    if (!profile.photoUrl) {
-        let { pathname } = new URL(profile.photoUrl, 'http://example.org') // dummy domain to avoid invalid URL error
-        pathname = pathname.substring(1) // remove first character '/'
+    if (profile.photoUrl) {
+        const pathname = profile.photoUrl.substring(48);
         const deleteParams = {
-            Bucket,
+            Bucket: process.env.AWS_BUCKET,
             Key: pathname,
         }
-        await s3.deleteObject(deleteParams, (err, data) => {
+        await s3.deleteObject(deleteParams, (err) => {
             if (err) {
-                res.send({ err: 'Error occured while trying to delete previous file in S3 bucket' });
+                res.status(400);
+                throw new Error('Error occured while trying to delete previous file in S3 bucket', err);
+
             }
         });
     }
     const uploadParams = {
         Bucket: process.env.AWS_BUCKET,
         Body: fs.createReadStream(req.file.path),
-        Key: `${req.file.originalname}`
+        Key: profile.userId + (`${req.file.originalname}`),
+        ACL: 'public-read'
     };
     s3.upload(uploadParams, (err, data) => {
         if (err) {
-            console.log('Error occured while trying to upload to S3 bucket', err);
+            res.status(403).send('Error occured while trying to upload to S3 bucket');
         }
         if (data) {
-            fs.unlinkSync(req.file.path); // Empty temp folder
-            const locationUrl = data.Location;
-            profile.photoUrl = locationUrl;
+            fs.unlinkSync(req.file.path);
+            profile.photoUrl = data.Location;
             profile
                 .save()
                 .then(profile => {
                     res.json({ message: 'Upload Photo successfully', profile });
                 })
                 .catch(err => {
-                    res.json('Error occured while trying to save to DB', err);
+                    res.status(400).send('Error occured while trying to save to DB');
                 });
         }
     });
+
+});
+
+exports.downloadPhoto = asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+
+    const profile = await Profile.findOne({ userId });
+    if (!profile) {
+        res.status(404);
+        throw new Error("No profile to check");
+    }
+    if (profile.photoUrl) {
+        const downloadParams = {
+            Bucket: process.env.AWS_BUCKET,
+            Key: profile.photoUrl.substring(48),
+        }
+        await s3.getObject(downloadParams,
+            function (error, data) {
+                if (error) {
+                    res.json("Failed to retrieve an object: ");
+                } else {
+                    res.setHeader("content-type", "image/*");
+                    fs.createReadStream(`./${profile.photoUrl.substring(72)}`).pipe(data);
+                }
+            }
+        );
+    }
 
 });
 

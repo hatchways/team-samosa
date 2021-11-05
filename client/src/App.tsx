@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import Welcome from './pages/Welcome/Welcome';
 import Login from './pages/Login/Login';
 import Signup from './pages/SignUp/SignUp';
-import ProfilePhotoMock from './pages/ProfileSkeleton/ProfilePhotoMock/ProfilePhotoMock';
 import Dashboard from './pages/Dashboard/Dashboard';
 import NavBar from './components/Navbar/NavBar';
 import ProfileListings from './components/ProfileListings/ProfileListings';
@@ -13,7 +12,6 @@ import { AuthProvider } from './context/useAuthContext';
 import { SocketProvider } from './context/useSocketContext';
 import { SnackBarProvider } from './context/useSnackbarContext';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 import './App.css';
 

@@ -5,6 +5,7 @@ export interface ProfileSuccess {
   gender: string;
   birthDate: Date;
   email: string;
+  photoUrl: string;
   phoneNum: string;
   address: string;
   description: string;

@@ -18,9 +18,8 @@ import useStyles from './useStyles';
 export default function LoggedIn(): JSX.Element {
   const classes = useStyles();
 
+  const { logout, userProfile, loggedInUser } = useAuth();
   const { updateSnackBarMessage } = useSnackBar();
-
-  const { logout } = useAuth();
 
   const [isSitter, setIsSitter] = useState(false);
 
@@ -72,7 +71,11 @@ export default function LoggedIn(): JSX.Element {
         </Link>
       </Box>
       <IconButton onClick={handleClick}>
-        <Avatar className={classes.avatar} />
+        {userProfile && userProfile.photoUrl ? (
+          <Avatar alt="Profile Image" className={classes.avatar} src={userProfile.photoUrl} />
+        ) : (
+          <Avatar className={classes.avatar} />
+        )}
       </IconButton>
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>

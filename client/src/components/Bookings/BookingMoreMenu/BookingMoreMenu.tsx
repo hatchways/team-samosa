@@ -10,12 +10,10 @@ interface Props {
   request: BookingRequest;
   size: 'small' | 'medium' | undefined;
   fontSize: 'small' | 'inherit' | 'default' | 'large' | undefined;
-  //TODO Add prop for user profile
+  bookingType: 'sitter' | 'owner';
 }
 
-export default function NextBooking({ request, size, fontSize }: Props): JSX.Element {
-  //TODO Add logic to render menu specific for owner or sitter
-
+export default function NextBooking({ request, size, fontSize, bookingType }: Props): JSX.Element {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -36,12 +34,12 @@ export default function NextBooking({ request, size, fontSize }: Props): JSX.Ele
         <MoreVertIcon color="secondary" fontSize={fontSize} />
       </IconButton>
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-        {request.status !== 'declined' ? (
+        {request.status !== 'accepted' ? (
           <MenuItem onClick={() => handleMenuItemClick('accepted')}>Accept</MenuItem>
         ) : (
           ''
         )}
-        {request.status !== 'accepted' ? (
+        {request.status !== 'declined' ? (
           <MenuItem onClick={() => handleMenuItemClick('declined')}>Decline</MenuItem>
         ) : (
           ''

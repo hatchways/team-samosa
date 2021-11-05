@@ -22,6 +22,7 @@ exports.getUProfile = asyncHandler(async (req, res) => {
       birthDate: profile.birthDate,
       email: user.email,
       phoneNum: profile.phoneNum,
+      photoUrl: profile.photoUrl,
       address: profile.address,
       description: profile.description,
     },
@@ -74,12 +75,13 @@ exports.getPublicProfile = asyncHandler(async (req, res, next) => {
   res.send({ profile });
 });
 
+
+
 // @route POST /profile
 // @desc Create a new profile
 // @access Private
 exports.createProfile = asyncHandler(async (req, res) => {
   const userId = req.user.id;
-
   const {
     firstName,
     lastName,
