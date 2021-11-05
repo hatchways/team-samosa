@@ -22,14 +22,16 @@ export default function LoggedIn(): JSX.Element {
   const { updateSnackBarMessage } = useSnackBar();
 
   const [isSitter, setIsSitter] = useState(false);
+  const [photoUrl, setPhotoUrl] = useState('');
 
   useEffect(() => {
     (async function () {
       const data = await getProfile();
       if (data.error) {
-        await updateSnackBarMessage(data.error.message);
+        updateSnackBarMessage(data.error.message);
       } else if (data.success) {
-        await setIsSitter(data.success.profile.isSitter);
+        setIsSitter(data.success.profile.isSitter);
+        await setPhotoUrl(data.success.profile.photoUrl);
       }
     })();
   }, [updateSnackBarMessage]);
@@ -71,8 +73,8 @@ export default function LoggedIn(): JSX.Element {
         </Link>
       </Box>
       <IconButton onClick={handleClick}>
-        {userProfile && userProfile.photoUrl ? (
-          <Avatar alt="Profile Image" className={classes.avatar} src={userProfile.photoUrl} />
+        {photoUrl ? (
+          <Avatar alt="Profile Image" className={classes.avatar} src={`/mock/${photoUrl}`} />
         ) : (
           <Avatar className={classes.avatar} />
         )}
