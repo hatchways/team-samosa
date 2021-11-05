@@ -21,7 +21,6 @@ export default function LoggedIn(): JSX.Element {
   const { logout, userProfile, loggedInUser } = useAuth();
   const { updateSnackBarMessage } = useSnackBar();
 
-
   const [isSitter, setIsSitter] = useState(false);
 
   useEffect(() => {

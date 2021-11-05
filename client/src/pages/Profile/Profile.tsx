@@ -1,69 +1,43 @@
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import { FormikHelpers } from 'formik';
-import Typography from '@material-ui/core/Typography';
-import useStyles from './useStyles';
-import createProfile from '../../helpers/APICalls/createProfile';
-import updateProfile from '../../helpers/APICalls/updateProfile';
-import { getUProfile } from '../../helpers/APICalls/getUProfile';
+import Container from '@material-ui/core/Container';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { useAuth } from '../../context/useAuthContext';
-import EditProfile from './EditProfile/EditProfile';
-import { useSnackBar } from '../../context/useSnackbarContext';
-import { ProfileSuccess } from '../../interface/Profile';
+import { useSocket } from '../../context/useSocketContext';
+import { useHistory } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import ProfilePhoto from './ProfilePhoto/ProfilePhoto';
+import ProfileEdition from './ProfileEdition/ProfileEdition';
+
+import { useEffect } from 'react';
 export default function Profile(): JSX.Element {
-  const classes = useStyles();
-  const { updateSnackBarMessage } = useSnackBar();
-  const { updateProfileContext } = useAuth();
-  const handleSubmit = (
-    { exist, firstName, lastName, gender, birthDate, email, phoneNum, address, description }: ProfileSuccess,
-    { setSubmitting }: FormikHelpers<ProfileSuccess>,
-  ) => {
-    exist
-      ? updateProfile(firstName, lastName, gender, birthDate, email, phoneNum, address, description).then((data) => {
-          if (data.error) {
-            updateSnackBarMessage(data.error.message);
-          } else {
-            getUProfile().then((res) => {
-              if (res.success) {
-                updateProfileContext(res.success);
-              }
-            });
-            updateSnackBarMessage('Profile was successfully Updated');
-          }
-          setSubmitting(false);
-        })
-      : createProfile(firstName, lastName, gender, birthDate, email, phoneNum, address, description).then((data) => {
-          if (data.error) {
-            updateSnackBarMessage(data.error.message);
-          } else {
-            getUProfile().then((res) => {
-              if (res.success) {
-                updateProfileContext(res.success);
-              }
-            });
-            updateSnackBarMessage('Profile was successfully created');
-          }
-          setSubmitting(false);
-        });
-  };
+  const { loggedInUser } = useAuth();
+  const { initSocket } = useSocket();
+  const history = useHistory();
+
+  useEffect(() => {
+    initSocket();
+  }, [initSocket]);
+  if (loggedInUser === undefined) return <CircularProgress />;
+  if (!loggedInUser) {
+    history.push('/login');
+    // loading for a split seconds until history.push works
+    return <CircularProgress />;
+  }
   return (
-    <Grid container component="main" className={classes.root}>
-      <Grid item xs={12} sm={8} md={7} elevation={6} component={Paper} square>
-        <Box className={classes.authWrapper}>
-          <Box width="100%" maxWidth={450} p={3} alignSelf="center">
-            <Grid container>
-              <Grid item xs>
-                <Typography className={classes.welcome} component="h1" variant="h5">
-                  Welcome back!
-                </Typography>
-              </Grid>
-            </Grid>
-            <EditProfile handleSubmit={handleSubmit} />
-          </Box>
-          <Box p={1} alignSelf="center" />
-        </Box>
-      </Grid>
+    <Grid container component="main">
+      <Container>
+        <Switch>
+          <Route path="/dashboard/my-profile/profile-photo">
+            <ProfilePhoto />
+          </Route>
+          <Route path="/dashboard/my-profile/profile-edition">
+            <ProfileEdition />
+          </Route>
+          <Route path="*">
+            <Redirect to="/dashboard/my-profile/profile-edition" />
+          </Route>
+        </Switch>
+      </Container>
     </Grid>
   );
 }

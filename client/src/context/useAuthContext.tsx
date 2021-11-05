@@ -5,6 +5,7 @@ import { User } from '../interface/User';
 import { ProfileSuccess } from '../interface/Profile';
 import loginWithCookies from '../helpers/APICalls/loginWithCookies';
 import { getUProfile } from '../helpers/APICalls/getUProfile';
+import { downloadPhoto } from '../helpers/APICalls/downloadPhoto';
 import logoutAPI from '../helpers/APICalls/logout';
 
 interface IAuthContext {
