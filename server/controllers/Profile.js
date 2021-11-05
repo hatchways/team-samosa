@@ -33,11 +33,22 @@ exports.getUProfile = asyncHandler(async (req, res) => {
 // @desc List of all profiles
 // @access Public
 exports.getProfiles = asyncHandler(async (req, res) => {
-  const profiles = await Profile.find(
-    { isSitter: true },
-    "_id userId firstName lastName photoUrl description address"
-  );
-  res.send({ profiles });
+  if (req.query.search) {
+    const profiles = await Profile.find(
+      {
+        isSitter: true,
+        address: { $regex: `^${req.query.search}`, $options: "i" },
+      },
+      "_id userId firstName lastName photoUrl description address"
+    );
+    res.send({ profiles });
+  } else {
+    const profiles = await Profile.find(
+      { isSitter: true },
+      "_id userId firstName lastName photoUrl description address"
+    );
+    res.send({ profiles });
+  }
 });
 
 // @route GET /profile
@@ -48,7 +59,9 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
 
   if (userId) {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res.status(400).send("Bad Request");
+      res
+        .status(400)
+        .send(JSON.stringify({ error: { message: "Bad request" } }));
     }
   }
 
