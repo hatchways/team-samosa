@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '1rem 1rem',
     width: drawerWidth,
     [theme.breakpoints.up('md')]: {
-      padding: '10rem 2rem',
+      padding: '0rem 2rem',
       width: '300px',
     },
   },

@@ -18,7 +18,7 @@ import useStyles from './useStyles';
 export default function LoggedIn(): JSX.Element {
   const classes = useStyles();
 
-  const { logout, userProfile, loggedInUser } = useAuth();
+  const { logout, userProfile } = useAuth();
   const { updateSnackBarMessage } = useSnackBar();
 
   const [isSitter, setIsSitter] = useState(false);
