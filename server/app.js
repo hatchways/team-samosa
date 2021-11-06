@@ -17,6 +17,9 @@ const profileRouter = require("./routes/profile");
 const uProfileRouter = require("./routes/uprofile");
 const photoRouter = require("./routes/profilephoto");
 const availabilityRouter = require("./routes/availability");
+
+const messageRouter = require("./routes/message");
+const conversationRouter = require("./routes/conversation");
 const { json, urlencoded } = express;
 
 connectDB();
@@ -56,6 +59,9 @@ app.use("/userprofile", uProfileRouter);
 app.use("/profile-photo", photoRouter);
 
 app.use("/availablity", availabilityRouter);
+
+app.use("/message", messageRouter);
+app.use("/conversation", conversationRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));

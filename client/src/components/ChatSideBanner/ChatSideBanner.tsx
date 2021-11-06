@@ -6,7 +6,7 @@ import useStyles from './useStyles';
 import { User } from '../../interface/User';
 import AvatarDisplay from '../AvatarDisplay/AvatarDisplay';
 import Search from '../Search/Search';
-import AuthMenu from '../AuthMenu/AuthMenu';
+import { useAuth } from '../../context/useAuthContext';
 
 interface Props {
   loggedInUser: User;
@@ -17,7 +17,7 @@ const ChatSideBanner = ({ loggedInUser }: Props): JSX.Element => {
   const [search, setSearch] = useState<string>('test');
   const [newChatUser, setNewChatUser] = useState<User | null>(null);
   const classes = useStyles();
-
+  const { userProfile } = useAuth();
   // React.FormEvent<FormControl & FormControlProps>)
   const handleChange = (e: ChangeEvent<HTMLInputElement>, newInputValue: string) => {
     setSearch(newInputValue);
@@ -29,15 +29,14 @@ const ChatSideBanner = ({ loggedInUser }: Props): JSX.Element => {
   return (
     <Grid className={classes.chatSideBanner}>
       <Box className={classes.userPanel}>
-        <AvatarDisplay loggedIn user={loggedInUser} />
+        <AvatarDisplay url={userProfile ? userProfile.photoUrl : 'default'} />
         <Typography className={classes.userText} variant="h5">
           {loggedInUser.username}
         </Typography>
-        <AuthMenu />
       </Box>
       <Box>
         <Typography className={classes.chatTitle} variant="h5">
-          Users
+          Chat
         </Typography>
         <Search search={search} handleChange={handleChange} />
       </Box>
